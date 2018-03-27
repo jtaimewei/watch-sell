@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.sys.type.dao.CrowdDao">
+	<sql id="crowd">
+		a.id AS "id",
+		a.crowd_name AS "crowdName"
+	</sql>
+	<select id="findList" resultType="Crowd">
+		SELECT
+		<include refid="crowd" />
+		FROM watch_crowd a where a.del_flag = '0'
+	</select>
+	<select id="getById" resultType="Crowd">
+		SELECT
+		<include refid="crowd" />
+		FROM watch_crowd a where a.id = #{id}
+	</select>
+	<insert id="save">
+		INSERT INTO watch_crowd
+		(id,
+		 crowd_name	
+		)VALUES
+		(#{id},
+		#{crowdName}
+		)	
+	</insert>
+	<update id="edit">
+		UPDATE watch_crowd SET
+		crowd_name = #{crowdName}
+		WHERE id =
+		#{id}
+	</update>
+	<update id="delete">
+		UPDATE watch_crowd SET
+		del_flag = '1'
+		WHERE id =
+		#{id}
+	</update>
+</mapper>

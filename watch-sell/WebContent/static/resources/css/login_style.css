@@ -1,0 +1,95 @@
+#lg-head {
+	height: 115px;
+}
+
+#lg-zong {
+	width: 1341px;
+	height: 600px;
+	position: relative;
+}
+
+#lg-zong-login {
+	height: 478px;
+	width: 400px;
+	background-color: white;
+	position: absolute;
+	top: 50px;
+	left: 800px;
+}
+
+#lg-zong-login-p {
+	margin-top: 20px;
+	margin-left: 155px;
+}
+
+.lg-zong-head{
+	font-size: 24px;
+	color: #990000;
+	letter-spacing: 5px;
+}
+
+.user-log-input {
+	font-size: 20px;
+	width: 320px;
+	height: 37px;
+	margin-left: -120px;
+	padding-left: 10px;
+	margin-top: 20px;
+}
+
+.user-log-input::-webkit-input-placeholder {
+	color: #D3D3D3;
+	font-size: 16px;
+	left: 10px;
+}
+
+#user-log-button {
+	background-color: #CC5252;
+	font-size: 22px;
+	width: 335px;
+	height: 44px;
+	margin-left: -120px;
+	padding-left: 10px;
+	margin-top: 20px;
+	color: white;
+}
+
+#register-p {
+	margin-top: 10px;
+}
+
+#register-a {
+	text-decoration: none;
+	color: #999999;
+	margin-top: 400px;
+	margin-left: 36px;
+}
+
+#lg-zong-but {
+	color: #999999;
+	font-size: 17px;
+	margin-left: 230px;
+	margin-top: 20px;
+}
+
+#lg-img{
+	/* position: relative; */
+	
+}
+#lg-yanz-img {
+	float:right;
+	left:40px;
+	top:20px;
+	position: absolute;
+    margin-top: 255px;
+    margin-left: 230px;
+}
+.notice-p{
+	font-size: 12px;
+	color: #990000;
+	margin-left: -120px;
+	height: 0px;
+}
+.message-p{
+	margin-top: -13px;
+}

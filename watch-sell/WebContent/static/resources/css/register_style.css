@@ -1,0 +1,65 @@
+body {
+	background-color: #FAFAFA;
+}
+
+#reg-head {
+	height: 80px;
+}
+
+#reg-re {
+	background-color: white;
+	height: 600px;
+	width: 990px;
+	margin-left: 180px;
+}
+
+#reg-re-reg p {
+	padding-top: 30px;
+	font-size: 28px;
+	margin-left: 400px;
+	color: #990000;
+	letter-spacing: 2px;
+}
+
+.user-reg-input {
+	font-size: 20px;
+	width: 320px;
+	height: 37px;
+	margin-left: 323px;
+	padding-left: 10px;
+	margin-top: 20px;
+}
+
+.user-reg-input::-webkit-input-placeholder {
+	color: #D3D3D3;
+	font-size: 16px;
+	left: 10px;
+}
+
+#email-input-code {
+	width: 215px;
+}
+
+#email-button {
+	font-size: 14px;
+	height: 43px;
+	background-color: #FFFFFF;
+	border: 1px #A9A9A9 solid;
+	padding-left: 10px;
+	margin-left: 11px;
+}
+
+#user-reg-button {
+	background-color: #B32424;
+	font-size: 20px;
+	width: 335px;
+	height: 44px;
+	margin-left: 320px;
+	padding-left: 10px;
+	margin-top: 20px;
+	color: white;
+}
+.user-reg-yanz-img {
+	margin-left: -100px;
+    margin-bottom: -13px;
+}

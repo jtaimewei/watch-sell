@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.sys.type.dao.BrandDao">
+	<sql id="brand">
+		a.id AS "id",
+		a.brand_name AS "brandName"
+	</sql>
+	<select id="findList" resultType="Brand">
+		SELECT
+		<include refid="brand" />
+		FROM watch_brand a where a.del_flag = '0' LIMIT #{page.number},#{page.pageSize}
+	</select>
+	<select id="findAllList" resultType="Brand">
+		SELECT
+		<include refid="brand" />
+		FROM watch_brand a where a.del_flag = '0'
+	</select>
+	<select id="getById" resultType="Brand">
+		SELECT
+		<include refid="brand" />
+		FROM watch_brand a where a.id = #{id}
+	</select>
+	<select id="getCount" resultType="Long">
+		SELECT
+		COUNT(1)
+		FROM watch_brand a WHERE a.del_flag = '0'
+	</select>
+	<insert id="save">
+		INSERT INTO watch_brand
+		(id,
+		 brand_name	
+		)VALUES
+		(#{id},
+		#{brandName}
+		)	
+	</insert>
+	<update id="edit">
+		UPDATE watch_brand SET
+		brand_name = #{brandName}
+		WHERE id =
+		#{id}
+	</update>
+	<update id="delete">
+		UPDATE watch_brand SET
+		del_flag ='1'
+		WHERE id =
+		#{id}
+	</update>
+</mapper>

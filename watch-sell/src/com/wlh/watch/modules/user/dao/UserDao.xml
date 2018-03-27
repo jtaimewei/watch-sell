@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.user.dao.UserDao">
+	<sql id="user">
+		a.id AS "id",
+		a.user_name AS "userName",
+		a.password AS
+		"password",
+		a.email AS "email",
+		a.sex AS "sex",
+		a.birthday AS "birthday",
+		a.user_type AS "userType",
+		a.vip AS "vip",
+		a.phone_num AS "phoneNum",
+		a.credits AS "credits"
+	</sql>
+	<select id="getById" resultType="User">
+		SELECT
+		<include refid="user" />
+		FROM sys_user a
+		WHERE a.id = #{id}
+	</select>
+	<select id="getByEmail" resultType="User">
+		SELECT
+		<include refid="user" />
+		FROM sys_user a
+		WHERE a.email = #{email}
+	</select>
+	<select id="findList" resultType="User">
+		SELECT
+		<include refid="user" />
+		FROM sys_user a where a.del_flag = '0' LIMIT #{page.number},#{page.pageSize}
+	</select>
+	<select id="getCount" resultType="Long">
+		SELECT
+		COUNT(1)
+		FROM sys_user a WHERE a.del_flag = '0'
+	</select>
+	<select id="getRoleUserCount" resultType="Long">
+		SELECT
+		COUNT(1)
+		FROM sys_user a,sys_user_role ur,sys_role r 
+		WHERE a.id = ur.user_id AND ur.role_id = r.id 
+		AND r.id = #{roleId} AND a.del_flag = '0'
+	</select>
+	<select id="findRoleUserList" resultType="User">
+		SELECT
+		<include refid="user" />
+		FROM sys_user a,sys_user_role ur,sys_role r 
+		WHERE a.id = ur.user_id AND ur.role_id = r.id 
+		AND r.id = #{roleId} AND a.del_flag = '0'
+		LIMIT #{page.number},#{page.pageSize}
+	</select>
+	<update id="editBack">
+		UPDATE sys_user SET
+		user_name = #{userName},
+		<if test="password != null and password != ''">
+			password = #{password},
+		</if>
+		sex = #{sex},
+		birthday = #{birthday},
+		phone_num = #{phoneNum}
+		WHERE id =
+		#{id}
+	</update>
+
+	<insert id="addUser">
+		INSERT INTO sys_user(
+		id,
+		user_name,
+		<if test="sex != null and sex != ''">
+			sex,
+		</if>
+		<if test="birthday != null and birthday != ''">
+			birthday,
+		</if>
+		<if test="phoneNum != null and phoneNum != ''">
+			phone_num,
+		</if>
+		password,
+		user_type,
+		email
+		) VALUES (
+		#{id},
+		#{userName},
+		<if test="sex != null and sex != ''">
+			#{sex},
+		</if>
+		<if test="birthday != null and birthday != ''">
+			#{birthday},
+		</if>
+		<if test="phoneNum != null and phoneNum != ''">
+			#{phoneNum},
+		</if>
+		#{password},
+		#{userType},
+		#{email}
+		)
+	</insert>
+	
+	<!-- 后台增加用户角色 -->
+	<insert id="addUserRole">
+		INSERT INTO sys_user_role(
+		user_id,
+		role_id
+		) VALUES (
+		#{id},
+		#{roleId}
+		)
+	</insert>
+	<!-- 后台删除用户角色 -->
+	<delete id="deleteUserRole">
+		delete from sys_user_role where user_id = #{id} and
+		role_id = #{roleId}
+	</delete>
+	<!--后台删除用户后删除用户所有的角色信息 -->
+	<delete id="deleteUserRoles">
+		delete from sys_user_role where user_id = #{id}
+	</delete>
+	<!--后台删除用户- 逻辑删除  设置 flag 为  1  -->
+	<update id="deleteUser">
+		UPDATE sys_user SET
+		del_flag = '1'
+		WHERE id =
+		#{id}
+	</update>
+	
+</mapper>
