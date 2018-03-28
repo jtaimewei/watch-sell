@@ -15,6 +15,7 @@ public class WatchService {
 	private WatchDao watchDao;
 
 	public Page<Watch> findPage(Page<Watch> page, Watch watch) {
+		page.setNumber((page.getPageNo()-1)*page.getPageSize());
 		watch.setPage(page);
 		page.setCount(watchDao.getCount(watch));
 		page.setList(watchDao.findList(watch));

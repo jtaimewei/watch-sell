@@ -24,6 +24,7 @@ public class UserService {
 	}
 
 	public Page<User> findPage(Page<User> page, User user) {
+		page.setNumber((page.getPageNo()-1)*page.getPageSize());
 		user.setPage(page);
 		page.setCount(userDao.getCount(user));
 		page.setList(userDao.findList(user));

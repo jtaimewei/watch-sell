@@ -17,6 +17,7 @@ public class MovementService {
 	private MovementDao movementDao;
 
 	public Page<Movement> findPage(Page<Movement> page, Movement Movement) {
+		page.setNumber((page.getPageNo()-1)*page.getPageSize());
 		Movement.setPage(page);
 		page.setCount(movementDao.getCount(Movement));
 		page.setList(movementDao.findList(Movement));
