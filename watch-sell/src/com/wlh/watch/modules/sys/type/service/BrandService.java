@@ -17,6 +17,7 @@ public class BrandService {
 	private BrandDao brandDao;
 
 	public Page<Brand> findPage(Page<Brand> page, Brand brand) {
+		page.setNumber((page.getPageNo()-1)*page.getPageSize());
 		brand.setPage(page);
 		page.setCount(brandDao.getCount(brand));
 		page.setList(brandDao.findList(brand));

@@ -25,7 +25,7 @@ public class Page<T> {
 	
 	private int pageNo = 1; // 当前页码
 	private int pageSize = 10; // 页面大小，设置为“-1”表示不进行分页（分页无效）
-	private int number = (this.pageNo-1)*this.pageSize;
+	private int number;
 	private long count;// 总记录数，设置为“-1”表示不查询总数
 	
 	private int first;// 首页索引
@@ -56,6 +56,11 @@ public class Page<T> {
 	public int getNumber() {
 		return number;
 	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
 	/**
 	 * 构造方法
 	 * @param request 传递 repage 参数，来记住页码

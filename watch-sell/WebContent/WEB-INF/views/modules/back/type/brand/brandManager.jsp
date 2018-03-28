@@ -10,6 +10,15 @@
     margin-left: 10px;
 }
 </style>
+<script type="text/javascript">
+function page(n,s){
+	if (n) $("#pageNo").val(n);
+	if (s) $("#pageSize").val(s);
+	$("#brandForm").submit();
+	return false;
+	
+}
+</script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -21,7 +30,9 @@
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/type/brand/save">添加品牌</a></li>
 				</ul>
 				<br>
-				
+				<form id="brandForm" action="${pageContext.request.contextPath }/a/type/brand/list" method="post">
+				<input type="hidden" id="pageNo" name="pageNo" value="${page.pageNo}">
+				<input type="hidden" id="pageSize" name="pageSize" value="${page.pageSize}">
 				<div class="table-responsive">
 					<table class="table">
 						<tr>
@@ -40,6 +51,7 @@
 					</table>
 					<div>${page}</div>
 				</div>
+				</form>
 			</div>
 
 		</div>
