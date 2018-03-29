@@ -255,9 +255,9 @@ $(function(){
 						<br>
 						<div id ="fileDiv" class="form-group">
     						<label for="exampleInputFile">上传产品图片</label><button id="addFile" type="button" class="btn btn-warning">增加文件</button>
-    						<br><label>主图</label><input type="file" id="exampleInputFile">
-    						<br><label>附图</label><input type="file" id="exampleInputFile">
-    						<br><label>附图</label><input type="file" id="exampleInputFile">
+    						<br><label>主图</label><input name="uploadFiles[0]" type="file" id="exampleInputFile">
+    						<br><label>附图</label><input name="uploadFiles[1]" type="file" id="exampleInputFile">
+    						<br><label>附图</label><input name="uploadFiles[2]" type="file" id="exampleInputFile">
   						</div>
 						
 					</div>

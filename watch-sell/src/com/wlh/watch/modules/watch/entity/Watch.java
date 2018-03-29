@@ -1,5 +1,9 @@
 package com.wlh.watch.modules.watch.entity;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.wlh.watch.common.persistence.Page;
 
 public class Watch {
@@ -25,6 +29,14 @@ public class Watch {
 	private String watchWeight;//'重量'
 	private String watchWaterproof;//'防水'
 	
+	private List<MultipartFile> uploadFiles;
+	
+	public List<MultipartFile> getUploadFiles() {
+		return uploadFiles;
+	}
+	public void setUploadFiles(List<MultipartFile> uploadFiles) {
+		this.uploadFiles = uploadFiles;
+	}
 	private Page<Watch> page;
 	
 	public Page<Watch> getPage() {
