@@ -93,7 +93,7 @@ $(function(){
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/watch/save">添加名表</a></li>
 				</ul>
 				<br>
-				<form:form action="${pageContext.request.contextPath }/a/watch/save"
+				<form:form action="${pageContext.request.contextPath }/a/watch/add"
   modelAttribute="multiFileUploadForm" method="post"
   enctype="multipart/form-data">
 				<div class="col-md-2">

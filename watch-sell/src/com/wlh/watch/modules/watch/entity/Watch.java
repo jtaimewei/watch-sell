@@ -29,7 +29,7 @@ public class Watch {
 	private String watchWeight;//'重量'
 	private String watchWaterproof;//'防水'
 	
-	private List<MultipartFile> uploadFiles;
+	private List<MultipartFile> uploadFiles;//文件列表
 	
 	public List<MultipartFile> getUploadFiles() {
 		return uploadFiles;
