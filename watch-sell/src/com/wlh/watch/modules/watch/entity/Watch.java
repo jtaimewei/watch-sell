@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wlh.watch.common.persistence.Page;
+import com.wlh.watch.modules.sys.type.entity.Brand;
+import com.wlh.watch.modules.sys.type.entity.Crowd;
+import com.wlh.watch.modules.sys.type.entity.Movement;
 
 public class Watch {
 	private String id;//'腕表id'
@@ -31,6 +34,38 @@ public class Watch {
 	
 	private List<MultipartFile> uploadFiles;//文件列表
 	
+	private Brand brand;
+	
+	private Crowd crowd;
+	
+	private Movement movement;
+	
+	private List<WatchPicture> watchPicture;
+	
+	public Brand getBrand() {
+		return brand;
+	}
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+	public Crowd getCrowd() {
+		return crowd;
+	}
+	public void setCrowd(Crowd crowd) {
+		this.crowd = crowd;
+	}
+	public Movement getMovement() {
+		return movement;
+	}
+	public void setMovement(Movement movement) {
+		this.movement = movement;
+	}
+	public List<WatchPicture> getWatchPicture() {
+		return watchPicture;
+	}
+	public void setWatchPicture(List<WatchPicture> watchPicture) {
+		this.watchPicture = watchPicture;
+	}
 	public List<MultipartFile> getUploadFiles() {
 		return uploadFiles;
 	}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.order.dao.OrderDetailDao">
+
+	<select id="getChart" resultType="OrderDetail">
+		select 
+		order_watch_serial_number AS "watchSerialNumber",
+		SUM(order_watch_number) AS "total",
+		DATE_FORMAT(order_detail_time,'%Y-%m-%d') AS "orderTime"
+		FROM watch_order_detail
+		WHERE order_detail_time BETWEEN #{startTime} AND #{endTime} 
+		GROUP BY DAY(order_detail_time),watch_id; 
+	</select>
+
+</mapper>

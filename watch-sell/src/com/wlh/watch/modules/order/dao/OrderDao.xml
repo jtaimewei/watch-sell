@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.order.dao.OrderDao">
+	<sql id="order">
+		a.id AS "id",
+		a.order_number AS "orderNumber",
+		a.order_trade_number AS "orderTradeNumber",
+		a.order_create_time AS "orderCreateTime",
+		a.order_pay_time AS "orderPayTime",
+		a.order_send_time AS "orderSendTime",
+		a.order_close_time AS "orderCloseTime",
+		a.order_all_price AS "orderAllPrice",
+		a.order_discount AS "orderDiscount",
+		a.order_send_price AS "orderSendPrice",
+		a.order_get_name AS "orderGetName",
+		a.order_get_address AS "orderGetAddress",
+		a.order_get_phone AS "orderGetPhone"
+	</sql>
+	<select id="getCount" resultType="Long">
+		SELECT
+		COUNT(1)
+		FROM watch_order a where a.del_flag = '0'
+	</select>
+	<select id="findList" resultType="Order">
+		SELECT b.email AS "userName",
+		<include refid="order" />
+		FROM watch_order a,sys_user b where a.del_flag = '0' AND a.user_id = b.id LIMIT #{page.number},#{page.pageSize}
+	</select>
+	<resultMap id="order1" type="Order">  
+    <id property="id" column="id"/>  
+    <result property="orderNumber" column="orderNumber"/>  
+    <result property="orderTradeNumber" column="orderTradeNumber"/>  
+    <result property="orderCreateTime" column="orderCreateTime"/>  
+    <result property="orderPayTime" column="orderPayTime"/>  
+    <result property="orderSendTime" column="orderSendTime"/>  
+    <result property="orderCloseTime" column="orderCloseTime"/>  
+    <result property="orderAllPrice" column="orderAllPrice"/>  
+    <result property="orderDiscount" column="orderDiscount"/>  
+    <result property="orderSendPrice" column="orderSendPrice"/>  
+    <result property="orderGetName" column="orderGetName"/>  
+    <result property="orderGetAddress" column="orderGetAddress"/>  
+    <result property="orderGetPhone" column="orderGetPhone"/>   
+    <collection property="orderDetail" ofType="OrderDetail">  
+        <result property="id" column="orderDetail.id"/>  
+        <result property="orderWatchSerialNumber" column="orderDetail.orderWatchSerialNumber"/>  
+        <result property="orderDetailOldPrice" column="orderDetail.orderDetailOldPrice"/>  
+        <result property="orderDetailDiscountPrice" column="orderDetail.orderDetailDiscountPrice"/>  
+        <result property="orderWatchNumber" column="orderDetail.orderWatchNumber"/>  
+        <result property="orderDetailPicture" column="orderDetail.orderDetailPicture"/>  
+        <result property="orderDetailState" column="orderDetail.orderDetailState"/>  
+        <result property="orderDetailTime" column="orderDetail.orderDetailTime"/>  
+    </collection>  
+  </resultMap> 
+	<select id="getById" resultMap="order1">
+		SELECT
+		b.id AS "orderDetail.id",
+		b.order_watch_serial_number AS "orderDetail.orderWatchSerialNumber",
+		b.order_detail_old_price AS "orderDetail.orderDetailOldPrice",
+		b.order_detail_discount_price AS "orderDetail.orderDetailDiscountPrice",
+		b.order_watch_number AS "orderDetail.orderWatchNumber",
+		b.order_detail_picture AS "orderDetail.orderDetailPicture",
+		b.order_detail_state AS "orderDetail.orderDetailState",
+		b.order_detail_time AS "orderDetail.orderDetailTime",
+		<include refid="order" />
+		FROM watch_order a LEFT JOIN watch_order_detail b 
+		ON a.id = b.order_id WHERE a.id=#{id};
+	</select>
+
+</mapper>

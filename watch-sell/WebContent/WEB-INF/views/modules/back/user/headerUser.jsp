@@ -61,7 +61,7 @@
 						<label for="inputPassword3" class="col-sm-2 control-label">生日</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="birthday"
-								name="birthday" value="${userOwn.birthday}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
+								name="birthday" readonly="readonly" value="${userOwn.birthday}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
 						</div>
 						<p id="birthday-notice" class="header-user-notice">*请输入生日</p>
 					</div>

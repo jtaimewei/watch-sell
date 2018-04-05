@@ -95,15 +95,36 @@ $(function(){
 		//alert(number);
 		if (number <= 5){
 			num = num+1;
-			$("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input type="file" name="uploadFiles['+num+']"></div>');
+			$("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input class="add-file" type="file" name="uploadFiles['+num+']"></div>');
 		}
 	});
-	/* 删除文件 */
+	/* 删除要新加的文件 */
 	$("#fileDiv").on('click','.deleteButton',function(){
 		$(this).parent().remove();
 	});
-	/* 提交-添加名表 */
-	 $("#addWatchButton").click(function(){
+	/* 删除已有的文件 */
+	$(".deleteImgButton").click(function(){
+		var th = $(this);
+		var id = $(this).prev().val();
+		alert(id)
+		$.ajax({  
+		    type: "POST",  
+		    url: "${pageContext.request.contextPath}/a/watch/picture/delete",  
+		    data:{"id":id},  
+		    async: false,
+		    error: function() {  
+		        alert("删除失败");  
+		    },  
+		    success: function(data) {
+		    	
+		    	th.parent().parent().remove(); 
+		    	}
+		    	
+		    });
+		});
+	
+	/* 提交-修改名表 */
+	 $("#editWatchButton").click(function(){
 	/* $("body").on('click','#addWatchButton',function(){ */
 		$(".notice-label").hide();
 		$("#notice-info").hide(); 
@@ -126,7 +147,7 @@ $(function(){
 				key = false;
 			}
 		});
-		$("input[type='file']").each(function(){
+		$(".add-file").each(function(){
 			if ($(this).val() == ''){
 				$("#notice-info").show();
 				key = false;
@@ -140,7 +161,7 @@ $(function(){
 			}
 		}); 
 		if (key == true) {
-			$("#addWatchForm").submit();
+			$("#editWatchForm").submit();
 		}
 	});
 })
@@ -153,52 +174,53 @@ $(function(){
 			<div class="col-md-12">
 				<ul class="nav nav-tabs">
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/watch/list">名表列表</a></li>
-					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/watch/save">添加名表</a></li>
+					<li role="presentation"><a href="${pageContext.request.contextPath }/a/watch/save">添加名表</a></li>
+					<li role="presentation" class="active"><a href="#">修改名表</a></li>
 				</ul>
 				<br>
 				<div id="notice-info" class="alert alert-danger alert-dismissible" role="alert">
   					<strong>文件未选择!</strong> 请检查第四步.填写产品.文件是否全部选择
 				</div>
 				
-				<form:form id="addWatchForm" action="${pageContext.request.contextPath }/a/watch/add"
+				<form:form id="editWatchForm" action="${pageContext.request.contextPath }/a/watch/edit"
   modelAttribute="multiFileUploadForm" method="post"
   enctype="multipart/form-data">
+  <input type="hidden" name="id" value="${watch.id }">
 				<div class="col-md-2">
 					<h4><span class="label label-danger">选择的品牌</span></h4>
-					<label id="brand-label"></label>
-					<input type="hidden" name="brandId">
+					<label id="brand-label">${watch.brand.brandName}</label>
+					<input type="hidden" name="brandId" value="${watch.brand.id}">
 					<br>
 					<label id="notice-brand" class="notice-label">*请选择品牌</label>
 					<br>
 					<h4><span class="label label-danger">选择的人群</span></h4>
-					<label id="crowd-label"></label>
-					<input type="hidden" name="crowdId">
+					<label id="crowd-label">${watch.crowd.crowdName}</label>
+					<input type="hidden" name="crowdId" value="${watch.crowd.id}">
 					<br>
 					<label id="notice-crowd" class="notice-label">*请选择人群</label>
 					<br>
 					<h4><span class="label label-danger">选择的机芯</span></h4>
-					<label id="movement-label"></label>
-					<input type="hidden" name="movementId">
+					<label id="movement-label">${watch.movement.movementName}</label>
+					<input type="hidden" name="movementId" value="${watch.movement.id}">
 					<br>
 					<label id="notice-movement" class="notice-label">*请选择机芯</label>
 					<br>
-					<h4><span class="label label-danger">选择的名表</span></h4>
 					<br>
-					<input type="button" id="addWatchButton" class="btn btn-danger btn-block" value="提 交">
+					<input type="button" id="editWatchButton" class="btn btn-danger btn-block" value="提 交">
 				</div>
 				<div class="col-md-10">
 				<div class="btn-group btn-group-justified" role="group" aria-label="123">
 				  <div class="btn-group" role="group">
-				    <button type="button" id="step-brand" class="btn btn-default">1.选择品牌:</button>
+				    <button type="button" id="step-brand" class="btn btn-default">1.修改品牌:</button>
 				  </div>
 				  <div class="btn-group" role="group">
-				    <button type="button" id="step-crowd" class="btn btn-default">2.选择人群:</button>
+				    <button type="button" id="step-crowd" class="btn btn-default">2.修改人群:</button>
 				  </div>
 				  <div class="btn-group" role="group">
-				    <button type="button" id="step-movement" class="btn btn-default">3.选择机芯:</button>
+				    <button type="button" id="step-movement" class="btn btn-default">3.修改机芯:</button>
 				  </div>
 				  <div class="btn-group" role="group">
-				    <button type="button" id="step-watch" class="btn btn-default">4.填写产品:</button>
+				    <button type="button" id="step-watch" class="btn btn-default">4.修改产品:</button>
 				  </div>
 				</div>
 				<br>
@@ -252,99 +274,161 @@ $(function(){
 					<div id="watch-div">
 						<div class="input-group">
 	  						<span class="input-group-addon">标&nbsp;&nbsp;&nbsp;题</span>
-	 						<input type="text" name="watchTitle" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchTitle" value="${watch.watchTitle}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">简&nbsp;&nbsp;&nbsp;介</span>
-	 						<input type="text" name="watchIntroduce" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchIntroduce" value="${watch.watchIntroduce}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">型&nbsp;&nbsp;&nbsp;号</span>
-	 						<input type="text" name="watchModel" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchModel" value="${watch.watchModel}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">编&nbsp;&nbsp;&nbsp;号</span>
-	 						<input type="text" name="watchSerialNumber" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchSerialNumber" value="${watch.watchSerialNumber}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">原价格</span>
-	 						<input type="text" name="watchOrgPrice" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchOrgPrice" value="${watch.watchOrgPrice}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">现价格</span>
-	 						<input type="text" name="watchPrePrice" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchPrePrice" value="${watch.watchPrePrice}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">数&nbsp;&nbsp;&nbsp;量</span>
-	 						<input type="text" name="watchNumber" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchNumber" value="${watch.watchNumber}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">机&nbsp;&nbsp;&nbsp;芯</span>
-	 						<input type="text" name="watchMovement" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchMovement" value="${watch.watchMovement}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">外&nbsp;&nbsp;&nbsp;壳</span>
-	 						<input type="text" name="watchShell" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchShell" value="${watch.watchShell}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">表&nbsp;&nbsp;&nbsp;盘</span>
-	 						<input type="text" name="watchDial" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchDial" value="${watch.watchDial}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">表&nbsp;&nbsp;&nbsp;带</span>
-	 						<input type="text" name="watchStrap" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchStrap" value="${watch.watchStrap}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">表&nbsp;&nbsp;&nbsp;扣</span>
-	 						<input type="text" name="watchClasp" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchClasp" value="${watch.watchClasp}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">年&nbsp;&nbsp;&nbsp;份</span>
-	 						<input type="text" name="watchYear" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchYear" value="${watch.watchYear}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">重&nbsp;&nbsp;&nbsp;量</span>
-	 						<input type="text" name="watchWeight" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchWeight" value="${watch.watchWeight}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div class="input-group">
 	  						<span class="input-group-addon">防&nbsp;&nbsp;&nbsp;水</span>
-	 						<input type="text" name="watchWaterproof" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
+	 						<input type="text" name="watchWaterproof" value="${watch.watchWaterproof}" class="form-control text-input" style="width: 800px;" placeholder="" aria-describedby="basic-addon1">
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
 						<div id ="fileDiv" class="form-group">
     						<label for="exampleInputFile">上传产品图片</label><button id="addFile" type="button" class="btn btn-warning">增加文件</button>
-    						<div><br><label>主图(页头1)</label><input name="uploadFiles[0]" type="file" ></div>
-    						<div><br><label>附图(页头2)</label><input name="uploadFiles[1]" type="file" ></div>
-    						<div><br><label>附图(页头3)</label><input name="uploadFiles[2]" type="file" ></div>
+    						<br><br>
+    						<c:forEach items="${watch.watchPicture}" var="picture" varStatus="str">
+    							<c:if test="${picture.pictureSort=='0' }">
+    								<div class="row">
+									  <div class="col-xs-6 col-md-3">
+									   主图(页头1)
+									    <a class="thumbnail">
+									      <img src="${ctxStatic}/resources/watch/${picture.pictureSrc }" class="img-rounded">
+									    </a>
+									  </div>
+									  <div class="col-xs-6 col-md-3">
+										  <br>
+										  <label>替换为</label>
+										  <input name="uploadFiles[0]" type="file" >
+									  </div>
+									</div>
+	    						</c:if>
+	    						<c:if test="${picture.pictureSort=='1' }">
+	    							<div class="row">
+									  <div class="col-xs-6 col-md-3">
+									  附图(页头2)
+									    <a class="thumbnail">
+									      <img src="${ctxStatic}/resources/watch/${picture.pictureSrc }" class="img-rounded">
+									    </a>
+									  </div>
+										<div class="col-xs-6 col-md-3">
+										  <br>
+										  <label>替换为</label>
+										  <input name="uploadFiles[1]" type="file" >
+									  </div>	
+									</div>
+  								</c:if>
+	    						<c:if test="${picture.pictureSort=='2' }">
+	    							<div class="row">
+									  <div class="col-xs-6 col-md-3">
+									  附图(页头3)
+									    <a class="thumbnail">
+									      <img src="${ctxStatic}/resources/watch/${picture.pictureSrc }" class="img-rounded">
+									    </a>
+									  </div>
+										<div class="col-xs-6 col-md-3">
+										  <br>
+										  <label>替换为</label>
+										  <input name="uploadFiles[2]" type="file" >
+									  </div>
+									</div>
+  								</c:if>
+  								<c:if test="${picture.pictureSort!='0'&& picture.pictureSort!='1' && picture.pictureSort!='2' }">
+	    							<div class="row">
+									  <div class="col-xs-6 col-md-3">
+									  附图(详情图)
+									    <a class="thumbnail">
+									      <img src="${ctxStatic}/resources/watch/${picture.pictureSrc }" class="img-rounded">
+									    </a>
+									  </div>
+										<div class="col-xs-6 col-md-3">
+										  <br>
+										  <br>
+										  <input type="hidden" value="${picture.id}">
+										  <button type="button" class="btn btn-warning btn-xs deleteImgButton">删除</button>
+									  </div>
+									</div>
+  								</c:if>
+  							</c:forEach>
+  							
   						</div>
 						
 					</div>

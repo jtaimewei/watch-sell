@@ -1,0 +1,365 @@
+#headad {
+				height: 60px;
+				background-image: url(/watch-sell/static/resources/img/headadpic.jpg);
+				margin-top: -10px;
+				margin-left: -9px;
+				margin-right: -9px;
+			}
+			
+			#headad span {
+				float: right;
+				font-size: 30px;
+				margin-top: 10px;
+				margin-right: 150px;
+				color: darkgray;
+			}
+			
+			#headtop {
+				background-color: #333333;
+				height: 30px;
+				margin-top: -16px;
+				margin-left: -9px;
+				margin-right: -9px;
+			}
+			
+			#headtop > ul {
+				margin-right: 85px;
+				list-style-type: none;
+				color: lightgrey;
+			}
+			
+			#headtop >ul >li {
+				margin-top: 5px;
+				float: right;
+				padding-right: 26px;
+			}
+			
+			#headtop >ul>li> a {
+				text-decoration: none;
+				color: lightgrey;
+			}
+			
+			#headtop_ul_li_a4_ul {
+				list-style-type: none;
+				background-color: white;
+				width: 200px;
+				height: 140px;
+				box-shadow: 7px 7px 5px #888888;
+				padding-top: 10px;
+				/*margin-top: 4px;*/
+				position: absolute;
+				display: none;
+			}
+			
+			#headtop_ul_li_a4_ul a:hover {
+				background-color: #D3D3D3;
+				color: white;
+			}
+			
+			#headtop_ul_li_a4_ul a {
+				text-decoration: none;
+				color: #000000;
+			}
+			
+			#headmiddle {
+				background-color: #FAFAFA;
+				height: 120px;
+				margin-left: -9px;
+				margin-right: -9px;
+				padding-left: 142px;
+			}
+			
+			#headmiddle div {
+				/*display:inline-block;*/
+				height: 80px;
+				overflow: hidden;
+				float: left;
+				/*background-color: aquamarine;*/
+				/*搜索栏荧光色测试背景*/
+			}
+			
+			#headmiddle1 {
+				/*margin-left: 142px;*/
+				padding-top: 35px;
+			}
+			
+			#headmiddle2 {
+				padding-top: 18px;
+				margin-left: 20px;
+			}
+			
+			#headmiddle3 {
+				padding-top: 35px;
+				margin-left: 200px;
+			}
+			
+			#headmiddle3 input[type="text"] {
+				/*z-index: 1;
+				position: absolute;*/
+				font-size: 20px;
+				width: 360px;
+				height: 37px;
+				/*top: 132px;
+				left: 730px;*/
+			}
+			
+			#headmiddle3 input[type="submit"] {
+				height: 45px;
+				width: 80px;
+				font-size: 20px;
+				color: white;
+				background-color: #A52A2A;
+				border: 1px white solid;
+				display: inline-block;
+				margin-left: -85px;
+				display: none;
+			}
+			
+			#headmiddle4 {
+				padding-top: 35px;
+				margin-left: 20px;
+			}
+			
+			#headmiddle4 button {
+				border: 1px #A9A9A9 solid;
+				background-color: #FAFAFA;
+				font-size: 20px;
+				height: 45px;
+				width: 150px;
+			}
+			
+			#headmiddle4 button:hover {
+				background-color: brown;
+				color: white;
+			}
+			
+			#navigationbar {
+				background-color: #FAFAFA;
+				margin-left: -9px;
+				margin-right: -9px;
+				height: 50px;
+				padding-left: 75px;
+			}
+			
+			#navigationbar div {
+				float: left;
+				position: relative;
+			}
+			
+			#navigationbar1 {
+				width: 210px;
+				height: 30px;
+				background-color: #B32424;
+				padding-top: 18px;
+			}
+			
+			#navigationbar1 a {
+				text-decoration: none;
+				color: white;
+				font-size: 18px;
+			}
+			
+			#navigationbar2 > ul {
+				margin-right: 85px;
+				list-style-type: none;
+				color: lightgrey;
+			}
+			
+			#navigationbar2 >ul >li {
+				margin-top: 5px;
+				float: right;
+				padding-right: 45px;
+			}
+			
+			#navigationbar2 >ul>li> a {
+				text-decoration: none;
+				color: #333333;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			
+			#navigationbar2_ul_li_a6_ul {
+				list-style-type: none;
+				position: absolute;
+				background-color: white;
+				width: 1366px;
+				height: 370px;
+				margin-top: 6px;
+				margin-left: -323px;
+				display: none;
+				z-index: 10000;
+			}
+			
+			#navigationbar2_ul_li_a6_ul >li {
+				margin-left: -22px;
+			}
+			
+			#navigationbar2_ul_li_a6_ul a {
+				text-decoration: none;
+				color: #000000;
+				opacity: 0.6;
+			}
+			
+			#navigationbar2_ul_li_a6_ul > li > div {
+				width: 295px;
+				background-color: white;
+				margin-left: 120px;
+			}
+			
+			#navigationbar2_ul_li_a6_ul .navigationbar_class {
+				font-size: 16px;
+				font-family: "楷体";
+				font-weight: bold;
+			}
+			
+			#navigationbar2_ul_li_a6_ul span a {
+				margin-left: 12px;
+				font-size: 14px;
+			}
+				
+			
+			.slider *{
+				padding: 0px;
+				margin: 0px;
+				
+			}
+			
+			.slider a {
+				text-decoration: none;
+			}
+			
+			.slider ul {
+				list-style: outside none none;
+			}
+			
+			.slider{
+				width: 1348px;
+				height: 435px;
+				margin-left: -8px;
+				margin-top: -2px;
+				position: relative;
+			}
+			.slider-panel img,
+			.slider-extra {
+				width: 1348px;
+				height: 435px;
+			}
+			
+			.slider {
+				text-align: center;
+		
+				position: relative;
+			}
+			
+			.slider-panel,
+			.slider-nav {
+				position: absolute;
+				z-index: 8;
+			}
+			.slider-pre{
+				position: absolute;
+				z-index: 8;
+				margin-left: 290px;
+			}
+			.slider-next {
+				position: absolute;
+				z-index: 8;
+				
+			}
+			
+			.slider-panel {
+				position: absolute;
+			}
+			
+			.slider-panel img {
+				border: none;
+			}
+			
+			.slider-extra {
+				position: relative;
+			}
+			
+			.slider-nav {
+				margin-left: -51px;
+				position: absolute;
+				left: 50%;
+				bottom: 4px;
+			}
+			
+			.slider-nav li {
+				background: #3e3e3e;
+				border-radius: 50%;
+				color: #fff;
+				cursor: pointer;
+				margin: 0 2px;
+				overflow: hidden;
+				text-align: center;
+				display: inline-block;
+				height: 18px;
+				line-height: 18px;
+				width: 18px;
+			}
+			
+			.slider-nav .slider-item-selected {
+				background: blue;
+			}
+			
+			.slider-page a {
+				background: rgba(0, 0, 0, 0.2);
+				filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#33000000, endColorstr=#33000000);
+				color: #fff;
+				text-align: center;
+				display: block;
+				font-family: "simsun";
+				font-size: 60px;
+				width: 28px;
+				height: 62px;
+				line-height: 62px;
+				margin-top: -31px;
+				position: absolute;
+				top: 50%;
+			}
+			
+			.slider-page a:HOVER {
+				background: rgba(0, 0, 0, 0.4);
+				filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#66000000, endColorstr=#66000000);
+			}
+			
+			.slider-next {
+				left: 100%;
+				margin-left: -140px;
+			}
+			.slider-select{
+				width: 211px;
+				height: 435px;
+				overflow: hidden;
+				background-color: #2E2E2E;
+				position: absolute;
+				z-index: 100;
+				margin-left: 73px;
+				margin-top: -435px;
+				
+				
+			}
+			.slider-select a{
+				text-decoration: none;
+				color: white ;
+				float: left;
+				opacity: 0.8;
+			
+			}
+			.slider-select span{
+				
+			}
+			.slider-select span a{
+				font-size: 13px;
+				margin-left: 10px;
+			}
+			.slider-select_a{
+				font-size: 15px;
+				margin-left: 10px;
+			}
+			.slider-select_div a:hover{
+					text-decoration: underline;
+			}
+			

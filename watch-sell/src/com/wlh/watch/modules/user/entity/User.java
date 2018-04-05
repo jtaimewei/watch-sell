@@ -16,7 +16,8 @@ public class User {
 	private int userType;// 0-顾客;1-客服;2-管理员
 	private String vip;//vip等级
 	private int credits;//积分
-	private String checkCode;//验证码
+	private String checkCode;//图验证码
+	private String emailCode;//邮箱验证码
 	private Page<User> page;
 	private List<SysRole> roles;//用户角色
 	private String roleId; //角色id
@@ -104,6 +105,12 @@ public class User {
 	}
 	public void setCredits(int credits) {
 		this.credits = credits;
+	}
+	public String getEmailCode() {
+		return emailCode;
+	}
+	public void setEmailCode(String emailCode) {
+		this.emailCode = emailCode;
 	}
 	
 	

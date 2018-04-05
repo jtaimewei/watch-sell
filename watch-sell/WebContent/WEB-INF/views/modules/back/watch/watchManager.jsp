@@ -54,8 +54,8 @@ function page(n,s){
 								<td class="warning">${watch.watchPrePrice}</td>
 								<td class="warning">${watch.watchNumber}</td>
 								<td class="danger">促销</td>
-								<td class="info"><a class="caozhuo-class" href="${pageContext.request.contextPath }/a/watch/edit?id=${user.id}">修改</a><a
-									class="caozhuo-class" href="${pageContext.request.contextPath }/a/watch/delete?id=${user.id}">删除</a></td>
+								<td class="info"><a class="caozhuo-class" href="${pageContext.request.contextPath }/a/watch/toedit?id=${watch.id}">修改</a><a
+									class="caozhuo-class" href="${pageContext.request.contextPath }/a/watch/delete?id=${watch.id}">删除</a></td>
 							</tr>
 						</c:forEach>
 					</table>

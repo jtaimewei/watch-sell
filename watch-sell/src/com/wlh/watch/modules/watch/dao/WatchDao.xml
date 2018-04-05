@@ -16,7 +16,7 @@
 	a.watch_pre_price AS "watchPrePrice",
 	a.watch_number AS "watchNumber",
 	a.watch_movement AS "watchMovement",
-	a.watch_shell AS "watchMovement",
+	a.watch_shell AS "watchShell",
 	a.watch_dial AS "watchDial",
 	a.watch_strap As "watchStrap",
 	a.watch_clasp AS "watchClasp",
@@ -24,12 +24,59 @@
 	a.watch_weight As "watchWeight",
 	a.watch_waterproof AS "watchWaterproof"
 	</sql>
-<!-- 	<select id="getById" resultType="Watch">
+	
+  <resultMap id="watch1" type="Watch">  
+    <id property="id" column="id"/>  
+    <result property="watchTitle" column="watchTitle"/>  
+    <result property="watchIntroduce" column="watchIntroduce"/>  
+    <result property="watchModel" column="watchModel"/>  
+    <result property="watchSerialNumber" column="watchSerialNumber"/>  
+    <result property="watchOrgPrice" column="watchOrgPrice"/>  
+    <result property="watchPrePrice" column="watchPrePrice"/>  
+    <result property="watchNumber" column="watchNumber"/>  
+    <result property="watchMovement" column="watchMovement"/>  
+    <result property="watchShell" column="watchShell"/>  
+    <result property="watchDial" column="watchDial"/>  
+    <result property="watchStrap" column="watchStrap"/>  
+    <result property="watchClasp" column="watchClasp"/>  
+    <result property="watchYear" column="watchYear"/>  
+    <result property="watchWeight" column="watchWeight"/>  
+    <result property="watchWaterproof" column="watchWaterproof"/>  
+    <association property="brand" javaType="Brand">
+            <result column="brand.id" property="id" />
+            <result column="brand.brandName" property="brandName" />
+    </association>  
+    <association property="crowd" javaType="Crowd">
+            <result column="crowd.id" property="id" />
+            <result column="crowd.crowdName" property="crowdName" />
+    </association>  
+    <association property="movement" javaType="Movement">
+            <result column="movement.id" property="id" />
+            <result column="movement.movementName" property="movementName" />
+    </association>  
+    <collection property="watchPicture" ofType="WatchPicture">  
+        <result property="id" column="watchPicture.id"/>  
+        <result property="pictureSrc" column="watchPicture.pictureSrc"/>  
+        <result property="pictureSort" column="watchPicture.pictureSort"/>  
+    </collection>  
+  </resultMap> 
+	<select id="getById" resultMap="watch1">
 		SELECT
-		<include refid="user" />
-		FROM sys_user a
-		WHERE a.id = #{id}
-	</select> -->
+		b.id AS "watchPicture.id",
+		b.picture_src AS "watchPicture.pictureSrc",
+		b.picture_sort AS "watchPicture.pictureSort",
+		c.id AS "brand.id",
+		c.brand_name AS "brand.brandName",
+		d.id AS "crowd.id",
+		d.crowd_name AS "crowd.crowdName",
+		e.id AS "movement.id",
+		e.movement_name AS "movement.movementName",
+		<include refid="watch" />
+		FROM watch a LEFT JOIN watch_picture b on a.id=b.watch_id 
+		LEFT JOIN watch_brand c ON c.id = a.brand_id
+		LEFT JOIN watch_crowd d on d.id = a.crowd_id
+		LEFT JOIN watch_movement e on e.id = a.movement_id WHERE a.id = #{id} ORDER BY b.picture_sort;
+	</select>
 	
 	<select id="findList" resultType="Watch">
 		SELECT
@@ -41,5 +88,85 @@
 		COUNT(1)
 		FROM watch a WHERE a.del_flag = '0'
 	</select>
+	<delete id="deletePictureById">
+		DELETE FROM watch_picture WHERE id = #{id}
+	</delete>
+	<delete id="deletePictureByPicture">
+		DELETE FROM watch_picture WHERE watch_id = #{watchId} AND picture_sort = #{pictureSort}
+	</delete>
+	
+	<update id="editWatch">
+		UPDATE watch SET
+			brand_id = #{brandId},
+			crowd_id = #{crowdId},
+			movement_id = #{movementId},
+			watch_title = #{watchTitle},
+			watch_introduce = #{watchIntroduce},
+			watch_model = #{watchModel},
+			watch_serial_number = #{watchSerialNumber},
+			watch_org_price = #{watchOrgPrice},
+			watch_pre_price = #{watchPrePrice},
+			watch_number = #{watchNumber},
+			watch_movement = #{watchMovement},
+			watch_shell = #{watchShell},
+			watch_dial = #{watchDial},
+			watch_strap = #{watchStrap},
+			watch_clasp = #{watchClasp},
+			watch_year = #{watchYear},
+			watch_weight = #{watchWeight},
+			watch_waterproof = #{watchWaterproof}
+			WHERE id = #{id}
+	</update>
+	<insert id="addWatch">
+		INSERT INTO watch(
+			id,
+			brand_id,
+			crowd_id,
+			movement_id,
+			watch_title,
+			watch_introduce,
+			watch_model,
+			watch_serial_number,
+			watch_org_price,
+			watch_pre_price,
+			watch_number,
+			watch_movement,
+			watch_shell,
+			watch_dial,
+			watch_strap,
+			watch_clasp,
+			watch_year,
+			watch_weight,
+			watch_waterproof
+		)VALUES (
+			#{id},
+			#{brandId},
+			#{crowdId},
+			#{movementId},
+			#{watchTitle},
+			#{watchIntroduce},
+			#{watchModel},
+			#{watchSerialNumber},
+			#{watchOrgPrice},
+			#{watchPrePrice},
+			#{watchNumber},
+			#{watchMovement},
+			#{watchMovement},
+			#{watchDial},
+			#{watchStrap},
+			#{watchClasp},
+			#{watchYear},
+			#{watchWeight},
+			#{watchWaterproof}
+		)
+		
+	</insert>
+	<insert id="addWatchPicture">
+		INSERT INTO watch_picture(id,picture_src,picture_sort,watch_id)  
+        VALUES   
+        <foreach collection="wps" item="wp" separator=",">  
+            (#{wp.id},#{wp.pictureSrc},#{wp.pictureSort},#{wp.watchId})  
+        </foreach> 
+	</insert>
 	
 </mapper>

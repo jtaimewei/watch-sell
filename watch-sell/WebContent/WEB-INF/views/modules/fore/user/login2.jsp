@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>管理员登录页面</title>
+<title>会员登录页面</title>
 <link href="${ctxStatic}/resources/css/login_style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script>
 <script type="text/javascript">
@@ -69,13 +69,13 @@ $(function(){
 	<div id="lg-head">图标
 	</div>
 	<div id="lg-zong">
-		<img src="${ctxStatic}/resources/img/39149a8c7a2c40d3bd7a5c66093a6bed.jpg" height="580px"
+		<img src="${ctxStatic}/resources/img/0804923a26414d188686dc39f12d9de3.png" height="580px"
 			width="1341px" />
 		
 		<div id="lg-zong-login">
 			<div id="lg-zong-login-p">
 				<form id="loginForm" action="${pageContext.request.contextPath }/a/login" method="post">
-				<p class="lg-zong-head">后台登录</p>
+				<p class="lg-zong-head">会员登录</p>
 				<p class="notice-p message-p">&nbsp;${message}</p>
 				<input class="user-log-input" id="userName" name="username" type="text" placeholder="用户名" /> <br>
 				<p id="user-name-p" class="notice-p">*请输入用户名</p>
@@ -87,10 +87,10 @@ $(function(){
 				<input id="user-log-button" type="button" value="立即登录" />
 				</form>
 			</div>
-			<br>
-			<br>
-			<br>
-			
+			<p id="register-p">
+				<a id="register-a" href="${pageContext.request.contextPath }/b/register">免费注册</a>
+			</p>
+			<p id="lg-zong-but">名表特售|优质服务</p>
 		</div>
 	</div>
 </body>
