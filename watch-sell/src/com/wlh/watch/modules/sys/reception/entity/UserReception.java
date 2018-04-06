@@ -2,10 +2,10 @@ package com.wlh.watch.modules.sys.reception.entity;
 
 public class UserReception {
 	private String id;
-	private String recName;
-	private String recPhone;
-	private String recAddress;
-	private String userId;
+	private String recName;//收货人名字
+	private String recPhone;//收货人电话号码
+	private String recAddress;//收货人地址
+	private String userId;//用户id
 	public String getId() {
 		return id;
 	}

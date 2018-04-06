@@ -58,7 +58,7 @@ $(function(){
 			    	alert(data);
 			    }  
 			  }); */
-			  $("#loginForm").submit();
+			  $("#signinForm").submit();
 		}
 
 	});
@@ -74,14 +74,14 @@ $(function(){
 		
 		<div id="lg-zong-login">
 			<div id="lg-zong-login-p">
-				<form id="loginForm" action="${pageContext.request.contextPath }/a/login" method="post">
+				<form id="signinForm" action="${pageContext.request.contextPath }/b/signin" method="post">
 				<p class="lg-zong-head">会员登录</p>
 				<p class="notice-p message-p">&nbsp;${message}</p>
-				<input class="user-log-input" id="userName" name="username" type="text" placeholder="用户名" /> <br>
+				<input class="user-log-input" id="userName" name="email" type="text" placeholder="用户名" /> <br>
 				<p id="user-name-p" class="notice-p">*请输入用户名</p>
 				<input class="user-log-input" id="password" name="password" type="password" placeholder="密码" /> <br>
 				<p id="passward-p" class="notice-p">*请输入密码</p>
-				<input id="lg-img" class="user-log-input" name="validateCode" type="text" placeholder="图形验证码" /> 
+				<input id="lg-img" class="user-log-input" name="checkCode" type="text" placeholder="图形验证码" /> 
 				<img id="lg-yanz-img" src="${pageContext.request.contextPath}/b/check/code">
 				<p id="yanz-p" class="notice-p">*请输入验证码</p>
 				<input id="user-log-button" type="button" value="立即登录" />

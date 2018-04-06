@@ -73,9 +73,6 @@ public class LoginController {
 		List<SysMenu> menus = null;
 		User user2 = userService.getByEmail(user);
 		session.setAttribute("userOwn", user2);
-		if (user2.getUserType()==0) {//顾客到顾客界面
-			return "modules/fore/index";
-		}
 		menus = sysMenuService.getByUserId(user2.getId());
 		session.setAttribute("menus", menus);
 		List<SysRole> roleList = sysRoleService.findList();

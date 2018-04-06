@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.sys.reception.dao.UserReceptionDao">
+	<sql id="reception">
+		a.id AS "id",
+		a.rec_name AS "recName",
+		a.rec_phone AS "recPhone",
+		a.rec_address AS "recAddress"
+	</sql>
+	<select id="findReception" resultType="UserReception">
+		SELECT 
+			<include refid="reception"/>
+		FROM
+		user_reception a
+		WHERE a.del_flag = '0' AND a.user_id = #{id}
+	</select>
+	<insert id="saveReception">
+		INSERT INTO user_reception(
+		id,
+		rec_name,
+		rec_phone,
+		rec_address,
+		user_id
+		) VALUES (
+		#{id},
+		#{recName},
+		#{recPhone},
+		#{recAddress},
+		#{userId}
+		) 
+	</insert>
+	<update id="deleteReception">
+		UPDATE user_reception SET
+		del_flag = '1'
+		WHERE id = #{id} AND user_id = #{userId} 
+	</update>
+	<update id="editReception">
+		UPDATE user_reception SET
+		rec_name = #{recName},
+		rec_phone = #{recPhone},
+		rec_address = #{recAddress}
+		WHERE id = #{id} 
+	</update>
+
+</mapper>

@@ -6,9 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>名表首页</title>
+<%@include file="/WEB-INF/views/include/head.jsp"%>
 <link href="${ctxStatic}/fore/index.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script>
 <script type="text/javascript">
+			//alert(window.screen.width);
+		<script type="text/javascript">
 			//alert(window.screen.width);
 			$(function() {
 				//导航栏顶部广告部分X点击隐藏广告部分
@@ -241,7 +244,7 @@
 		</script>
 </head>
 <body style="overflow-x:hidden ;">
-<div id="headad">
+	<div id="headad">
 			<span>&times;</span>
 		</div>
 		<div id="headtop">
@@ -260,17 +263,19 @@
 				<li><a id="headtop_ul_li_a3" href="">手机表行</a></li>
 				
 				
-				<c:if test="${empty userOwn}">
+				<c:if test="${empty gUser}">
 				<li>|</li>
-				<li><a id="headtop_ul_li_a5" href="">注册</a></li>
+				<li><a id="headtop_ul_li_a5" href="${pageContext.request.contextPath }/b/register">注册</a></li>
 				<li><a id="headtop_ul_li_a6" href="${pageContext.request.contextPath }/b/login">登录</a></li>
 				</c:if>
-				<c:if test="${!empty userOwn}">
+				<c:if test="${!empty gUser}">
 				<li>|</li>
 				<li><a href="" id="headtop_ul_li_a1">我的订单</a></li>
 				<li>|</li>
-				<li><a id="headtop_ul_li_a5" href="">${userOwn.userName }</a></li>
+				<li><a href="${pageContext.request.contextPath}/b/logout">注销</a></li>
+				<li><a id="headtop_ul_li_a5" href="${pageContext.request.contextPath}/b/user/own">${gUser.userName }</a></li>
 				</c:if>
+				<li><a href="${pageContext.request.contextPath}/b/index">首页</a></li>
 			</ul>
 		</div>
 

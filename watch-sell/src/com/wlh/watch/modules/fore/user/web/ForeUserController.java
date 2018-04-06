@@ -1,5 +1,7 @@
 package com.wlh.watch.modules.fore.user.web;
 
+import java.util.Enumeration;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -9,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,6 +22,8 @@ import com.wlh.watch.common.email.UserMail;
 import com.wlh.watch.common.utils.Digests;
 import com.wlh.watch.common.utils.Encodes;
 import com.wlh.watch.modules.sys.menu.service.SysMenuService;
+import com.wlh.watch.modules.sys.reception.entity.UserReception;
+import com.wlh.watch.modules.sys.reception.service.UserReceptionService;
 import com.wlh.watch.modules.sys.vip.service.UserVipService;
 import com.wlh.watch.modules.user.entity.User;
 import com.wlh.watch.modules.user.service.UserService;
@@ -34,6 +40,8 @@ public class ForeUserController {
 	private SysMenuService sysMenuService;
 	@Resource
 	private UserMail userMail;
+	@Resource
+	private UserReceptionService userReceptionService;
 
 	/**
 	 * 进入登录界面
@@ -42,6 +50,45 @@ public class ForeUserController {
 	@RequestMapping("login")
 	public String toLogin(){
 		return "modules/fore/user/login2";
+	}
+	/**
+	 * 注销
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request){
+		Enumeration<String> em = request.getSession().getAttributeNames();
+		while (em.hasMoreElements()) {
+			request.getSession().removeAttribute(em.nextElement().toString());
+		}
+		return "modules/fore/index";
+	}
+	/**
+	 * 登录
+	 * @return
+	 */
+	@RequestMapping("signin")
+	public String login(User user,HttpSession session,Model model){
+		String checkCode = (String) session.getAttribute("checkCode");
+		if (!checkCode.equals(user.getCheckCode().toUpperCase())) {
+			model.addAttribute("message", "图形验证码错误");
+			return "modules/fore/user/login2";
+		}
+		User user1 = userService.getByEmail(user);
+		if (user1 == null) {
+			model.addAttribute("message", "用户名或者密码错误");
+			return "modules/fore/user/login2";
+		}
+		// 密码解密
+		//byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
+		String password = "123";
+		if (!password.equals(user.getPassword())) {
+			model.addAttribute("message", "用户名或者密码错误");
+			return "modules/fore/user/login2";
+		}
+		session.setAttribute("gUser", user1);
+		return "modules/fore/index";
 	}
 	/**
 	 * 进入注册界面 web-inf
@@ -106,4 +153,61 @@ public class ForeUserController {
 		userService.addUser(user);
 		return "modules/fore/user/login2";
 	}
+	//查看个人信息
+	@RequestMapping("/user/own")
+	public String toMy() {
+		
+		return "modules/fore/user/foreUser";
+	}
+	//修改密码
+	@RequestMapping("/user/editPassword")
+	public String editPassword(User user) {
+		
+		return "modules/fore/user/forePassword";
+	}
+	//添加地址
+	@RequestMapping("/user/reception/add")
+	public String addReception(UserReception reception,HttpSession session) {
+		User user = (User) session.getAttribute("gUser");
+		String id = user.getId();
+		
+		reception.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+		reception.setUserId(id);
+		
+		userReceptionService.saveReception(reception);
+		return "redirect:/b/user/reception";
+	}
+	//查看收货地址
+	@RequestMapping("/user/reception")
+	public String reception(Model model,HttpSession session) {
+		User user = (User) session.getAttribute("gUser");
+		String id = user.getId();
+		
+		List<UserReception> recs = userReceptionService.findReception(id);
+		
+		model.addAttribute("recs", recs);
+		return "modules/fore/user/foreReception";
+	}
+	//ajax-删除地址
+	@RequestMapping(value="/user/reception/delete",produces="text/html;charset=UTF-8;")
+	public @ResponseBody String deleteRec(String id,HttpSession session,HttpServletResponse response) {
+		User user = (User) session.getAttribute("gUser");
+		String userId = user.getId();
+		
+		UserReception reception = new UserReception();
+		reception.setId(id);
+		reception.setUserId(userId);
+		userReceptionService.deleteReception(reception);
+		
+		return "ok";
+	}
+	//ajax-修改地址
+	@RequestMapping(value="/user/reception/edit")
+	public @ResponseBody String editRec(@RequestBody UserReception reception,HttpSession session,HttpServletResponse response) {
+		
+		userReceptionService.editReception(reception);
+		
+		return "ok";
+	}
+	
 }
