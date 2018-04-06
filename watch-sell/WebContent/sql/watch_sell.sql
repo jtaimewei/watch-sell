@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-04-05 23:18:29
+Date: 2018-04-06 23:33:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -105,7 +105,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1231', 'weilihong', '314cd370f3d2a9e88331f043a731029cf0ddea2bc67f4ef159950dae', '1510491769@qq.com', '1', '19940307', '2', 'vip1', '1231312321', '100', '0');
 INSERT INTO `sys_user` VALUES ('1232', 'weiwei', '65de6c3f438bae0e4c7c27c15c770d6a0dfcade13bba5c421f131041', '123@qq.com', '1', '2018-03-15', '1', 'vip1', '33333333', '100', '0');
-INSERT INTO `sys_user` VALUES ('7d1211b196dc4a8ab81a5a9a0ca90f4e', 'weilihong', '314cd370f3d2a9e88331f043a731029cf0ddea2bc67f4ef159950dae', '123', null, null, '0', 'vip1', null, '0', '0');
+INSERT INTO `sys_user` VALUES ('7d1211b196dc4a8ab81a5a9a0ca90f4e', 'weilihong', '314cd370f3d2a9e88331f043a731029cf0ddea2bc67f4ef159950dae', '123', '1', null, '0', 'vip1', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -140,6 +140,11 @@ CREATE TABLE `user_reception` (
 -- ----------------------------
 -- Records of user_reception
 -- ----------------------------
+INSERT INTO `user_reception` VALUES ('1', '1232', '3213', '123131', '0', '7d1211b196dc4a8ab81a5a9a0ca90f4e');
+INSERT INTO `user_reception` VALUES ('2', 'ewqeqw', '13213123', 'sds发顺丰', '1', '7d1211b196dc4a8ab81a5a9a0ca90f4e');
+INSERT INTO `user_reception` VALUES ('3', 'eqweqwe', '1232136765756', '安达市达到', '0', '7d1211b196dc4a8ab81a5a9a0ca90f4e');
+INSERT INTO `user_reception` VALUES ('850d2759430b49e7ab5623c976ccafe4', '11111', '1111111', '无穷大大所', '1', '7d1211b196dc4a8ab81a5a9a0ca90f4e');
+INSERT INTO `user_reception` VALUES ('e67ff4ddefd345dba122243721c9c368', '22222222', '2222222222', '驱蚊器二群', '1', '7d1211b196dc4a8ab81a5a9a0ca90f4e');
 
 -- ----------------------------
 -- Table structure for user_vip
