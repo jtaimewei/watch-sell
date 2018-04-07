@@ -273,7 +273,7 @@
 				<li><a href="" id="headtop_ul_li_a1">我的订单</a></li>
 				<li>|</li>
 				<li><a href="${pageContext.request.contextPath}/b/logout">注销</a></li>
-				<li><a id="headtop_ul_li_a5" href="${pageContext.request.contextPath}/b/user/own">${gUser.userName }</a></li>
+				<li><a id="headtop_ul_li_a5" href="${pageContext.request.contextPath}/b/user/own">${gUser.userName }&nbsp;[${gUser.vip}]</a></li>
 				</c:if>
 				<li><a href="${pageContext.request.contextPath}/b/index">首页</a></li>
 			</ul>
@@ -413,7 +413,7 @@
 				<div class="slider-select_div">
 					<br />
 					<a class="slider-select_a" href="">顶级品牌</a><br /><hr style="visibility: hidden;"/><hr style="visibility: hidden;"/>
-					<span><a href="">百达翡丽</a><a href="">亨利·慕时</a><a href="">积家</a><a href="">柏高</a></span>
+					<span><a href="${pageContext.request.contextPath}/b/watch/brand?name=百达翡丽">百达翡丽</a><a href="">亨利·慕时</a><a href="">积家</a><a href="">柏高</a></span>
 					<br /><br /><hr />
 				</div >
 				<div class="slider-select_div">
@@ -425,7 +425,7 @@
 				<div class="slider-select_div">
 					<br />
 					<a class="slider-select_a" href="">轻奢品牌</a><br />   
-					<span><a href="">天梭</a><a href="">浪琴</a><a href="">赫柏林</a><a href="">迪沃斯</a><a href="">宝玑</a></span>
+					<span><a href="">天梭</a><a href="">浪琴</a><a href="">赫柏林</a><a href="${pageContext.request.contextPath}/b/watch/brand?name=爱宝时">爱宝时</a><a href="">宝玑</a></span>
 					<br /><br /><hr />
 				</div>
 				
@@ -448,6 +448,91 @@
 			</div>
 			
 		</div>
-
+		<br><br>
+		<p  style="font-size: 20px;font-weight:bold; #4a4a4a;font-family: 'Microsoft Yahei';">热卖推荐</p>	
+<!-- 第一栏 热卖推荐 -->
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    	<a href="#" class="thumbnail">
+      <img src="${ctxStatic}/resources/img/3e42cdc61f19419e9f792b4d95cf3a7a.jpg" alt="...">
+     </a>
+      <div class="caption">
+      	<center>
+	        <h3>汉米尔顿</h3>
+	        <p>大胆坚定的美国设计</p>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    <a href="#" class="thumbnail">
+      <img src="${ctxStatic}/resources/img/338eb63710384628ba7bee3933cc7278.jpg" alt="...">
+     </a>
+      <div class="caption">
+      	<center>
+	        <h3>法国赫柏林</h3>
+	        <p>岁月中的恒久坚恒</p>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    <a href="#" class="thumbnail">
+      <img src="${ctxStatic}/resources/img/ef5a9592e673468fb4d08ead45b20ee9.jpg" alt="...">
+      </a>
+      <div class="caption">
+      	<center>
+	        <h3>东方双狮</h3>
+	        <p>低调内涵，精明之选</p>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 第二栏 热卖推荐 -->
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    	<a href="#" class="thumbnail">
+      <img src="${ctxStatic}/resources/img/b04ae7b6d3b8457e997e82d198d82317.jpg" alt="...">
+     </a>
+      <div class="caption">
+      	<center>
+	        <h3>瑞士驰客</h3>
+	        <p>无谓时间，Rock前行</p>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    <a href="#" class="thumbnail">
+      <img src="${ctxStatic}/resources/img/c6d3d945e0b14c69bd7b2df43ae49534.jpg" alt="...">
+     </a>
+      <div class="caption">
+      	<center>
+	        <h3>阿玛尼</h3>
+	        <p>热切追求,人生所有</p>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    <a href="#" class="thumbnail">
+      <img src="${ctxStatic}/resources/img/d8199b064b654f7c90e9007522cc5932.jpg" alt="...">
+      </a>
+      <div class="caption">
+      	<center>
+	        <h3>瑞士天铭</h3>
+	        <p>鉴赏镂空艺术，聆听机芯律动</p>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -49,4 +49,12 @@ public class WatchService {
 		watchDao.deletePictureByPicture(wap);
 	}
 
+	public Page<Watch> findForePage(Page<Watch> page, Watch watch) {
+		page.setNumber((page.getPageNo()-1)*page.getPageSize());
+		watch.setPage(page);
+		page.setCount(watchDao.getForeCount(watch));
+		page.setList(watchDao.findForeList(watch));
+		return page;
+	}
+
 }

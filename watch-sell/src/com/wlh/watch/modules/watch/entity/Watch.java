@@ -34,6 +34,13 @@ public class Watch {
 	
 	private List<MultipartFile> uploadFiles;//文件列表
 	
+	private String brandName;
+	private String crowdName;
+	private String movementName;
+	private int gPrice;//小价格
+	private int lPrice;//大价格
+	
+	
 	private Brand brand;
 	
 	private Crowd crowd;
@@ -199,6 +206,36 @@ public class Watch {
 	}
 	public void setPromotionId(String promotionId) {
 		this.promotionId = promotionId;
+	}
+	public String getBrandName() {
+		return brandName;
+	}
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+	public String getCrowdName() {
+		return crowdName;
+	}
+	public void setCrowdName(String crowdName) {
+		this.crowdName = crowdName;
+	}
+	public String getMovementName() {
+		return movementName;
+	}
+	public void setMovementName(String movementName) {
+		this.movementName = movementName;
+	}
+	public int getgPrice() {
+		return gPrice;
+	}
+	public void setgPrice(int gPrice) {
+		this.gPrice = gPrice;
+	}
+	public int getlPrice() {
+		return lPrice;
+	}
+	public void setlPrice(int lPrice) {
+		this.lPrice = lPrice;
 	}
 
 }

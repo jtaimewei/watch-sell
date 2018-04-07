@@ -25,4 +25,8 @@ public interface WatchDao {
 
 	void deletePictureByPicture(WatchPicture wap);
 
+	long getForeCount(Watch watch);
+
+	List<Watch> findForeList(Watch watch);
+
 }

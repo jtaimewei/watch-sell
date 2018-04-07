@@ -25,13 +25,13 @@
 				<form id="headerUserForm" class="form-horizontal" action="" method="post">
 					<input type="hidden" name="id" value="${userOwn.id}">
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">登录名</label>
 						<div class="col-sm-10">
 							<input type="email" class="form-control"
 								value="${userOwn.email}" disabled="disabled">
 						</div>
 					</div>
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">用户名</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="userName"
@@ -46,7 +46,7 @@
 								name="password" value="${userOwn.password}" placeholder="密码">
 						</div>
 						<p id="password-notice" class="header-user-notice">*请输入密码</p>
-					</div>
+					</div> --%>
 					<div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">性别</label>
 						<div class="col-sm-10">
@@ -57,14 +57,14 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">生日</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="birthday"
 								name="birthday" readonly="readonly" value="${userOwn.birthday}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
 						</div>
 						<p id="birthday-notice" class="header-user-notice">*请输入生日</p>
-					</div>
+					</div> --%>
 					<div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">用户类型</label>
 						<div class="col-sm-10">
@@ -88,13 +88,12 @@
 							<input type="text" class="form-control" id="phoneNum"
 								name="phoneNum" value="${userOwn.phoneNum}" placeholder="电话号码">
 						</div>
-						<p id="phone-num-notice" class="header-user-notice">*请输入电话号码</p>
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-default">修改</button>
 						</div>
-					</div>
+					</div> -->
 				</form>
 			</div>
 		</div>

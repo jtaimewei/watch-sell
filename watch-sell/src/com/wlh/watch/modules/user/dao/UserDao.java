@@ -32,4 +32,6 @@ public interface UserDao {
 
 	public List<User> findRoleUserList(User user);
 
+	public void editPassword(User user);
+
 }

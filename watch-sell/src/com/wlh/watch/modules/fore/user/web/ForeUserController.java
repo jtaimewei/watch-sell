@@ -90,6 +90,7 @@ public class ForeUserController {
 		session.setAttribute("gUser", user1);
 		return "modules/fore/index";
 	}
+	
 	/**
 	 * 进入注册界面 web-inf
 	 * @return
@@ -159,10 +160,53 @@ public class ForeUserController {
 		
 		return "modules/fore/user/foreUser";
 	}
-	//修改密码
+	//修改个人信息
+	@RequestMapping("/user/edit")
+	public String edit(User user,HttpSession session) {
+		userService.editBack(user);
+		User user2 = userService.getById(user.getId());
+		session.setAttribute("gUser", user2);
+		return "modules/fore/user/foreUser";
+	}
+	//进入修改密码
 	@RequestMapping("/user/editPassword")
 	public String editPassword(User user) {
 		
+		return "modules/fore/user/forePassword";
+	}
+	// 进入vip 页面
+	@RequestMapping("/user/vip")
+	public String vip(User user) {
+		
+		return "modules/fore/user/foreVip";
+	}
+	/**
+	 * 修改密码
+	 * @return
+	 */
+	@RequestMapping("/user/password/edit")
+	public String password(User user,HttpSession session,Model model){
+		User user1 = (User) session.getAttribute("gUser");
+		String id = user1.getId();
+		//原来密码解密
+		String password = user1.getPassword();
+		password = "123";
+		if (!user.getPassword().equals(password)) {
+			model.addAttribute("message", "密码错误");
+			return "modules/fore/user/forePassword";
+		}
+		//新密码-加盐加密
+		String plain = Encodes.unescapeHtml(user.getNewPassword());
+		byte[] salt = Digests.generateSalt(8);
+		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, 1024);
+		String password1 = Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
+		
+		user.setPassword(password1);
+		user.setId(id);
+		
+		userService.editPassword(user);
+		
+		model.addAttribute("message", "修改密码成功！");
 		return "modules/fore/user/forePassword";
 	}
 	//添加地址

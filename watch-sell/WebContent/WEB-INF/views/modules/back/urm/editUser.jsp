@@ -40,7 +40,7 @@
 				key = false;
 				$("#user-name-notice").show();
 			}
-			if ($("#password").val() == null || $("#password").val() == '') {
+			 if ($("#password").val() == null || $("#password").val() == '') {
 				key = false;
 				$("#password-notice").show();
 			}

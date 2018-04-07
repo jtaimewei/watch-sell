@@ -66,4 +66,8 @@ public class UserService {
 		return page;
 	}
 
+	public void editPassword(User user) {
+		userDao.editPassword(user);
+	}
+
 }

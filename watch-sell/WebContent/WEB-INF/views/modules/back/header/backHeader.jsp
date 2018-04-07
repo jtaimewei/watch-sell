@@ -62,7 +62,7 @@
 				</a>
 					<ul class="dropdown-menu">
 						<li>
-						<a href="${pageContext.request.contextPath}/a/headerUser">${userOwn.userName}</a>
+						<a href="${pageContext.request.contextPath}/a/headerUser">${userOwn.email}</a>
 						</li>
 					</ul>
 				</li>

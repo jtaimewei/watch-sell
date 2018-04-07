@@ -25,11 +25,11 @@
 		//判断选择的必须数据是否 有数据
 		$("#addButton").click(function(){
 			$(".header-user-notice").hide();
+			var key = true;
 			if ($("#email").val() == null || $("#email").val() == '') {
 				key = false;
 				$("#email-notice").show();
 			}
-			var key = true;
 			if ($("#password").val() == null || $("#password").val() == '') {
 				key = false;
 				$("#password-notice").show();
@@ -70,14 +70,14 @@
 							</div>
 							<p id="email-notice" class="header-user-notice">*请输入登录名</p>
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">用户名*</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="userName"
 									name="userName" value="" placeholder="用户名">
 							</div>
 							<p id="user-name-notice" class="header-user-notice">*请输入用户名</p>
-						</div>
+						</div> -->
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">密码*</label>
 							<div class="col-sm-10">
@@ -96,7 +96,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">生日</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="birthday"
@@ -104,7 +104,7 @@
 									onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
 							</div>
 							<p id="birthday-notice" class="header-user-notice">*请输入生日</p>
-						</div>
+						</div> -->
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">用户类型</label>
 							<div class="col-sm-10">

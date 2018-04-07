@@ -22,6 +22,10 @@ public class User {
 	private List<SysRole> roles;//用户角色
 	private String roleId; //角色id
 	
+	private String newPassword;//修改密码的新密码
+	
+	
+	
 	public String getRoleId() {
 		return roleId;
 	}
@@ -112,6 +116,11 @@ public class User {
 	public void setEmailCode(String emailCode) {
 		this.emailCode = emailCode;
 	}
-	
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 	
 }

@@ -28,7 +28,7 @@
 			<li role="presentation"  ${type == 'movement'?'class="active"':''}><a
 				href="${pageContext.request.contextPath }/b/user/reception">收货地址</a></li>
 			<li role="presentation"  ${type == 'movement'?'class="active"':''}><a
-				href="${pageContext.request.contextPath }/a/type/movement/list">会员中心</a></li>
+				href="${pageContext.request.contextPath }/b/user/vip">会员中心</a></li>
 		</ul>
 	</div>
 </body>

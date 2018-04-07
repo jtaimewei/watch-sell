@@ -55,14 +55,32 @@
 	<update id="editBack">
 		UPDATE sys_user SET
 		user_name = #{userName},
-		<if test="password != null and password != ''">
-			password = #{password},
+		<if test="sex != null">
+			sex = #{sex},
 		</if>
-		sex = #{sex},
-		birthday = #{birthday},
-		phone_num = #{phoneNum}
+		<if test="sex == null">
+			sex = null,
+		</if>
+		<if test="birthday != null">
+			birthday = #{birthday},
+		</if>
+		<if test="birthday == null">
+			birthday = null,
+		</if>
+		<if test="phoneNum != null">
+			phone_num = #{phoneNum}
+		</if>
+		<if test="phoneNum == null">
+			phone_num = null
+		</if>
 		WHERE id =
 		#{id}
+	</update>
+	<!--前台 修改密码  -->
+	<update id="editPassword">
+		UPDATE sys_user SET
+		password = #{password}
+		WHERE id = #{id}
 	</update>
 
 	<insert id="addUser">

@@ -83,10 +83,52 @@
 		<include refid="watch" />
 		FROM watch a where a.del_flag = '0' LIMIT #{page.number},#{page.pageSize}
 	</select>
+	<select id="findForeList" resultType="Watch">
+		SELECT
+		<include refid="watch" />
+		FROM watch a,watch_brand b,watch_crowd c,watch_movement m
+		WHERE a.brand_id = b.id and a.crowd_id = c.id and a.movement_id = m.id
+		and a.del_flag = '0'
+		<if test="brandName != null and brandName != ''">
+			AND b.brand_name = #{brandName}
+		</if>
+		<if test="crowdName != null and crowdName != ''">
+			AND c.crowd_name = #{crowdName}
+		</if>
+		<if test="movementName != null and movementName != ''">
+			AND m.movement_name = #{movementName}
+		</if>
+		<if test="gPrice != null and gPrice != '' and lPrice != null and lPrice != ''">
+			AND a.watch_pre_price BETWEEN #{gPrice} and #{lPrice}
+		</if>
+		LIMIT #{page.number},#{page.pageSize}
+	</select>
 	<select id="getCount" resultType="Long">
 		SELECT
 		COUNT(1)
-		FROM watch a WHERE a.del_flag = '0'
+		FROM watch a 
+		WHERE
+		a.del_flag = '0'	 
+	</select>
+	<select id="getForeCount" resultType="Long">
+		SELECT
+		COUNT(1)
+		FROM watch a,watch_brand b,watch_crowd c,watch_movement m
+		WHERE a.brand_id = b.id and a.crowd_id = c.id and a.movement_id = m.id
+		and a.del_flag = '0'
+		<if test="brandName != null and brandName != ''">
+			AND b.brand_name = #{brandName}
+		</if>
+		<if test="crowdName != null and crowdName != ''">
+			AND c.crowd_name = #{crowdName}
+		</if>
+		<if test="movementName != null and movementName != ''">
+			AND m.movement_name = #{movementName}
+		</if>
+		<if test="gPrice != null and gPrice != '' and lPrice != null and lPrice != ''">
+			AND a.watch_pre_price BETWEEN #{gPrice} and #{lPrice}
+		</if>
+		 
 	</select>
 	<delete id="deletePictureById">
 		DELETE FROM watch_picture WHERE id = #{id}
