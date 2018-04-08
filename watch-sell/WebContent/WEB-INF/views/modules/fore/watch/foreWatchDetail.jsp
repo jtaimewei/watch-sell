@@ -159,7 +159,7 @@
 <td>年份</td>
 <td>213</td>
 <td>防水</td>
-<td>3123</td>
+<td>312e3</td>
 </tr>
 </table>
 </div>
