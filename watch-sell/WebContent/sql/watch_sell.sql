@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-04-06 23:33:04
+Date: 2018-04-08 18:01:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -105,7 +105,10 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1231', 'weilihong', '314cd370f3d2a9e88331f043a731029cf0ddea2bc67f4ef159950dae', '1510491769@qq.com', '1', '19940307', '2', 'vip1', '1231312321', '100', '0');
 INSERT INTO `sys_user` VALUES ('1232', 'weiwei', '65de6c3f438bae0e4c7c27c15c770d6a0dfcade13bba5c421f131041', '123@qq.com', '1', '2018-03-15', '1', 'vip1', '33333333', '100', '0');
-INSERT INTO `sys_user` VALUES ('7d1211b196dc4a8ab81a5a9a0ca90f4e', 'weilihong', '314cd370f3d2a9e88331f043a731029cf0ddea2bc67f4ef159950dae', '123', '1', null, '0', 'vip1', null, '0', '0');
+INSERT INTO `sys_user` VALUES ('3a7f860c1c3e464a8b9cb81101e31fed', null, '29fdff78ebb128732def3f9ef986dd6a69618f0710835110992f5507', 'www', '1', null, '2', 'vip1', null, '0', '0');
+INSERT INTO `sys_user` VALUES ('7d1211b196dc4a8ab81a5a9a0ca90f4e', 'wwww', '93a4b672123b02fa219d48a90a0f9061bf4cd34328efb103fe66c535', '123', '0', '', '0', 'vip1', '', '0', '0');
+INSERT INTO `sys_user` VALUES ('8e44cd2948284e2e937f2c5465825d31', '111', '82a510c0d81490bb5a779b69774bce70d440060d3aca3611cd20b8de', '111', null, null, '0', 'vip1', null, '0', '0');
+INSERT INTO `sys_user` VALUES ('a3699712ec60429582f35d19caadcf42', '2222', 'b545ef1ef5f6a7974c213e51618b755745a894c961f6edec0399213c', '222', null, null, '0', 'vip1', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -122,6 +125,7 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1231', '1');
 INSERT INTO `sys_user_role` VALUES ('1231', '2');
+INSERT INTO `sys_user_role` VALUES ('3a7f860c1c3e464a8b9cb81101e31fed', '1');
 
 -- ----------------------------
 -- Table structure for user_reception
@@ -199,11 +203,11 @@ CREATE TABLE `watch` (
 -- ----------------------------
 -- Records of watch
 -- ----------------------------
-INSERT INTO `watch` VALUES ('09c10439c0fb425e8eba68396c593157', '061176832eac40748777ea2f38db6306', 'e90ae503f730422484d1e54bea867cac', '68b11c01944e4a46987379120f3eb364', null, 'test', '123', '123', '123', '123', '123', '123', '123', '123', '131', '31', '2131', '1231', '3132123', '132131', '0');
-INSERT INTO `watch` VALUES ('0ad450ed108f4b388e55ed73527edd26', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '12313', '121', '123123', '1231', '31231', '31313', '3131', '313', '313', '3131', '313', '3131', '313123', '1312', '3131', '0');
+INSERT INTO `watch` VALUES ('09c10439c0fb425e8eba68396c593157', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e90ae503f730422484d1e54bea867cac', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列', '3390.152.20.16.25', '唯有超一流的工艺加上坚持不懈的创作方可成就这一精品超薄腕表', '42471', '123', '123', '123', '123', '123', '131', '31', '2131', '1231', '3132123', '132131', '0');
+INSERT INTO `watch` VALUES ('0ad450ed108f4b388e55ed73527edd26', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列', '121', '123123', '1231', '31231', '31313', '3131', '313', '313', '3131', '313', '3131', '313123', '1312', '3131', '0');
 INSERT INTO `watch` VALUES ('1', null, null, null, null, '测试', '测试', '测试', 'A111', '5000', '3800', '20', null, null, null, null, null, null, null, null, '0');
-INSERT INTO `watch` VALUES ('17e804749e1543a89f8af516c5afa753', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列 罗马假期-水蓝版 3390.152.20.16.25 机械男表', '3390.152.20.16.25', '褐尽繁华 保留腕表原始的魅力 渐变太阳纹表盘 简约 不简单', '42471', '5800', '5600', '100', 'ETA 2892-A2', 'ETA 2892-A2', '表盘宽度41mm 表盘厚度9mm 表耳20mm 纵向表耳间距50mm 蓝色', '牛皮 黑色', '针扣', '2014年', '200g', '50米', '0');
-INSERT INTO `watch` VALUES ('52b7fe3df22e483f976cec3e88b4216a', '1d746af421c44d8b98ecbd71a4b09359', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Originale原创系列', '3408.208.24.10.15', '唯有超一流的工艺加上坚持不懈的创作方可成就这一精品超薄腕表', '25502', '16000', '14000', '100', '13213', '13213', '3123', '313', '31231', '31231', '1231', '1323', '0');
+INSERT INTO `watch` VALUES ('17e804749e1543a89f8af516c5afa753', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列', '3390.152.20.16.25', '褐尽繁华 保留腕表原始的魅力 渐变太阳纹表盘 简约 不简单', '42471', '5800', '5600', '100', 'ETA 2892-A2', 'ETA 2892-A2', '表盘宽度41mm 表盘厚度9mm 表耳20mm 纵向表耳间距50mm 蓝色', '牛皮 黑色', '针扣', '2014年', '200g', '50米', '0');
+INSERT INTO `watch` VALUES ('52b7fe3df22e483f976cec3e88b4216a', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Originale原创系列', '3408.208.24.10.15', '唯有超一流的工艺加上坚持不懈的创作方可成就这一精品超薄腕表', '25502', '16000', '14000', '100', '13213', '13213', '3123', '313', '31231', '31231', '1231', '1323', '0');
 
 -- ----------------------------
 -- Table structure for watch_brand
