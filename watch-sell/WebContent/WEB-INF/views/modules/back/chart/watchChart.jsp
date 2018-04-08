@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 
-/* var option = {
+ /* var option = {
 	    title: {
 	        text: '折线图堆叠'
 	    },
@@ -92,9 +92,12 @@
 	            data:[820, 932, 901, 934, 1290, 1330, 1320]
 	        }
 	    ]
-	}; */
+	}; 
+ var myChart = echarts.init(document.getElementById('main'));
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option); */ 
 //指定图表的配置项和数据
-var option = {
+ var option = {
 	    title: {
 	        text: '折线图堆叠'
 	    },
@@ -102,7 +105,7 @@ var option = {
 	        trigger: 'axis'
 	    },
 	    legend: {
-	        data:null
+	        data:[]
 	    },
 	    grid: {
 	        left: '3%',
@@ -115,10 +118,20 @@ var option = {
 	            saveAsImage: {}
 	        }
 	    },
+	    dataZoom: [
+	               {
+	            	   id: 'dataZoomX',
+	                   type: 'slider',
+	                   xAxisIndex: [0],
+	                   filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+	                   start: 30,
+	                   end: 70
+	               }
+	           ],
 	    xAxis: {
 	        type: 'category',
 	        boundaryGap: false,
-	        data: null
+	        data: []
 	    },
 	    yAxis: {
 	        type: 'value'
@@ -145,7 +158,10 @@ $("#chartButton").click(function(){
 		    },  
 		    success: function(data) {
 		    	//alert(typeof data)
-		    	console.log('data',data["1"]);
+		    	console.log('data',data);
+		    	option.legend.data = null;
+		    	option.xAxis.data = null;
+		    	option.series = [];
 		    	option.legend.data = data.title;
 		    	option.xAxis.data = data.timeList;
 		    	var title = data.title;
@@ -153,11 +169,12 @@ $("#chartButton").click(function(){
 		    		var d = {
 	    		            name:title[i],
 	    		            type:'line',
-	    		            stack: '总量',
+	    		            //stack: '总量',
 	    		            data:data[title[i]]
 	    		        };
 		    		option.series.push(d);
 		    	}
+		    	console.log('option',option);
 		    	/* $.each(title, function(){
 		    		var key = this;
 		    		  var d = {
@@ -169,10 +186,9 @@ $("#chartButton").click(function(){
 		    		  option.series.push(d);
 		    	 }); */
 		    	// 基于准备好的dom，初始化echarts实例
-		    	
 		    	 var myChart = echarts.init(document.getElementById('main'));
-	// 使用刚指定的配置项和数据显示图表。
-	myChart.setOption(option);
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
 		    } 
 		  });
 

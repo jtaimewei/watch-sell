@@ -78,6 +78,11 @@
 		LEFT JOIN watch_movement e on e.id = a.movement_id WHERE a.id = #{id} ORDER BY b.picture_sort;
 	</select>
 	
+	<select id="getForeById" resultType="Watch">
+		SELECT
+		<include refid="watch" />
+		FROM watch a where a.del_flag = '0' and a.id = #{id}
+	</select>
 	<select id="findList" resultType="Watch">
 		SELECT
 		<include refid="watch" />
@@ -98,7 +103,7 @@
 		<if test="movementName != null and movementName != ''">
 			AND m.movement_name = #{movementName}
 		</if>
-		<if test="gPrice != null and gPrice != '' and lPrice != null and lPrice != ''">
+		<if test="gPrice != 0 and lPrice != 0">
 			AND a.watch_pre_price BETWEEN #{gPrice} and #{lPrice}
 		</if>
 		LIMIT #{page.number},#{page.pageSize}
@@ -125,7 +130,7 @@
 		<if test="movementName != null and movementName != ''">
 			AND m.movement_name = #{movementName}
 		</if>
-		<if test="gPrice != null and gPrice != '' and lPrice != null and lPrice != ''">
+		<if test="gPrice != 0 and lPrice != 0">
 			AND a.watch_pre_price BETWEEN #{gPrice} and #{lPrice}
 		</if>
 		 

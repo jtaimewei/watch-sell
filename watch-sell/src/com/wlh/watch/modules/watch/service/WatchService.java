@@ -57,4 +57,8 @@ public class WatchService {
 		return page;
 	}
 
+	public Watch getForeById(String id) {
+		return watchDao.getForeById(id);
+	}
+
 }

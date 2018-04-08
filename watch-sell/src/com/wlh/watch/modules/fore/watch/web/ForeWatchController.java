@@ -43,24 +43,58 @@ public class ForeWatchController {
 	}
 	
 	/**
-	 * 
+	 * 根据价格-品牌-人群-机芯 分类联合查询
 	 * @return
 	 */
-	@RequestMapping("/watch/brand")
-	public String toWatch(String name,Watch watch,Model model,HttpServletRequest request,
-			HttpServletResponse response){
+	@RequestMapping("/watch/search")
+	public String toWatch(Watch watch,Model model,HttpServletRequest request,
+			HttpServletResponse response,HttpSession session){
 		List<Brand> brands = brandService.findAllList();
 		List<Crowd> crowds = crowdService.findList();
 		List<Movement> movements = movementService.findAllList();
 		model.addAttribute("brands", brands);
 		model.addAttribute("crowds", crowds);
 		model.addAttribute("movements", movements);
-		watch.setBrandName(name);
+		//watch.setBrandName(name);
+		if (watch.getgPrice() != 0) {
+			session.setAttribute("gPrice", watch.getgPrice());
+		} else {
+			session.removeAttribute("gPrice");
+		}
+		if (watch.getlPrice() != 0) {
+			session.setAttribute("lPrice", watch.getlPrice());
+		} else {
+			session.removeAttribute("lPrice");
+		}
+		if (watch.getBrandName() != null && !watch.getBrandName().equals("")) {
+			session.setAttribute("brandName", watch.getBrandName());
+		} else {
+			session.removeAttribute("brandName");
+		}
+		if (watch.getCrowdName() != null && !watch.getCrowdName().equals("")) {
+			session.setAttribute("crowdName", watch.getCrowdName());
+		} else {
+			session.removeAttribute("crowdName");
+		}
+		if (watch.getMovementName() != null && !watch.getMovementName().equals("")) {
+			session.setAttribute("movementName", watch.getMovementName());
+		} else {
+			session.removeAttribute("movementName");
+		}
 		Page<Watch> page = watchService.findForePage(
 				new Page<Watch>(request, response), watch);
 		model.addAttribute("page", page);
 		return "modules/fore/watch/foreWatch";
 	}
-	
+	/**
+	 * 查询单个手表信息
+	 * @return
+	 */
+	@RequestMapping("/watch/detail")
+	public String toOneWatch(String id,Model model){
+		Watch watch = watchService.getById(id);
+		model.addAttribute("watch", watch);
+		return "modules/fore/watch/foreWatchDetail";
+	}
 	
 }

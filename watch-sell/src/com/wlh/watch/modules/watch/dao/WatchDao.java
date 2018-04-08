@@ -29,4 +29,6 @@ public interface WatchDao {
 
 	List<Watch> findForeList(Watch watch);
 
+	Watch getForeById(String id);
+
 }

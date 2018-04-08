@@ -83,11 +83,11 @@
 <body style="overflow-x:hidden ;">
 		<div id="headmiddle">
 			<div id="headmiddle1">
-				<img src="${ctxStatic}/resources/img/147219975709452.png" />
+				<img src="${ctxStatic}/resources/img/20180408140857.png" height="45px" />
 
 			</div>
 			<div id="headmiddle2">
-				<img src="${ctxStatic}/resources/img/149421866385797.gif" />
+				<img src="${ctxStatic}/resources/img/adelodimsdkeidjsmqq.gif" />
 			</div>
 			<div id="headmiddle3">
 				<form action="" method="">
@@ -105,7 +105,7 @@
 					<a href="">全部腕表</a>
 				</center>
 			</div>
-			<div id="navigationbar2">
+			<div id="navigationbar2" style="margin-top: 18px;">
 				<ul>
 					<li><a id="navigationbar2_ul_li_a1" href="">钟表文化</a></li>
 					<li><a id="navigationbar2_ul_li_a2" href="">会员福利</a></li>

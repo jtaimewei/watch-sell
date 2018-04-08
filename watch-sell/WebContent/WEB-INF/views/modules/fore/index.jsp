@@ -281,11 +281,11 @@
 
 		<div id="headmiddle">
 			<div id="headmiddle1">
-				<img src="${ctxStatic}/resources/img/147219975709452.png" />
+				<img src="${ctxStatic}/resources/img/20180408140857.png" height="45px" />
 
 			</div>
 			<div id="headmiddle2">
-				<img src="${ctxStatic}/resources/img/149421866385797.gif" />
+				<img src="${ctxStatic}/resources/img/adelodimsdkeidjsmqq.gif" />
 			</div>
 			<div id="headmiddle3">
 				<form action="" method="">
@@ -413,7 +413,7 @@
 				<div class="slider-select_div">
 					<br />
 					<a class="slider-select_a" href="">顶级品牌</a><br /><hr style="visibility: hidden;"/><hr style="visibility: hidden;"/>
-					<span><a href="${pageContext.request.contextPath}/b/watch/brand?name=百达翡丽">百达翡丽</a><a href="">亨利·慕时</a><a href="">积家</a><a href="">柏高</a></span>
+					<span><a href="${pageContext.request.contextPath}/b/watch/search?brandName=百达翡丽">百达翡丽</a><a href="">亨利·慕时</a><a href="">积家</a><a href="">柏高</a></span>
 					<br /><br /><hr />
 				</div >
 				<div class="slider-select_div">
@@ -425,7 +425,7 @@
 				<div class="slider-select_div">
 					<br />
 					<a class="slider-select_a" href="">轻奢品牌</a><br />   
-					<span><a href="">天梭</a><a href="">浪琴</a><a href="">赫柏林</a><a href="${pageContext.request.contextPath}/b/watch/brand?name=爱宝时">爱宝时</a><a href="">宝玑</a></span>
+					<span><a href="">天梭</a><a href="">浪琴</a><a href="">赫柏林</a><a href="${pageContext.request.contextPath}/b/watch/search?brandName=爱宝时">爱宝时</a><a href="">宝玑</a></span>
 					<br /><br /><hr />
 				</div>
 				

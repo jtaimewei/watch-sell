@@ -80,13 +80,19 @@ public class ForeUserController {
 			model.addAttribute("message", "用户名或者密码错误");
 			return "modules/fore/user/login2";
 		}
-		// 密码解密
-		//byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
-		String password = "123";
-		if (!password.equals(user.getPassword())) {
+
+		String plain = Encodes.unescapeHtml(user.getPassword());//明文密码
+		byte[] salt = Encodes.decodeHex(user1.getPassword().substring(0,16));//密文密码
+		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, 1024);
+		if(!user1.getPassword().equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword))){
 			model.addAttribute("message", "用户名或者密码错误");
 			return "modules/fore/user/login2";
 		}
+		/*String plain = Encodes.unescapeHtml(plainPassword);
+		byte[] salt = "314cd370f3d2a9e88";
+		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
+		String pwd2=Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);*/
+		
 		session.setAttribute("gUser", user1);
 		return "modules/fore/index";
 	}
@@ -112,7 +118,8 @@ public class ForeUserController {
 		}
 		String cd = UUID.randomUUID().toString().replaceAll("-", "");
 		String code = cd.substring(0, 5);
-		userMail.sendMail(email, code);
+		//userMail.sendMail(email, code);
+		System.out.println("-------------------"+code);
 		Cookie cookie = new Cookie("emailCode",code);
 		cookie.setMaxAge(60);
 		response.addCookie(cookie);
