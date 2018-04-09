@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.sys.cart.dao.WatchCartDao">
+	<sql id="cart">
+		a.id AS "id",
+		a.cart_product_number AS "cartProductNumber",
+		a.cart_create_time AS "cartCreateTime",
+		a.cart_state AS "cartState",
+		a.watch_id AS "watchId",
+		a.user_id AS "userId"
+	</sql>
+	<resultMap id="cart1" type="WatchCart">  
+    	<id property="id" column="id"/> 
+		<result property="cartProductNumber" column="cartProductNumber"/>  
+		<result property="cartCreateTime" column="cartCreateTime"/>
+		<result property="cartState" column="cartState"/>
+		<result property="watchId" column="watchId"/>
+	    <association property="watch" javaType="Watch">
+		    <result property="id" column="watch.id"/>  
+		    <result property="watchTitle" column="watch.watchTitle"/>  
+		    <result property="watchPrePrice" column="watch.watchPrePrice"/>
+		    <result property="watchNumber" column="watch.watchNumber"/>
+		    <collection property="watchPicture" ofType="WatchPicture">  
+		        <result property="id" column="watchPicture.id"/>  
+		        <result property="pictureSrc" column="watchPicture.pictureSrc"/>  
+		        <result property="pictureSort" column="watchPicture.pictureSort"/>  
+	    	</collection>   
+	    </association>  
+  	</resultMap> 
+	<select id="findCart" resultMap="cart1">
+		SELECT
+		b.id AS "watchPicture.id",
+		b.picture_src AS "watchPicture.pictureSrc",
+		b.picture_sort AS "watchPicture.pictureSort",
+		c.id AS "watch.id",
+		c.watch_title AS "watch.watchTitle",
+		c.watch_pre_price AS "watch.watchPrePrice",
+		c.watch_number AS "watch.watchNumber",
+		<include refid="cart" />
+		FROM watch_cart a LEFT JOIN watch_picture b on a.watch_id=b.watch_id 
+		LEFT JOIN watch c ON c.id = a.watch_id
+		WHERE a.user_id= #{id} ORDER BY b.picture_sort;
+	</select>
+	<insert id="addCart">
+		INSERT INTO watch_cart(
+		id,
+		cart_product_number,
+		cart_create_time,
+		cart_state,
+		watch_id,
+		user_id
+		) VALUES (
+		#{id},
+		#{cartProductNumber},
+		#{cartCreateTime},
+		#{cartState},
+		#{watchId},
+		#{userId}
+		)
+	</insert>
+
+</mapper>

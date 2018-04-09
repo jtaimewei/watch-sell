@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
-import org.apache.shiro.util.ByteSource;
+
+
+
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,14 +22,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wlh.watch.common.email.UserMail;
+import com.wlh.watch.common.utils.DateUtils;
 import com.wlh.watch.common.utils.Digests;
 import com.wlh.watch.common.utils.Encodes;
+import com.wlh.watch.modules.order.entity.OrderDetail;
+import com.wlh.watch.modules.sys.cart.entity.WatchCart;
+import com.wlh.watch.modules.sys.cart.service.WatchCartService;
 import com.wlh.watch.modules.sys.menu.service.SysMenuService;
 import com.wlh.watch.modules.sys.reception.entity.UserReception;
 import com.wlh.watch.modules.sys.reception.service.UserReceptionService;
 import com.wlh.watch.modules.sys.vip.service.UserVipService;
 import com.wlh.watch.modules.user.entity.User;
 import com.wlh.watch.modules.user.service.UserService;
+import com.wlh.watch.modules.watch.entity.Watch;
+import com.wlh.watch.modules.watch.service.WatchService;
 
 @Controller
 @RequestMapping("/b")
@@ -42,6 +51,11 @@ public class ForeUserController {
 	private UserMail userMail;
 	@Resource
 	private UserReceptionService userReceptionService;
+	@Resource
+	private WatchCartService watchCartService;
+	@Resource
+	private WatchService watchService;
+	
 
 	/**
 	 * 进入登录界面
@@ -260,5 +274,53 @@ public class ForeUserController {
 		
 		return "ok";
 	}
-	
+	//进入购物车
+	@RequestMapping("/user/cart")
+	public String toMyCart(Model model,HttpSession session) {
+		User user = (User) session.getAttribute("gUser");
+		if (user == null) {
+			return "modules/fore/user/login2";
+		}
+		String id = user.getId();
+		
+		List<WatchCart> carts = watchCartService.findCart(id);
+		
+		model.addAttribute("carts", carts);
+		
+		return "modules/fore/user/foreCart";
+	}
+	//ajax-添加订单
+	@RequestMapping(value="/user/order",produces="text/html;charset=UTF-8;")
+	public @ResponseBody String order(String list,Model model,HttpSession session,HttpServletRequest request,
+			HttpServletResponse response) {
+		User user = (User) session.getAttribute("gUser");
+		if (user == null) {
+			return "0";//您还未登录,请先登录！
+		}
+		String[] li = list.split(",");
+		for (String idNum : li) {
+			String[] idN = idNum.split("@");
+			String id = idN[0];
+			int number = Integer.parseInt(idN[1]);
+			Watch watch = watchService.getById(id);
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setWatchId(watch.getId());
+			orderDetail.setOrderWatchSerialNumber(watch.getWatchSerialNumber());
+			orderDetail.setOrderDetailOldPrice(watch.getWatchPrePrice());
+			orderDetail.setOrderWatchNumber(number);
+			orderDetail.setOrderDetailPicture(watch.getWatchPicture().get(0).getPictureSrc());;
+			orderDetail.setOrderDetailState("0");
+			orderDetail.setOrderDetailTime(DateUtils.getDateTime());
+			
+			
+		}
+		return "提交成功";//提交成功
+	}
 }
+/**
+ * JSONArray 加入jar ：
+ * commons-beanutils-1.7.0.jar
+ * json-lib-2.4-jdk15.jar
+ * ezmorph-1.0.3.jar
+ * commons-collections-3.1.jar
+ */

@@ -41,6 +41,8 @@ public class Watch {
 	private int lPrice;//大价格
 	
 	
+	private Page<Watch> page;
+	
 	private Brand brand;
 	
 	private Crowd crowd;
@@ -79,8 +81,6 @@ public class Watch {
 	public void setUploadFiles(List<MultipartFile> uploadFiles) {
 		this.uploadFiles = uploadFiles;
 	}
-	private Page<Watch> page;
-	
 	public Page<Watch> getPage() {
 		return page;
 	}

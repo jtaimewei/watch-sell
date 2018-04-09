@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-04-08 18:01:56
+Date: 2018-04-09 18:08:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -206,7 +206,7 @@ CREATE TABLE `watch` (
 INSERT INTO `watch` VALUES ('09c10439c0fb425e8eba68396c593157', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e90ae503f730422484d1e54bea867cac', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列', '3390.152.20.16.25', '唯有超一流的工艺加上坚持不懈的创作方可成就这一精品超薄腕表', '42471', '123', '123', '123', '123', '123', '131', '31', '2131', '1231', '3132123', '132131', '0');
 INSERT INTO `watch` VALUES ('0ad450ed108f4b388e55ed73527edd26', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列', '121', '123123', '1231', '31231', '31313', '3131', '313', '313', '3131', '313', '3131', '313123', '1312', '3131', '0');
 INSERT INTO `watch` VALUES ('1', null, null, null, null, '测试', '测试', '测试', 'A111', '5000', '3800', '20', null, null, null, null, null, null, null, null, '0');
-INSERT INTO `watch` VALUES ('17e804749e1543a89f8af516c5afa753', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列', '3390.152.20.16.25', '褐尽繁华 保留腕表原始的魅力 渐变太阳纹表盘 简约 不简单', '42471', '5800', '5600', '100', 'ETA 2892-A2', 'ETA 2892-A2', '表盘宽度41mm 表盘厚度9mm 表耳20mm 纵向表耳间距50mm 蓝色', '牛皮 黑色', '针扣', '2014年', '200g', '50米', '0');
+INSERT INTO `watch` VALUES ('17e804749e1543a89f8af516c5afa753', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '3390.152.20.16.25', '褐尽繁华 保留腕表原始的魅力 渐变太阳纹表盘 简约 不简单', '42471', '5800', '5600', '100', 'ETA 2892-A2', 'ETA 2892-A2', '表盘宽度41mm 表盘厚度9mm 表耳20mm 纵向表耳间距50mm 蓝色', '牛皮 黑色', '针扣', '2014年', '200g', '50米', '0');
 INSERT INTO `watch` VALUES ('52b7fe3df22e483f976cec3e88b4216a', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Originale原创系列', '3408.208.24.10.15', '唯有超一流的工艺加上坚持不懈的创作方可成就这一精品超薄腕表', '25502', '16000', '14000', '100', '13213', '13213', '3123', '313', '31231', '31231', '1231', '1323', '0');
 
 -- ----------------------------
@@ -243,18 +243,20 @@ INSERT INTO `watch_brand` VALUES ('d6e50460ab0942db8b4ef9fa5f55f8d6', '浪琴', 
 DROP TABLE IF EXISTS `watch_cart`;
 CREATE TABLE `watch_cart` (
   `id` varchar(64) NOT NULL,
-  `cart_product_number` int(64) DEFAULT NULL,
+  `cart_product_number` int(64) DEFAULT NULL COMMENT '购买数量',
   `cart_create_time` varchar(64) DEFAULT NULL COMMENT '购物车创建时间',
   `cart_state` varchar(1) DEFAULT NULL COMMENT '购物车状态',
   `watch_id` varchar(64) DEFAULT NULL,
   `user_id` varchar(64) DEFAULT NULL,
-  `del_flag` varchar(1) DEFAULT NULL,
+  `del_flag` varchar(1) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of watch_cart
 -- ----------------------------
+INSERT INTO `watch_cart` VALUES ('1', '2', '2018-04-09 14:14:15', '0', '09c10439c0fb425e8eba68396c593157', '7d1211b196dc4a8ab81a5a9a0ca90f4e', '0');
+INSERT INTO `watch_cart` VALUES ('84550ca703784a13bdd08fcf4d471186', '1', '2018-04-09 14:14:15', '0', '09c10439c0fb425e8eba68396c593157', '7d1211b196dc4a8ab81a5a9a0ca90f4e', '0');
 
 -- ----------------------------
 -- Table structure for watch_comment
@@ -263,7 +265,9 @@ DROP TABLE IF EXISTS `watch_comment`;
 CREATE TABLE `watch_comment` (
   `id` varchar(64) NOT NULL,
   `comment_content` varchar(600) DEFAULT NULL COMMENT '评论内容',
+  `comment_content_time` varchar(64) DEFAULT NULL COMMENT '评论时间',
   `comment_answer` varchar(600) DEFAULT NULL COMMENT '回复内容',
+  `comment_answer_time` varchar(64) DEFAULT NULL COMMENT '回复时间',
   `user_name` varchar(255) DEFAULT NULL COMMENT '评论的用户名',
   `user_id` varchar(64) DEFAULT NULL,
   `watch_id` varchar(64) DEFAULT NULL,
@@ -273,6 +277,11 @@ CREATE TABLE `watch_comment` (
 -- ----------------------------
 -- Records of watch_comment
 -- ----------------------------
+INSERT INTO `watch_comment` VALUES ('1', '啊大大大的大剧院加油加油', '2018-4-3 13:12:34', null, null, 'dsada', '7d1211b196dc4a8ab81a5a9a0ca90f4e', '09c10439c0fb425e8eba68396c593157');
+INSERT INTO `watch_comment` VALUES ('2', '发沙发舒服撒发顺丰个好看看看人头', '2018-4-3 13:12:34', '', '', 'dada', '7d1211b196dc4a8ab81a5a9a0ca90f4e', '09c10439c0fb425e8eba68396c593157');
+INSERT INTO `watch_comment` VALUES ('3', '回电话滑动平均同意家庭影院', '2018-4-3 13:12:34', '', '', 'dasdada', '7d1211b196dc4a8ab81a5a9a0ca90f4e', '09c10439c0fb425e8eba68396c593157');
+INSERT INTO `watch_comment` VALUES ('4', '回电话6防辐射服的说法是否收到影院', '2018-4-3 13:12:34', '', '', 'asdadsad', '7d1211b196dc4a8ab81a5a9a0ca90f4e', '09c10439c0fb425e8eba68396c593157');
+INSERT INTO `watch_comment` VALUES ('5', '借古讽今国家管控力拉风我认为而去', '2018-4-3 13:12:34', '', '', 'dasdasdad', '7d1211b196dc4a8ab81a5a9a0ca90f4e', '09c10439c0fb425e8eba68396c593157');
 
 -- ----------------------------
 -- Table structure for watch_crowd
@@ -383,10 +392,10 @@ CREATE TABLE `watch_picture` (
 -- ----------------------------
 -- Records of watch_picture
 -- ----------------------------
-INSERT INTO `watch_picture` VALUES ('19c65e83baae435482d68f9f44873029', 'c0fb7c1a6bc847b884eefd10c79f1d2a.jpg', null, '2', '0ad450ed108f4b388e55ed73527edd26');
+INSERT INTO `watch_picture` VALUES ('19c65e83baae435482d68f9f44873029', 'c0fb7c1a6bc847b884eefd10c79f1d2a.jpg', null, '1', '09c10439c0fb425e8eba68396c593157');
 INSERT INTO `watch_picture` VALUES ('1b797dfeaa1e45358c1cfcdb763e496b', '7c29e4c6511b4b5ea6f7f8bf76351abe.jpg', null, '2', '52b7fe3df22e483f976cec3e88b4216a');
 INSERT INTO `watch_picture` VALUES ('24894e4df5a741eb8a8db9c595047bd2', 'fc76fd7e8b8b4db4ab8b3d2093aecabd.jpg', null, '3', '52b7fe3df22e483f976cec3e88b4216a');
-INSERT INTO `watch_picture` VALUES ('4a7ca535e11e4ce79a0757363aa64f02', '6d9d6152d2c34471b84acf3f1644fd72.jpg', null, '3', '17e804749e1543a89f8af516c5afa753');
+INSERT INTO `watch_picture` VALUES ('4a7ca535e11e4ce79a0757363aa64f02', '6d9d6152d2c34471b84acf3f1644fd72.jpg', null, '0', '09c10439c0fb425e8eba68396c593157');
 INSERT INTO `watch_picture` VALUES ('623fd70897d642089008b16fd680e927', '27e81f06b85e4854b22c7a83d4b2e3d0.jpg', null, '4', '52b7fe3df22e483f976cec3e88b4216a');
 INSERT INTO `watch_picture` VALUES ('b136d022efbb408cba5e75598acb862f', '724a7b893de84c448975de285a7c4f05.jpg', null, '1', '52b7fe3df22e483f976cec3e88b4216a');
 INSERT INTO `watch_picture` VALUES ('b929af59b8c341adab1be22371fa3a31', 'a6b62fcacb7c4a8ab74310b11263029a.jpg', null, '1', '0ad450ed108f4b388e55ed73527edd26');

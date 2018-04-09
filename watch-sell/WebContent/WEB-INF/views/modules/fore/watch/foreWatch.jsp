@@ -200,12 +200,13 @@ $(function(){
 	<c:forEach items="${page.list}" var="watch">
 	  <div class="col-sm-6 col-md-3">
 	    <div class="thumbnail">
-	    	<a href="${pageContext.request.contextPath}/b/watch/detail?id=${watch.id}">
-	      <img src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" alt="...">
+	    	<a href="${pageContext.request.contextPath}/b/watch/detail?watchId=${watch.id}">
+	      <%-- <img src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" alt="..."> --%>
+	      <img src="${ctxStatic}/resources/watch/${watch.watchPicture[0].pictureSrc}" alt="...">
 	     </a>
 	      <div class="caption">
 	      	<h4 style="font-weight: bold;color:#990000;">￥${watch.watchPrePrice}</h4>
-		        <h5><a style="color: #666666;" href="${pageContext.request.contextPath}/b/watch/detail?id=${watch.id}">${watch.watchTitle}</a></h5>
+		        <h5><a style="color: #666666;" href="${pageContext.request.contextPath}/b/watch/detail?watchId=${watch.id}">${watch.watchTitle}</a></h5>
 	      </div>
 	    </div>
 	  </div>
