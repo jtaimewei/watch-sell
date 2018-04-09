@@ -14,4 +14,6 @@ public interface UserReceptionDao {
 
 	void editReception(UserReception reception);
 
+	UserReception getById(String id);
+
 }

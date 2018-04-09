@@ -1,5 +1,6 @@
 package com.wlh.watch.modules.fore.user.web;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
@@ -9,6 +10,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+
+
+
+
 
 
 
@@ -25,7 +31,10 @@ import com.wlh.watch.common.email.UserMail;
 import com.wlh.watch.common.utils.DateUtils;
 import com.wlh.watch.common.utils.Digests;
 import com.wlh.watch.common.utils.Encodes;
+import com.wlh.watch.modules.order.entity.Order;
 import com.wlh.watch.modules.order.entity.OrderDetail;
+import com.wlh.watch.modules.order.service.OrderDetailService;
+import com.wlh.watch.modules.order.service.OrderService;
 import com.wlh.watch.modules.sys.cart.entity.WatchCart;
 import com.wlh.watch.modules.sys.cart.service.WatchCartService;
 import com.wlh.watch.modules.sys.menu.service.SysMenuService;
@@ -55,8 +64,11 @@ public class ForeUserController {
 	private WatchCartService watchCartService;
 	@Resource
 	private WatchService watchService;
+	@Resource
+	private OrderDetailService orderDetailService;
+	@Resource
+	private OrderService orderService;
 	
-
 	/**
 	 * 进入登录界面
 	 * @return
@@ -298,24 +310,85 @@ public class ForeUserController {
 			return "0";//您还未登录,请先登录！
 		}
 		String[] li = list.split(",");
+		List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+		int total = 0;
 		for (String idNum : li) {
 			String[] idN = idNum.split("@");
 			String id = idN[0];
 			int number = Integer.parseInt(idN[1]);
 			Watch watch = watchService.getById(id);
+			total = total + Integer.parseInt(watch.getWatchPrePrice())*number;
 			OrderDetail orderDetail = new OrderDetail();
 			orderDetail.setWatchId(watch.getId());
+			orderDetail.setOrderWatchTitle(watch.getWatchTitle());
 			orderDetail.setOrderWatchSerialNumber(watch.getWatchSerialNumber());
 			orderDetail.setOrderDetailOldPrice(watch.getWatchPrePrice());
 			orderDetail.setOrderWatchNumber(number);
 			orderDetail.setOrderDetailPicture(watch.getWatchPicture().get(0).getPictureSrc());;
 			orderDetail.setOrderDetailState("0");
 			orderDetail.setOrderDetailTime(DateUtils.getDateTime());
-			
-			
+			orderDetailList.add(orderDetail);
 		}
-		return "提交成功";//提交成功
+		session.setAttribute("total", total);
+		session.setAttribute("orderDetailList", orderDetailList);
+		return "1";//提交成功
 	}
+	//添加地址
+	@RequestMapping("/user/addOrder/reception/add")
+	public String addOrderReception(UserReception reception,HttpSession session) {
+		User user = (User) session.getAttribute("gUser");
+		String id = user.getId();
+		
+		reception.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+		reception.setUserId(id);
+		
+		userReceptionService.saveReception(reception);
+		return "redirect:/b/user/toOrder";
+	}
+		// 进入下订单界面
+		@RequestMapping("/user/toOrder")
+		public String toOrder(HttpSession session,Model model) {
+			User user = (User) session.getAttribute("gUser");
+			String id = user.getId();
+			
+			List<UserReception> recs = userReceptionService.findReception(id);
+			
+			model.addAttribute("recs", recs);
+			return "modules/fore/user/foreOrder";
+		}
+		
+		//增加订单
+		@RequestMapping("/user/addOrder")
+		public String addOrder(UserReception userReception,HttpSession session,Model model) {
+			User user = (User) session.getAttribute("gUser");
+			String id = user.getId();
+			String orderId = UUID.randomUUID().toString().replaceAll("-", "");
+			@SuppressWarnings("unchecked")
+			List<OrderDetail> orderDetailList = (List<OrderDetail>) session.getAttribute("orderDetailList");
+			int total = (int) session.getAttribute("total");
+			for (OrderDetail orderDetail : orderDetailList) {
+				orderDetail.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+				orderDetail.setOrderId(orderId);
+				orderDetailService.saveOrderDetail(orderDetail);
+			}
+			System.out.println(System.currentTimeMillis());
+			UserReception UserReception = userReceptionService.getById(userReception.getId());
+			Order order = new Order();		
+			order.setId(orderId);
+			order.setUserId(id);
+			order.setOrderNumber("O"+ String.valueOf(System.currentTimeMillis()));
+			order.setOrderTradeNumber(String.valueOf(System.currentTimeMillis()));
+			order.setOrderCreateTime(DateUtils.getDateTime());
+			order.setOrderAllPrice(total);
+			order.setOrderDiscount(0);
+			order.setOrderSendPrice(0);
+			order.setOrderGetName(UserReception.getRecName());
+			order.setOrderGetPhone(UserReception.getRecPhone());
+			order.setOrderGetAddress(UserReception.getRecAddress());
+			orderService.saveOrder(order);
+			return "modules/fore/user/foreMyOrder";
+		}
+		
 }
 /**
  * JSONArray 加入jar ：

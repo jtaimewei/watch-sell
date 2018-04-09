@@ -78,7 +78,11 @@ $(function(){
 		        alert("加入订单失败");  
 		    },  
 		    success: function(data) {
-		    	alert(data);
+		    	if (data == "0") {
+			    	$("#messageSpan").html("请先登录！");
+		    	} else if (data == "1") {
+		    		window.location.href="${pageContext.request.contextPath}/b/user/toOrder";
+		    	}
 		    }  
 		  });
 		
@@ -125,7 +129,7 @@ $(function(){
 							</tr>
 						</c:forEach>
 					</table>
-					<button id="buyButton" type="button" class="btn btn-danger buyButton" style="float: right;width: 200px;height: 50px;font-size: 16px;">立即购买</button>
+					<button id="buyButton" type="button" class="btn btn-danger buyButton" style="float: right;width: 200px;height: 50px;font-size: 16px;">结&nbsp;&nbsp;算</button>
 				</div>
 			</div>
 		</div>

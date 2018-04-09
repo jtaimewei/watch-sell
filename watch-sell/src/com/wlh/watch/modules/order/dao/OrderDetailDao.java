@@ -8,4 +8,6 @@ public interface OrderDetailDao {
 
 	List<OrderDetail> getChart(OrderDetail orderDetail);
 
+	void saveOrderDetail(OrderDetail orderDetail);
+
 }

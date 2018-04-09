@@ -14,6 +14,8 @@ public class OrderDetail {
 	private String orderDetailState;//订单产品详情状态：交易成功，退货
 	private String orderDetailTime;//时间
 	
+	private String orderWatchTitle;//商品信息title
+	
 	private String watchSerialNumber;
 	private int total;
 	private Date orderTime;
@@ -108,6 +110,12 @@ public class OrderDetail {
 	}
 	public void setOrderDetailTime(String orderDetailTime) {
 		this.orderDetailTime = orderDetailTime;
+	}
+	public String getOrderWatchTitle() {
+		return orderWatchTitle;
+	}
+	public void setOrderWatchTitle(String orderWatchTitle) {
+		this.orderWatchTitle = orderWatchTitle;
 	}
 	
 }

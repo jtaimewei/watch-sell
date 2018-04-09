@@ -27,4 +27,8 @@ public class OrderService {
 	public Order getById(String id) {
 		return orderDao.getById(id);
 	}
+
+	public void saveOrder(Order order) {
+		orderDao.saveOrder(order);
+	}
 }

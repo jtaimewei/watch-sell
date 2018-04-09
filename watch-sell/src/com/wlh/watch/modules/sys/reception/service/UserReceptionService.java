@@ -30,4 +30,8 @@ public class UserReceptionService {
 		userReceptionDao.editReception(reception);
 	}
 
+	public UserReception getById(String id) {
+		return userReceptionDao.getById(id);
+	}
+
 }

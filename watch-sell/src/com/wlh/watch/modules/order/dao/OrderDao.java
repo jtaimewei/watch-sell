@@ -12,4 +12,6 @@ public interface OrderDao {
 
 	Order getById(String id);
 
+	void saveOrder(Order order);
+
 }

@@ -6,6 +6,15 @@ public class UserReception {
 	private String recPhone;//收货人电话号码
 	private String recAddress;//收货人地址
 	private String userId;//用户id
+	
+	private String remarks;//备注
+	
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 	public String getId() {
 		return id;
 	}

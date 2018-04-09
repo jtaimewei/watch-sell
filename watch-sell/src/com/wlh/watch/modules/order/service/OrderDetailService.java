@@ -72,4 +72,8 @@ public class OrderDetailService {
 		return map;
 	}
 
+	public void saveOrderDetail(OrderDetail orderDetail) {
+		orderDetailDao.saveOrderDetail(orderDetail);
+	}
+
 }

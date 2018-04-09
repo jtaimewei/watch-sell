@@ -6,21 +6,21 @@ import com.wlh.watch.common.persistence.Page;
 
 public class Order {
 	
-	private String id;
-	private String userId;
+	private String id;//--
+	private String userId;//--
 	private String userName;
-	private String orderNumber;//订单编号
-	private String orderTradeNumber;//交易号
-	private String orderCreateTime;//订单创建时间
+	private String orderNumber;//订单编号--
+	private String orderTradeNumber;//交易号---
+	private String orderCreateTime;//订单创建时间--
 	private String orderPayTime;//订单支付时间
 	private String orderSendTime;//发货时间
 	private String orderCloseTime;//订单完成时间
-	private int orderAllPrice;//订单总价
-	private int orderDiscount;//订单优惠金额
-	private int orderSendPrice;//邮费
-	private String orderGetName;//收货人
-	private String orderGetAddress;//收货地址
-	private String orderGetPhone;//收货人电话
+	private int orderAllPrice;//订单总价--
+	private int orderDiscount;//订单优惠金额--
+	private int orderSendPrice;//邮费---
+	private String orderGetName;//收货人---
+	private String orderGetAddress;//收货地址--
+	private String orderGetPhone;//收货人电话--
 	
 	List<OrderDetail> orderDetail;
 	

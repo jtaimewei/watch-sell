@@ -12,5 +12,29 @@
 		WHERE order_detail_time BETWEEN #{startTime} AND #{endTime} 
 		GROUP BY DAY(order_detail_time),watch_id; 
 	</select>
+	
+	<insert id="saveOrderDetail">
+		INSERT INTO watch_order_detail(
+		id,
+		order_id,
+		watch_id,
+		order_watch_serial_number,
+		order_detail_old_price,
+		order_watch_number,
+		order_detail_picture,
+		order_detail_state,
+		order_detail_time
+		) VALUES (
+		#{id},
+		#{orderId},
+		#{watchId},
+		#{orderWatchSerialNumber},
+		#{orderDetailOldPrice},
+		#{orderWatchNumber},
+		#{orderDetailPicture},
+		#{orderDetailState},
+		#{orderDetailTime}
+		)
+	</insert>
 
 </mapper>

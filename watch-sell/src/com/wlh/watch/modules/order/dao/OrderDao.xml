@@ -66,5 +66,33 @@
 		FROM watch_order a LEFT JOIN watch_order_detail b 
 		ON a.id = b.order_id WHERE a.id=#{id};
 	</select>
+	<insert id="saveOrder">
+		INSERT INTO watch_order(
+		id,
+		user_id,
+		order_number,
+		order_trade_number,
+		order_create_time,
+		order_all_price,
+		order_discount,
+		order_send_price,
+		order_get_name,
+		order_get_address,
+		order_get_phone
+		) VALUES (
+		#{id},
+		#{userId},
+		#{orderNumber},
+		#{orderTradeNumber},
+		#{orderCreateTime},
+		#{orderAllPrice},
+		#{orderDiscount},
+		#{orderSendPrice},
+		#{orderGetName},
+		#{orderGetAddress},
+		#{orderGetPhone}
+		)
+	</insert>
+	
 
 </mapper>
