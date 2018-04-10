@@ -11,6 +11,10 @@
 td{
 	white-space:nowrap;
 }
+.backButton{
+	float: right;
+    width: 120px;
+}
 </style>
 <script type="text/javascript">
 function page(n,s){
@@ -20,6 +24,24 @@ function page(n,s){
 	return false;
 	
 }
+$(function(){
+	$(".backButton").click(function(){
+		var key = false;
+		$(this).parent().find("input[name='id']").each(function(){
+			//alert($(this).val());
+			if ($(this).is(':checked')) {
+				key = true;
+			}
+		});
+		if (key == true) {
+			
+			$(this).parent().submit();
+		}
+		
+		
+	});
+	
+});
 </script>
 </head>
 <body>
@@ -34,6 +56,7 @@ function page(n,s){
 			      		<c:forEach items="${page.list}" var="order">
 			      		<div class="thumbnail" style="overflow-x: auto;">
 			      	<div class="caption">
+			      	 <form  action="${pageContext.request.contextPath }/b/user/order/back" method="post">
 			      			<table class="table">
 							<tr>
 							<td class="active">订单编号</td>
@@ -104,6 +127,11 @@ function page(n,s){
 					<td >产品数量</td>
 					<td >订单状态</td>
 					<td >时间</td>
+					<c:if test="${order.orderState == '2'}">
+					<td >
+					 退货<input type="checkbox">
+					</td>
+					</c:if>
 				</tr>
 				<c:forEach items="${order.orderDetail}" var="orderDetail">
 				<tr>
@@ -116,9 +144,22 @@ function page(n,s){
 					<td >${orderDetail.orderWatchNumber}</td>
 					<td >${orderDetail.orderDetailState}</td>
 					<td >${orderDetail.orderDetailTime}</td>
+					<c:if test="${order.orderState == '2'}">
+						<td >
+						<input type="checkbox" name="id" value="${orderDetail.id}">
+					</td>
+					</c:if>
 				</tr>
 				</c:forEach>
 			</table>
+			<c:if test="${order.orderState == '2'}">
+			<input type="hidden" name="orderId" value="${order.id}">
+			 <button type="button" class="btn btn-default btn-sm backButton">退货</button>
+			 </c:if>
+			</form>
+			<br>
+			<div class="row">
+			<div class="col-md-1">
 			<c:if test="${order.orderState == '0'}">
 				<form action="${pageContext.request.contextPath }/b/user/order/toPay" method="post">
 	      			<input type="hidden" name="id" value="${order.id}">
@@ -135,7 +176,16 @@ function page(n,s){
 	      			<button  type="submit" class="btn btn-success" style="margin-left: 26px;">确认收货</button>
       			</form>			
 			</c:if>
-			<button type="submit" class="btn btn-success" style="margin-left: 26px;">删除订单</button>
+			</div>
+			<div class="col-md-1">
+			<form action="${pageContext.request.contextPath }/b/user/order/toPay" method="post">
+	      			<input type="hidden" name="id" value="${order.id}">
+	      			<input type="hidden" name="orderNumber" value="${order.orderNumber}">
+	      			<input type="hidden" name="orderAllPrice" value="${order.orderAllPrice}">
+					<button type="button" class="btn btn-success" style="margin-left: 26px;">删除订单</button>
+      			</form>	
+      			</div>
+      			</div>
 					</div></div>
 			      		</c:forEach>
 				  	</div>
@@ -150,5 +200,32 @@ function page(n,s){
 		</div>
 
 	</div>
+	
+	<!-- 模态框 退货-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel">确认退货</h4>
+						      </div>
+						  <form class="form-horizontal" action="${pageContext.request.contextPath }/b/user/order/back" method="post">
+						      <div class="modal-body">
+							<input type="hidden" id="backId" name="id">
+							<input type="hidden" id="backOrderId" name="orderId">
+							<label>退货须知:</label>
+							<p>1.若手表已摘吊牌或人为损坏，将不提供退换货。</p>
+							<p>2.退货请在物流显示签收日期的7日内退回，超过时间不能退货。</p>
+							<p>3.请记录好返件的物流单号，如果不能确定是否收到货，将以提供的物流单号为准。</p>
+							<p>2.退货请寄地址深圳市南山区迈科龙A1301，70550143，名表网售后收，不接收到付运费的包裹和平邮件。</p>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="addRecButton" class="btn btn-primary">确认退货</button>
+						      </div>
+						      </form>
+						    </div>
+						  </div>
+						</div>
 </body>
 </html>

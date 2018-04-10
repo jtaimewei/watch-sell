@@ -429,6 +429,16 @@ public class ForeUserController {
 			model.addAttribute("orderPay", order);
 			return "modules/fore/user/forePay";
 		}
+		//退货 -整个订单的
+		@RequestMapping("/user/order/back")
+		public String backOrder(OrderDetail orderDetail,HttpServletRequest request,HttpSession session,Model model) {
+			//orderService.backOrder(order);
+			//model.addAttribute("orderPay", order);
+			String[] ids = request.getParameterValues("id");
+			System.out.println(ids);
+			return "modules/fore/user/forePay";
+		}
+		
 }
 /**
  * JSONArray 加入jar ：
