@@ -23,4 +23,8 @@ public class WatchCartService {
 		return watchCartDao.findCart(id);
 	}
 
+	public void cleanCart(String id) {
+		watchCartDao.cleanCart(id);
+	}
+
 }

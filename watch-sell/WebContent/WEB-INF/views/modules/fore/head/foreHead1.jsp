@@ -122,7 +122,7 @@
 				</c:if>
 				<c:if test="${!empty gUser}">
 				<li>|</li>
-				<li><a href="" id="headtop_ul_li_a1">我的订单</a></li>
+				<li><a href="${pageContext.request.contextPath}/b/user/order/myOrder?userId=${gUser.id}" id="headtop_ul_li_a1">我的订单</a></li>
 				<li>|</li>
 				<li><a href="${pageContext.request.contextPath}/b/logout">注销</a></li>
 				<li><a id="headtop_ul_li_a5" href="${pageContext.request.contextPath}/b/user/own">${gUser.userName }&nbsp;[${gUser.vip}]</a></li>

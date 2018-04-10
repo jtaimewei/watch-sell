@@ -97,8 +97,12 @@ $(function(){
 	<%@ include file="/WEB-INF/views/modules/fore/head/foreHead1.jsp"%>	
 	<div class="container-fluid">
 		<div class="row">
+		<br>
 			<div class="col-md-12">
 				<div class="col-md-10 col-md-offset-1">
+				
+				<div class="thumbnail">
+			      <div class="caption">
 				<br><span id="messageSpan" style="margin-left: 350px;font-size: 15px;color: red;"></span><br>
 					<label>全部商品&nbsp;&nbsp;&nbsp;(${fn:length(carts)})</label>
 					<table class="table table-striped">
@@ -130,7 +134,11 @@ $(function(){
 						</c:forEach>
 					</table>
 					<button id="buyButton" type="button" class="btn btn-danger buyButton" style="float: right;width: 200px;height: 50px;font-size: 16px;">结&nbsp;&nbsp;算</button>
+				<br><br><br>
 				</div>
+				
+			</div>
+		</div>
 			</div>
 		</div>
 

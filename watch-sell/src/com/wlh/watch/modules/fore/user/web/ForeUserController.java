@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 
 
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wlh.watch.common.email.UserMail;
+import com.wlh.watch.common.persistence.Page;
 import com.wlh.watch.common.utils.DateUtils;
 import com.wlh.watch.common.utils.Digests;
 import com.wlh.watch.common.utils.Encodes;
@@ -369,7 +371,10 @@ public class ForeUserController {
 			for (OrderDetail orderDetail : orderDetailList) {
 				orderDetail.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 				orderDetail.setOrderId(orderId);
+				//添加订单详情
 				orderDetailService.saveOrderDetail(orderDetail);
+				//商品库存数量减去购买数量
+				watchService.editWatchNumber(orderDetail);
 			}
 			System.out.println(System.currentTimeMillis());
 			UserReception UserReception = userReceptionService.getById(userReception.getId());
@@ -377,7 +382,7 @@ public class ForeUserController {
 			order.setId(orderId);
 			order.setUserId(id);
 			order.setOrderNumber("O"+ String.valueOf(System.currentTimeMillis()));
-			order.setOrderTradeNumber(String.valueOf(System.currentTimeMillis()));
+			//order.setOrderTradeNumber(String.valueOf(System.currentTimeMillis()));
 			order.setOrderCreateTime(DateUtils.getDateTime());
 			order.setOrderAllPrice(total);
 			order.setOrderDiscount(0);
@@ -385,10 +390,45 @@ public class ForeUserController {
 			order.setOrderGetName(UserReception.getRecName());
 			order.setOrderGetPhone(UserReception.getRecPhone());
 			order.setOrderGetAddress(UserReception.getRecAddress());
+			order.setOrderState("0");//0-订单创建成功
+			//创建新订单
 			orderService.saveOrder(order);
-			return "modules/fore/user/foreMyOrder";
+			//订单创建成功后，清空购物车
+			watchCartService.cleanCart(id);
+			model.addAttribute("orderPay", order);
+			model.addAttribute("allPrice", total);
+			return "modules/fore/user/forePay";
 		}
 		
+		// 支付成功-进入我的订单页面
+		@RequestMapping("/user/order/pay")
+		public String pay(Order order,HttpSession session,Model model) {
+			User user = (User) session.getAttribute("gUser");
+			String id = user.getId();
+			order.setOrderTradeNumber(String.valueOf(System.currentTimeMillis()));
+			order.setOrderPayTime(DateUtils.getDateTime());
+			order.setOrderSendTime(DateUtils.getDateTime());
+			order.setOrderState("2");//2-已发货 
+			orderService.editOrder(order);
+			model.addAttribute("userId", id);
+			return "redirect:/b/user/order/myOrder";
+		}
+		// 进入我的订单界面
+		@RequestMapping("/user/order/myOrder")
+		public String ToMyOrder(HttpServletRequest request,
+				HttpServletResponse response,Order order,Model model,HttpSession session) {
+			Page<Order> page = orderService.findMyOrderPage(
+					new Page<Order>(request, response), order);
+			model.addAttribute("page", page);
+			return "modules/fore/user/foreMyOrder";
+		}
+		//从我的订单页面进入-支付界面
+		@RequestMapping("/user/order/toPay")
+		public String myOrderToPay(Order order,HttpSession session,Model model) {
+			
+			model.addAttribute("orderPay", order);
+			return "modules/fore/user/forePay";
+		}
 }
 /**
  * JSONArray 加入jar ：

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>个人信息</title>
+<title>名表网</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <style type="text/css">
 #left-head {
@@ -14,11 +14,14 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		$("#leftDive").height($(".myDiv").height());
 	});
 </script>
 </head>
 <body>
 	<div id="left-head" class="col-md-2">
+	<div id="leftDive" class="thumbnail">
+			      	<div class="caption">
 	<br><br>
 		<ul class="nav nav-pills nav-stacked">
 			<li role="presentation" ${type == 'brand'?'class="active"':''}><a
@@ -32,6 +35,8 @@
 			<li role="presentation" ><a
 				href="${pageContext.request.contextPath }/b/user/cart">购物车</a></li>
 		</ul>
+	</div>
+	</div>
 	</div>
 </body>
 </html>

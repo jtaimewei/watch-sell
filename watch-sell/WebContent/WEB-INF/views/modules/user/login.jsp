@@ -66,7 +66,8 @@ $(function(){
 </script>
 </head>
 <body>
-	<div id="lg-head">图标
+	<div id="lg-head" style="margin-left: 120px;margin-top: 30px;">
+	<img src="${ctxStatic}/resources/img/20180408140857.png" height="45px" />
 	</div>
 	<div id="lg-zong">
 		<img src="${ctxStatic}/resources/img/39149a8c7a2c40d3bd7a5c66093a6bed.jpg" height="580px"

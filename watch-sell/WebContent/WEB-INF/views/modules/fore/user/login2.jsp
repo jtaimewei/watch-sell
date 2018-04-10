@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>会员登录页面</title>
+<title>名表网</title>
 <link href="${ctxStatic}/resources/css/login_style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script>
 <script type="text/javascript">
@@ -66,7 +66,8 @@ $(function(){
 </script>
 </head>
 <body>
-	<div id="lg-head">图标
+	<div id="lg-head" style="margin-left: 120px;margin-top: 30px;">
+	<img src="${ctxStatic}/resources/img/20180408140857.png" height="45px" />
 	</div>
 	<div id="lg-zong">
 		<img src="${ctxStatic}/resources/img/0804923a26414d188686dc39f12d9de3.png" height="580px"

@@ -197,6 +197,11 @@
 			watch_waterproof = #{watchWaterproof}
 			WHERE id = #{id}
 	</update>
+	<update id="editWatchNumber">
+		UPDATE watch SET
+			watch_number = watch_number - #{orderWatchNumber}
+			WHERE id = #{watchId}
+	</update>
 	<insert id="addWatch">
 		INSERT INTO watch(
 			id,

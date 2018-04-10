@@ -5,6 +5,7 @@
 	<sql id="order">
 		a.id AS "id",
 		a.order_number AS "orderNumber",
+		a.order_state AS "orderState",
 		a.order_trade_number AS "orderTradeNumber",
 		a.order_create_time AS "orderCreateTime",
 		a.order_pay_time AS "orderPayTime",
@@ -22,6 +23,11 @@
 		COUNT(1)
 		FROM watch_order a where a.del_flag = '0'
 	</select>
+	<select id="getMyOrderCount" resultType="Long">
+		SELECT
+		COUNT(1)
+		FROM watch_order a where a.del_flag = '0' AND a.user_id = #{userId}
+	</select>
 	<select id="findList" resultType="Order">
 		SELECT b.email AS "userName",
 		<include refid="order" />
@@ -30,6 +36,7 @@
 	<resultMap id="order1" type="Order">  
     <id property="id" column="id"/>  
     <result property="orderNumber" column="orderNumber"/>  
+    <result property="orderState" column="orderState"/>  
     <result property="orderTradeNumber" column="orderTradeNumber"/>  
     <result property="orderCreateTime" column="orderCreateTime"/>  
     <result property="orderPayTime" column="orderPayTime"/>  
@@ -44,6 +51,7 @@
     <collection property="orderDetail" ofType="OrderDetail">  
         <result property="id" column="orderDetail.id"/>  
         <result property="orderWatchSerialNumber" column="orderDetail.orderWatchSerialNumber"/>  
+        <result property="orderWatchTitle" column="orderDetail.orderWatchTitle"/>  
         <result property="orderDetailOldPrice" column="orderDetail.orderDetailOldPrice"/>  
         <result property="orderDetailDiscountPrice" column="orderDetail.orderDetailDiscountPrice"/>  
         <result property="orderWatchNumber" column="orderDetail.orderWatchNumber"/>  
@@ -52,6 +60,23 @@
         <result property="orderDetailTime" column="orderDetail.orderDetailTime"/>  
     </collection>  
   </resultMap> 
+	<select id="findMyOrderList" resultMap="order1">
+		SELECT
+		b.id AS "orderDetail.id",
+		b.order_watch_serial_number AS "orderDetail.orderWatchSerialNumber",
+		b.order_watch_title AS "orderDetail.orderWatchTitle",
+		b.order_detail_old_price AS "orderDetail.orderDetailOldPrice",
+		b.order_detail_discount_price AS "orderDetail.orderDetailDiscountPrice",
+		b.order_watch_number AS "orderDetail.orderWatchNumber",
+		b.order_detail_picture AS "orderDetail.orderDetailPicture",
+		b.order_detail_state AS "orderDetail.orderDetailState",
+		b.order_detail_time AS "orderDetail.orderDetailTime",
+		<include refid="order" />
+		FROM (SELECT * from watch_order wo WHERE wo.del_flag = '0' AND wo.user_id = #{userId} LIMIT #{page.number},#{page.pageSize}) a
+		LEFT JOIN watch_order_detail b 
+		ON a.id = b.order_id 
+	</select>
+	
 	<select id="getById" resultMap="order1">
 		SELECT
 		b.id AS "orderDetail.id",
@@ -71,7 +96,7 @@
 		id,
 		user_id,
 		order_number,
-		order_trade_number,
+		order_state,
 		order_create_time,
 		order_all_price,
 		order_discount,
@@ -83,7 +108,7 @@
 		#{id},
 		#{userId},
 		#{orderNumber},
-		#{orderTradeNumber},
+		#{orderState},
 		#{orderCreateTime},
 		#{orderAllPrice},
 		#{orderDiscount},
@@ -93,6 +118,15 @@
 		#{orderGetPhone}
 		)
 	</insert>
+	<update id="editOrder">
+		UPDATE watch_order
+		SET
+		order_state = #{orderState},
+		order_trade_number = #{orderTradeNumber},
+		order_pay_time = #{orderPayTime},
+		order_send_time = #{orderSendTime}
+		WHERE id = #{id}
+	</update>
 	
 
 </mapper>

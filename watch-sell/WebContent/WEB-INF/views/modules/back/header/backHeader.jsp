@@ -40,14 +40,14 @@
 </head>
 <body>
 <br>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default" style="height: 60px;">
 	<div class="container-fluid">
 		<div class="navbar-header">
       <a class="navbar-brand" href="#">
-        <img alt="名表网后台" src="...">
+        <img width="40px" alt="名表网后台" src="${ctxStatic}/resources/img/20180408135738.png">
       </a>
     </div>
-			<ul class="nav nav-pills">
+			<ul class="nav nav-pills" style="margin-top: 8px;">
 				<!-- <li role="presentation"><a>名表网后台</a></li> -->
 				<c:forEach items="${menus}" var="menu">
 					<li role="presentation" ${head == menu.href?'class="active"':''}><a class="menu-a-class"

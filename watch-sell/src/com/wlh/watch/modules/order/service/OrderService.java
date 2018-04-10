@@ -31,4 +31,16 @@ public class OrderService {
 	public void saveOrder(Order order) {
 		orderDao.saveOrder(order);
 	}
+
+	public void editOrder(Order order) {
+		orderDao.editOrder(order);
+	}
+
+	public Page<Order> findMyOrderPage(Page<Order> page, Order order) {
+		page.setNumber((page.getPageNo()-1)*page.getPageSize());
+		order.setPage(page);
+		page.setCount(orderDao.getMyOrderCount(order));
+		page.setList(orderDao.findMyOrderList(order));
+		return page;
+	}
 }

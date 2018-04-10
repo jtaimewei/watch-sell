@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改密码</title>
+<title>名表网</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 
 </head>

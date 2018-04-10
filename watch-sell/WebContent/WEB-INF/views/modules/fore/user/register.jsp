@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>注册页面</title>
+<title>名表网</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <link href="${ctxStatic}/resources/css/register_style.css"
 	rel="stylesheet" type="text/css">
@@ -89,7 +89,9 @@
 </script>
 </head>
 <body>
-	<div id="reg-head">图标</div>
+	<div id="reg-head" style="margin-left: 270px;margin-top: 20px;">
+		<img src="${ctxStatic}/resources/img/20180408135738.png" height="45px" />
+	</div>
 	<div id="reg-re">
 	
 		<div id="reg-re-reg">

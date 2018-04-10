@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改密码</title>
+<title>名表网</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <style type="text/css">
 .header-user-notice {
@@ -131,7 +131,8 @@
 		<div class="row">
 		<%@ include file="/WEB-INF/views/modules/fore/user/leftUser.jsp"%>
 			<div class="col-md-10">
-				<div class="col-md-5 col-md-offset-1">
+				<div class="thumbnail myDiv">
+			      	<div class="caption">
 					<br>
 					<button id="addBu" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 						 添加收货地址
@@ -189,7 +190,7 @@
 							<input type="hidden" class="id" value="${rec.id}">
 								<label for="inputPassword3" class="col-sm-2 control-label">收货人</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control recName"
+									<input style="width: 300px;" type="text" class="form-control recName"
 										 value="${rec.recName }"  placeholder="收货人">
 								</div>
 								<p class="header-user-notice rec-recName">*请输入收货人</p>
@@ -224,6 +225,7 @@
 						
 						
 						
+				</div>
 				</div>
 			</div>
 		</div>

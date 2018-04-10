@@ -49,7 +49,10 @@ $(function(){
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+			<br>
 				<div class="col-md-10 col-md-offset-1">
+				<div class="thumbnail">
+			      <div class="caption">
 				<br><span id="messageSpan" style="margin-left: 350px;font-size: 15px;color: red;"></span><br>
 					<label>送货清单&nbsp;&nbsp;&nbsp;(${fn:length(orderDetailList)})</label>
 					<table class="table table-striped">
@@ -90,6 +93,10 @@ $(function(){
 						<button id="buyButton" type="button" class="btn btn-danger buyButton" style="float: right;width: 200px;height: 50px;font-size: 16px;">提交订单</button>
 						<label style="float: right;margin-top: 20px;margin-right: 20px;">应付款:<span style="color: #990000;font-size: 20px;">￥${total}</span></label>
 					</form>	
+					<br><br><br>
+				</div>
+			</div>
+					
 				</div>
 			</div>
 		</div>

@@ -14,4 +14,10 @@ public interface OrderDao {
 
 	void saveOrder(Order order);
 
+	void editOrder(Order order);
+
+	long getMyOrderCount(Order order);
+
+	List<Order> findMyOrderList(Order order);
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.wlh.watch.modules.order.entity.OrderDetail;
 import com.wlh.watch.modules.watch.entity.Watch;
 import com.wlh.watch.modules.watch.entity.WatchPicture;
 
@@ -30,5 +31,7 @@ public interface WatchDao {
 	List<Watch> findForeList(Watch watch);
 
 	Watch getForeById(String id);
+
+	void editWatchNumber(OrderDetail orderDetail);
 
 }

@@ -10,4 +10,6 @@ public interface WatchCartDao {
 
 	List<WatchCart> findCart(String id);
 
+	void cleanCart(String id);
+
 }

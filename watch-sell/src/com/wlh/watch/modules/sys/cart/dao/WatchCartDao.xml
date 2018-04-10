@@ -40,7 +40,7 @@
 		<include refid="cart" />
 		FROM watch_cart a LEFT JOIN watch_picture b on a.watch_id=b.watch_id 
 		LEFT JOIN watch c ON c.id = a.watch_id
-		WHERE a.user_id= #{id} ORDER BY b.picture_sort;
+		WHERE a.del_flag = '0' and a.user_id= #{id} ORDER BY b.picture_sort;
 	</select>
 	<insert id="addCart">
 		INSERT INTO watch_cart(
@@ -59,5 +59,10 @@
 		#{userId}
 		)
 	</insert>
+	<update id="cleanCart">
+		UPDATE watch_cart SET
+			del_flag = '1'
+			WHERE user_id = #{id}
+	</update>
 
 </mapper>

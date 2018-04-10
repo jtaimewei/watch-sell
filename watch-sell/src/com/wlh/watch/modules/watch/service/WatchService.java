@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.wlh.watch.common.persistence.Page;
+import com.wlh.watch.modules.order.entity.OrderDetail;
 import com.wlh.watch.modules.watch.dao.WatchDao;
 import com.wlh.watch.modules.watch.entity.Watch;
 import com.wlh.watch.modules.watch.entity.WatchPicture;
@@ -59,6 +60,10 @@ public class WatchService {
 
 	public Watch getForeById(String id) {
 		return watchDao.getForeById(id);
+	}
+
+	public void editWatchNumber(OrderDetail orderDetail) {
+		watchDao.editWatchNumber(orderDetail);
 	}
 
 }
