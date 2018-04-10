@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-04-09 18:08:48
+Date: 2018-04-10 18:00:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -207,7 +207,7 @@ INSERT INTO `watch` VALUES ('09c10439c0fb425e8eba68396c593157', '13b900fef0bd4a7
 INSERT INTO `watch` VALUES ('0ad450ed108f4b388e55ed73527edd26', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Emotion情感系列', '121', '123123', '1231', '31231', '31313', '3131', '313', '313', '3131', '313', '3131', '313123', '1312', '3131', '0');
 INSERT INTO `watch` VALUES ('1', null, null, null, null, '测试', '测试', '测试', 'A111', '5000', '3800', '20', null, null, null, null, null, null, null, null, '0');
 INSERT INTO `watch` VALUES ('17e804749e1543a89f8af516c5afa753', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '3390.152.20.16.25', '褐尽繁华 保留腕表原始的魅力 渐变太阳纹表盘 简约 不简单', '42471', '5800', '5600', '100', 'ETA 2892-A2', 'ETA 2892-A2', '表盘宽度41mm 表盘厚度9mm 表耳20mm 纵向表耳间距50mm 蓝色', '牛皮 黑色', '针扣', '2014年', '200g', '50米', '0');
-INSERT INTO `watch` VALUES ('52b7fe3df22e483f976cec3e88b4216a', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Originale原创系列', '3408.208.24.10.15', '唯有超一流的工艺加上坚持不懈的创作方可成就这一精品超薄腕表', '25502', '16000', '14000', '100', '13213', '13213', '3123', '313', '31231', '31231', '1231', '1323', '0');
+INSERT INTO `watch` VALUES ('52b7fe3df22e483f976cec3e88b4216a', '13b900fef0bd4a7c8ab0904a5169e7ff', 'e870b42bbfe04ee9b152065c211a9fe2', '68b11c01944e4a46987379120f3eb364', null, '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '3408.208.24.10.15', '唯有超一流的工艺加上坚持不懈的创作方可成就这一精品超薄腕表', '25502', '16000', '14000', '100', '13213', '13213', '3123', '313', '31231', '31231', '1231', '1323', '0');
 
 -- ----------------------------
 -- Table structure for watch_brand
@@ -326,6 +326,7 @@ CREATE TABLE `watch_order` (
   `id` varchar(64) NOT NULL,
   `user_id` varchar(64) DEFAULT NULL,
   `order_number` varchar(255) DEFAULT NULL COMMENT '订单编号',
+  `order_state` varchar(1) DEFAULT NULL COMMENT '0-创建订单成功 1-支付成功 ，待发货 2-已发货 3-已收货 4-退货中5-退货成功6-交易完成',
   `order_trade_number` varchar(255) DEFAULT NULL COMMENT '交易号',
   `order_create_time` varchar(255) DEFAULT NULL COMMENT '订单创建时间',
   `order_pay_time` varchar(255) DEFAULT NULL COMMENT '订单支付时间',
@@ -344,7 +345,38 @@ CREATE TABLE `watch_order` (
 -- ----------------------------
 -- Records of watch_order
 -- ----------------------------
-INSERT INTO `watch_order` VALUES ('1', '1231', '13123', '31313', '2018-9-3', '2019-8-2', '2018-9-2', '2017-3-3', '12', '12', '12', 'qeqeq', 'wdqw', '12312313', '0');
+INSERT INTO `watch_order` VALUES ('1', '1231', '13123', null, '31313', '2018-9-3', '2019-8-2', '2018-9-2', '2017-3-3', '12', '12', '12', 'qeqeq', 'wdqw', '12312313', '0');
+INSERT INTO `watch_order` VALUES ('1a45e9a32aa2447eaf594444726e12f0', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523338915229', '2', '1523354176695', '2018-04-10 13:41:55', '2018-04-10 17:56:16', '2018-04-10 17:56:16', null, '369', '0', '0', '1232', '123131', '3213', '0');
+INSERT INTO `watch_order` VALUES ('1ec49578d3504b1490792e3a48be9f3b', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330784821', '0', '1523330784821', '2018-04-10 11:26:24', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('2493c7490875434e9c2be0b5d8a64f3d', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523328203135', '0', '1523328203136', '2018-04-10 10:43:23', null, null, null, '1107', '0', '0', '1232', '123131', '3213', '0');
+INSERT INTO `watch_order` VALUES ('2b6fd07355b142138b749acf0a73ae08', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329219422', '2', '1523353957693', '2018-04-10 11:00:19', '2018-04-10 17:52:37', '2018-04-10 17:52:37', null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('2dcae2d8f14b44ba90913aefc7623c00', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330112057', '0', '1523330112057', '2018-04-10 11:15:12', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('3038e1d883964f8ea6eea127d6833afc', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330722476', '0', '1523330722476', '2018-04-10 11:25:22', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('30bf176d4f9f48c58e9c1bd95086a4ed', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523339072700', '2', '1523352382585', '2018-04-10 13:44:32', '2018-04-10 17:26:22', '2018-04-10 17:26:22', null, '369', '0', '0', '1232', '123131', '3213', '0');
+INSERT INTO `watch_order` VALUES ('349f811d94d945f9941d5d7d84c6008d', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329984407', '0', '1523329984407', '2018-04-10 11:13:04', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('40bd0ae5d211403fa02cc82233b35a13', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329554947', '0', '1523329554947', '2018-04-10 11:05:54', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('4179e1488578428b8a228323bc273324', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330566917', '0', '1523330566917', '2018-04-10 11:22:46', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('444bfbbc419240fe86a26f85715b83c9', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523328909440', '2', '1523328909440', '2018-04-10 10:55:09', null, null, null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('46ee3e3ddfec4eb2abfbc096e972ac2c', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330823152', '0', '1523330823152', '2018-04-10 11:27:03', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('54c219b5b7da4259bc0f03980c4500a0', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329131896', '0', '1523329131896', '2018-04-10 10:58:51', null, null, null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('5d3a94acdb0b45869cb5eb5cb143c7fa', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329498547', '0', '1523329498547', '2018-04-10 11:04:58', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('6a0000662b754398ac088f0641ada872', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523328895318', '2', '1523328895318', '2018-04-10 10:54:55', null, null, null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('83d56579ca3143dfa827c90d9be68fe2', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523339095364', '0', '1523339095364', '2018-04-10 13:44:55', null, null, null, '369', '0', '0', '1232', '123131', '3213', '0');
+INSERT INTO `watch_order` VALUES ('8c59be1ff9ba45c0b76cdd3c43f9b113', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523328869741', '0', '1523328869741', '2018-04-10 10:54:29', null, null, null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('92588073212441b895f769453d12e3d9', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330705817', '0', '1523330705817', '2018-04-10 11:25:05', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('96a130eec3314a05b42fff111daa5ab4', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523328883311', '0', '1523328883311', '2018-04-10 10:54:43', null, null, null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('a0a15d9af20f4eba8a528bb679cd7943', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329955440', '0', '1523329955440', '2018-04-10 11:12:35', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('a4dd1ce22a3a4bccad1bf29c992a9c45', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330673172', '0', '1523330673172', '2018-04-10 11:24:33', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('ac49448c90e343eebf2b57381f5e7cea', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329687682', '0', '1523329687682', '2018-04-10 11:08:07', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('c7b671a2618c4eeeb9f85f12e34895aa', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329656062', '0', '1523329656062', '2018-04-10 11:07:36', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('ce4a6f57b4c74f08a49c18f883606b1c', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329592082', '0', '1523329592082', '2018-04-10 11:06:32', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('d108b604de584f5abda7beced759e2f0', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330754275', '0', '1523330754275', '2018-04-10 11:25:54', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('da89eaea29be4f3b8c537f8ad018b1e8', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330632817', '0', '1523330632817', '2018-04-10 11:23:52', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('e517f4b3f5a945e6b98b88818d928c6f', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330860208', '0', '1523330860208', '2018-04-10 11:27:40', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('e90d9036fa14427f8ece1e7edbcab280', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330580171', '0', '1523330580171', '2018-04-10 11:23:00', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('f882a504f55640608e3deb09a56f83b9', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523328750207', '0', '1523328750207', '2018-04-10 10:52:30', null, null, null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('f8941932d69a4535b7bfeb9f29b18e85', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523330083577', '0', '1523330083577', '2018-04-10 11:14:43', null, null, null, '369', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
+INSERT INTO `watch_order` VALUES ('faeb4c95214243f0aecb4fb452a85c37', '7d1211b196dc4a8ab81a5a9a0ca90f4e', 'O1523329087331', '0', '1523329087331', '2018-04-10 10:58:07', null, null, null, '984', '0', '0', 'eqweqwe', '安达市达到', '1232136765756', '0');
 
 -- ----------------------------
 -- Table structure for watch_order_detail
@@ -355,6 +387,7 @@ CREATE TABLE `watch_order_detail` (
   `order_id` varchar(64) DEFAULT NULL COMMENT '订单id',
   `watch_id` varchar(64) DEFAULT NULL COMMENT '手表id',
   `order_watch_serial_number` varchar(64) DEFAULT NULL COMMENT '手表序列号',
+  `order_watch_title` varchar(255) DEFAULT NULL COMMENT '商品标题',
   `order_detail_old_price` varchar(64) DEFAULT NULL COMMENT '商品原价',
   `order_detail_discount_price` varchar(64) DEFAULT NULL COMMENT '优惠价格',
   `order_watch_number` int(64) DEFAULT NULL COMMENT '产品数量',
@@ -368,13 +401,75 @@ CREATE TABLE `watch_order_detail` (
 -- ----------------------------
 -- Records of watch_order_detail
 -- ----------------------------
-INSERT INTO `watch_order_detail` VALUES ('1', '1', '1', 'A001', '1200', '999', '12', '132', '0', '2018-03-01 11:13:06', '0');
-INSERT INTO `watch_order_detail` VALUES ('2', '2', '2', 'A002', '5335', '343', '10', '1231', '0', '2018-03-01 08:14:03', '0');
-INSERT INTO `watch_order_detail` VALUES ('3', '3', '1', 'A001', '4244', null, '5', '123', '0', '2018-03-02 09:17:55', '0');
-INSERT INTO `watch_order_detail` VALUES ('4', '4', '4', 'A004', null, null, '8', '2131', '0', '2018-03-03 11:15:11', '0');
-INSERT INTO `watch_order_detail` VALUES ('5', '5', '2', 'A002', null, null, '7', '213', '0', '2018-03-03 11:16:10', '0');
-INSERT INTO `watch_order_detail` VALUES ('6', '6', '2', 'A002', null, null, '6', '312', '0', '2018-03-03 11:16:22', '0');
-INSERT INTO `watch_order_detail` VALUES ('7', '1', '2', 'A002', '1231', '3131', '12', '31231', '0', '2018-04-04 22:38:00', '0');
+INSERT INTO `watch_order_detail` VALUES ('044a66314cf9451bba95c881a7a66a2a', '46ee3e3ddfec4eb2abfbc096e972ac2c', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('0900289e6c0642899820f1a5e44ef4d5', 'ce4a6f57b4c74f08a49c18f883606b1c', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('1', '1', '1', 'A001', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '1200', '999', '12', '132', '0', '2018-03-01 11:13:06', '0');
+INSERT INTO `watch_order_detail` VALUES ('12d998ceae454842acf22e337dd06910', 'c7b671a2618c4eeeb9f85f12e34895aa', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('138375c1eee24fbbb28559f175b4d9fe', 'a0a15d9af20f4eba8a528bb679cd7943', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('14cc1ca0a91c4a18adeca8385bb4ee76', 'e90d9036fa14427f8ece1e7edbcab280', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('1d69e38e9b7347ab8bb2474a7ea0e096', 'da89eaea29be4f3b8c537f8ad018b1e8', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('2', '2', '2', 'A002', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '5335', '343', '10', '1231', '0', '2018-03-01 08:14:03', '0');
+INSERT INTO `watch_order_detail` VALUES ('2a353b77a5a842e2926e57371d56d1dd', '30bf176d4f9f48c58e9c1bd95086a4ed', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 13:41:38', '0');
+INSERT INTO `watch_order_detail` VALUES ('2cf391068d084a8e9fa03dac2eef5ae6', '83d56579ca3143dfa827c90d9be68fe2', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 13:41:37', '0');
+INSERT INTO `watch_order_detail` VALUES ('3', '3', '1', 'A001', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '4244', null, '5', '123', '0', '2018-03-02 09:17:55', '0');
+INSERT INTO `watch_order_detail` VALUES ('357fe93529a84a85995c8fc950a8ef1e', '6a0000662b754398ac088f0641ada872', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('367ad14fafab43f8aff003e02213f2fe', '444bfbbc419240fe86a26f85715b83c9', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('36dab19f98dc463696172c5956ed11c3', '3038e1d883964f8ea6eea127d6833afc', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('3afeec4b2f484a91a9bd25e846ea0cb0', '3038e1d883964f8ea6eea127d6833afc', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('3f3a71e219214539b88565f4c2938bdc', '444bfbbc419240fe86a26f85715b83c9', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('4', '4', '4', 'A004', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', null, null, '8', '2131', '0', '2018-03-03 11:15:11', '0');
+INSERT INTO `watch_order_detail` VALUES ('4034b1348cb9495287738a2eb19bcd43', 'ac49448c90e343eebf2b57381f5e7cea', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('47d0ab0453d943d7bc5b67a9365b242a', 'ac49448c90e343eebf2b57381f5e7cea', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('49288f65985548ca8374595f3eeffd62', 'f882a504f55640608e3deb09a56f83b9', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('4955a8e52309466fbb55534921d85045', '5d3a94acdb0b45869cb5eb5cb143c7fa', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('5', '5', '2', 'A002', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', null, null, '7', '213', '0', '2018-03-03 11:16:10', '0');
+INSERT INTO `watch_order_detail` VALUES ('5130f1f6f5744518a728607d9bc98da5', '2dcae2d8f14b44ba90913aefc7623c00', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('590c9c8252e949f3924acb05ef9541af', '30bf176d4f9f48c58e9c1bd95086a4ed', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 13:41:37', '0');
+INSERT INTO `watch_order_detail` VALUES ('5c955d2f735b43f986ab26275ea500a2', 'a0a15d9af20f4eba8a528bb679cd7943', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('6', '6', '2', 'A002', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', null, null, '6', '312', '0', '2018-03-03 11:16:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('618784eb4d7a419a8ff850a796ad1d5a', '2493c7490875434e9c2be0b5d8a64f3d', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '5', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:43:02', '0');
+INSERT INTO `watch_order_detail` VALUES ('623d67f2c91044cf8cb9971aca1a3ca4', '8c59be1ff9ba45c0b76cdd3c43f9b113', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('62f700041d12459e90a8c82823f2628e', 'da89eaea29be4f3b8c537f8ad018b1e8', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('66550472255148a0bdb1b9d5473369c2', 'faeb4c95214243f0aecb4fb452a85c37', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('677f0f82385943a8b1e1c2f9b5d65509', 'e517f4b3f5a945e6b98b88818d928c6f', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('7', '1', '2', 'A002', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '1231', '3131', '12', '31231', '0', '2018-04-04 22:38:00', '0');
+INSERT INTO `watch_order_detail` VALUES ('712de373b2d5489a9fd36f5ccbac2b0a', '2493c7490875434e9c2be0b5d8a64f3d', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:43:01', '0');
+INSERT INTO `watch_order_detail` VALUES ('71aae21464294b7abcf47b9e9c9c88d6', 'f882a504f55640608e3deb09a56f83b9', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('72c197ba4ddb4020b544f8ee07e22de5', '4179e1488578428b8a228323bc273324', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('7b78cb585dfb4f63bf7332c46dc9e31e', '92588073212441b895f769453d12e3d9', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('823cf2ded2ee40d8bbeca64d0ca3642a', 'faeb4c95214243f0aecb4fb452a85c37', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('857788aa594f424683fe79577a9e74cb', 'a4dd1ce22a3a4bccad1bf29c992a9c45', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('8d93eb4526524142a49254af27c56388', 'd108b604de584f5abda7beced759e2f0', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('9636c9d1968f45d88de3e52516ebf84d', 'd108b604de584f5abda7beced759e2f0', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('9a55c8fc45354eb8bba7106f7921c812', '2b6fd07355b142138b749acf0a73ae08', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('9e131e5a557c4fbc8083f896188d6949', '4179e1488578428b8a228323bc273324', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('a0527c1e5eae41a8a5567b865c623eb9', '2b6fd07355b142138b749acf0a73ae08', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('a3d8c4111259421da0b6ceae3becacae', '83d56579ca3143dfa827c90d9be68fe2', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 13:41:38', '0');
+INSERT INTO `watch_order_detail` VALUES ('a5c8a66cb2d94dbc8c2cb3254aa27839', '92588073212441b895f769453d12e3d9', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('abb6b81f6a2e4b41845d24c33bd29369', '1a45e9a32aa2447eaf594444726e12f0', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 13:41:38', '0');
+INSERT INTO `watch_order_detail` VALUES ('acf51cb3a13e43d7aff4b0557ce6dfc6', '6a0000662b754398ac088f0641ada872', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('b1c0c87982aa4bbeb351d8cfcc3acbab', '40bd0ae5d211403fa02cc82233b35a13', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('b3fadb2782a04a95ae2d32c1c950ff1d', 'ce4a6f57b4c74f08a49c18f883606b1c', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('b488198c607f48b1ad6568e2ed41020a', '349f811d94d945f9941d5d7d84c6008d', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('b5fe6fd77f3940679dc5c867216da26a', 'f8941932d69a4535b7bfeb9f29b18e85', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('c029d49c5a1e426fb01044c71bab86c2', '96a130eec3314a05b42fff111daa5ab4', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('c1393461b9674d8cb6d9e06bbc2202ef', '349f811d94d945f9941d5d7d84c6008d', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('c696b3cb858647fc8ff83df26a435c2f', '1a45e9a32aa2447eaf594444726e12f0', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 13:41:37', '0');
+INSERT INTO `watch_order_detail` VALUES ('c738d06dc9214828954d207c58c2175d', 'e90d9036fa14427f8ece1e7edbcab280', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('c80e548ecf2f40cdb3892b9873c08f5e', '46ee3e3ddfec4eb2abfbc096e972ac2c', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('c8ecf8997aa3410699f91488194fb0da', '40bd0ae5d211403fa02cc82233b35a13', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('cd323cffb95649858668954c97d94e37', '54c219b5b7da4259bc0f03980c4500a0', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:23', '0');
+INSERT INTO `watch_order_detail` VALUES ('d5624981e6db4b668b84be3517b7dd17', 'a4dd1ce22a3a4bccad1bf29c992a9c45', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('d7878b2fe59a442a9bc9aeeffe97679e', '54c219b5b7da4259bc0f03980c4500a0', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('daa011476ff34835b3b5c9ff18510e2b', '5d3a94acdb0b45869cb5eb5cb143c7fa', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('dc7051da3201463a915f2410d20f5ee9', '1ec49578d3504b1490792e3a48be9f3b', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('e4254a2cb357499fbe0e5c301ff16e26', 'f8941932d69a4535b7bfeb9f29b18e85', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('e4f9e7f54a304966a456908590fb5868', 'e517f4b3f5a945e6b98b88818d928c6f', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('e875f74ba9ca49dfb04a17d2bcbd3c68', '2dcae2d8f14b44ba90913aefc7623c00', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('f031a8d3c6d149998376faf3766225fd', 'c7b671a2618c4eeeb9f85f12e34895aa', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '1', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('f2c0e6140c384760aefaf1ff979ff475', '1ec49578d3504b1490792e3a48be9f3b', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '2', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 11:04:50', '0');
+INSERT INTO `watch_order_detail` VALUES ('f9967e9f68634db4b71b1eec3afba7f8', '8c59be1ff9ba45c0b76cdd3c43f9b113', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
+INSERT INTO `watch_order_detail` VALUES ('fc6a3456b563446cb08179090cf615d8', '96a130eec3314a05b42fff111daa5ab4', '09c10439c0fb425e8eba68396c593157', '42471', '瑞士艺术制表大师爱宝时（EPOS）-Weilihong情感系列', '123', null, '4', '6d9d6152d2c34471b84acf3f1644fd72.jpg', '0', '2018-04-10 10:52:22', '0');
 
 -- ----------------------------
 -- Table structure for watch_picture
