@@ -58,6 +58,7 @@
         <result property="id" column="watchPicture.id"/>  
         <result property="pictureSrc" column="watchPicture.pictureSrc"/>  
         <result property="pictureSort" column="watchPicture.pictureSort"/>  
+        <result property="pictureType" column="watchPicture.pictureType"/>  
     </collection>  
   </resultMap> 
 	<select id="getById" resultMap="watch1">
@@ -65,6 +66,7 @@
 		b.id AS "watchPicture.id",
 		b.picture_src AS "watchPicture.pictureSrc",
 		b.picture_sort AS "watchPicture.pictureSort",
+		b.picture_type AS "watchPicture.pictureType",
 		c.id AS "brand.id",
 		c.brand_name AS "brand.brandName",
 		d.id AS "crowd.id",
@@ -247,10 +249,10 @@
 		
 	</insert>
 	<insert id="addWatchPicture">
-		INSERT INTO watch_picture(id,picture_src,picture_sort,watch_id)  
+		INSERT INTO watch_picture(id,picture_src,picture_type,picture_sort,watch_id)  
         VALUES   
         <foreach collection="wps" item="wp" separator=",">  
-            (#{wp.id},#{wp.pictureSrc},#{wp.pictureSort},#{wp.watchId})  
+            (#{wp.id},#{wp.pictureSrc},#{wp.pictureType},#{wp.pictureSort},#{wp.watchId})  
         </foreach> 
 	</insert>
 	

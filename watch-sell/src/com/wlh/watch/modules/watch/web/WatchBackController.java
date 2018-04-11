@@ -82,25 +82,23 @@ public class WatchBackController {
 		//1.先存手表信息
 		String id = UUID.randomUUID().toString().replaceAll("-", "");
 		watch.setId(id);
-		watchService.addWatch(watch);
 		//2.再存图片信息
-		List<MultipartFile> files = new ArrayList<MultipartFile>();
 		List<WatchPicture> wps = new ArrayList<WatchPicture>();
-		files = watch.getUploadFiles();
-		for (int i = 0; i<files.size();i++ ){
-		/*for (MultipartFile mf : files) {*/
-			MultipartFile mf = files.get(i);
-			if (mf!=null) {
+		List<WatchPicture> pics = watch.getWatchPicture();
+		for (WatchPicture watchPicture : pics) {
+				MultipartFile mf = watchPicture.getUploadFile();
+			if (mf != null) {
+				WatchPicture wp = new WatchPicture();
+				String src =  mf.getOriginalFilename();
+				String srch = src.substring(src.lastIndexOf(".") + 1);
+				String pathName = UUID.randomUUID().toString().replaceAll("-", "") + "."+ srch;
+				wp.setPictureSrc(pathName);
+				wp.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+				wp.setWatchId(id);
+				wp.setPictureSort(watchPicture.getPictureSort());
+				wp.setPictureType(watchPicture.getPictureType());
+				wps.add(wp);
 				try {
-					WatchPicture wp = new WatchPicture();
-					String src =  mf.getOriginalFilename();
-					String srch = src.substring(src.lastIndexOf(".") + 1);
-					String pathName = UUID.randomUUID().toString().replaceAll("-", "") + "."+ srch;
-					wp.setPictureSrc(pathName);
-					wp.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-					wp.setWatchId(id);
-					wp.setPictureSort(String.valueOf(i));
-					wps.add(wp);
 					mf.transferTo(new File("D:/file/" + pathName));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -108,8 +106,8 @@ public class WatchBackController {
 					e.printStackTrace();
 				}
 			}
-			
 		}
+		watchService.addWatch(watch);
 		watchService.addWatchPicture(wps);
 		List<Brand> brands = brandService.findAllList();
 		List<Crowd> crowds = crowdService.findList();

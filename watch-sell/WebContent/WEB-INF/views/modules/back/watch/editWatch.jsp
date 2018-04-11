@@ -366,7 +366,35 @@ $(function(){
     						<label for="exampleInputFile">上传产品图片</label><button id="addFile" type="button" class="btn btn-warning">增加文件</button>
     						<br><br>
     						<c:forEach items="${watch.watchPicture}" var="picture" varStatus="str">
-    							<c:if test="${picture.pictureSort=='0' }">
+    							<div class="row">
+    							<div class="col-lg-1">
+    								<label class="fileInput">图信息</label>
+							 	 </div>
+    							<div class="col-lg-3">
+								     <img src="D:/file/${picture.pictureSrc }" class="img-rounded">
+							 	 </div>
+    							<div class="col-lg-3">
+								      <input class="fileInput" name="watchPicture[0].uploadFile" type="file" >
+							 	 </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">类型</button>
+								      </span>
+								      <input name="watchPicture[0].pictureType" type="text" value="${picture.pictureType }" class="form-control typeInput">
+								    </div>
+								  </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">排序</button>
+								      </span>
+								      <input name="watchPicture[0].pictureSort" type="text" value="${picture.pictureSort }" class="form-control typeInput">
+								    </div>
+								  </div>
+								  <br><br><br>
+    						</div>
+    							<%-- <c:if test="${picture.pictureSort=='0' }">
     								<div class="row">
 									  <div class="col-xs-6 col-md-3">
 									   主图(页头1)
@@ -426,7 +454,7 @@ $(function(){
 										  <button type="button" class="btn btn-warning btn-xs deleteImgButton">删除</button>
 									  </div>
 									</div>
-  								</c:if>
+  								</c:if> --%>
   							</c:forEach>
   							
   						</div>

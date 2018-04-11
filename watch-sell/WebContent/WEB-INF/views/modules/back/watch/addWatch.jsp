@@ -94,10 +94,12 @@ $(function(){
 		$("#movement-label").next().val($(this).attr("name"));
 	});
 	/* 增加文件 */
+	var num = 2;
 	$("#addFile").click(function(){
-		var num = $("#fileDiv").find("input[type='file']").size();
-		alert(num);
-		if (num <= 5){
+		var number = $("#fileDiv").find("input[type='file']").size();
+		//alert(num);
+		if (number <= 5){
+			num = num + 1;
 			/* $("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input type="file" name="uploadFiles['+num+']"></div>'); */
 			$("#fileDiv").append('<div class="row">'+
 					'<div class="col-lg-1">'+
@@ -111,7 +113,7 @@ $(function(){
 					      '<span class="input-group-btn">'+
 					       ' <button class="btn btn-default" type="button">类型</button>'+
 					      '</span>'+
-					     '<input name="watchPicture['+num+'].pictureType" type="text" class="form-control" value="2">'+
+					     '<input name="watchPicture['+num+'].pictureType" type="text" class="form-control typeInput" value="2">'+
 					   ' </div>'+
 					  '</div>'+
 					'<div class="col-lg-2">'+
@@ -119,7 +121,7 @@ $(function(){
 					     ' <span class="input-group-btn">'+
 					      '  <button class="btn btn-default" type="button">排序</button>'+
 					      '</span>'+
-					     ' <input name="watchPicture['+num+'].pictureSort" type="text" class="form-control" value="1">'+
+					     ' <input name="watchPicture['+num+'].pictureSort" type="text" class="form-control typeInput" value="1">'+
 					   ' </div>'+
 					   ' </div>'+
 					   '<div class="col-lg-2">'+
@@ -158,6 +160,12 @@ $(function(){
 				$(this).next().show();
 				key = false;
 			}
+		});
+		$(".typeInput").each(function(){
+			if ($(this).val() == ''){
+				$("#notice-info").show();
+				key = false;
+			} 
 		});
 		$("input[type='file']").each(function(){
 			if ($(this).val() == ''){
@@ -393,7 +401,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">类型</button>
 								      </span>
-								      <input name="watchPicture[0].pictureType" type="text" class="form-control">
+								      <input name="watchPicture[0].pictureType" type="text" class="form-control typeInput">
 								    </div>
 								  </div>
 	    						<div class="col-lg-2">
@@ -401,7 +409,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">排序</button>
 								      </span>
-								      <input name="watchPicture[0].pictureSort" type="text" class="form-control">
+								      <input name="watchPicture[0].pictureSort" type="text" class="form-control typeInput">
 								    </div>
 								  </div>
 								  <br><br><br>
@@ -412,14 +420,14 @@ $(function(){
     								<label class="fileInput">图信息</label>
 							 	 </div>
     							<div class="col-lg-3">
-								      <input class="fileInput" name="watchPicture[0].uploadFile" type="file" >
+								      <input class="fileInput" name="watchPicture[1].uploadFile" type="file" >
 							 	 </div>
 	    						<div class="col-lg-2">
 								    <div class="input-group">
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">类型</button>
 								      </span>
-								      <input name="watchPicture[1].pictureType" type="text" class="form-control">
+								      <input name="watchPicture[1].pictureType" type="text" class="form-control typeInput">
 								    </div>
 								  </div>
 	    						<div class="col-lg-2">
@@ -427,7 +435,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">排序</button>
 								      </span>
-								      <input name="watchPicture[1].pictureSort" type="text" class="form-control">
+								      <input name="watchPicture[1].pictureSort" type="text" class="form-control typeInput">
 								    </div>
 								  </div>
 								  <br><br><br>
@@ -438,14 +446,14 @@ $(function(){
     								<label class="fileInput">图信息</label>
 							 	 </div>
     							<div class="col-lg-3">
-								      <input class="fileInput" name="watchPicture[0].uploadFile" type="file" >
+								      <input class="fileInput" name="watchPicture[2].uploadFile" type="file" >
 							 	 </div>
 	    						<div class="col-lg-2">
 								    <div class="input-group">
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">类型</button>
 								      </span>
-								      <input name="watchPicture[2].pictureType" type="text" class="form-control" value="2">
+								      <input name="watchPicture[2].pictureType" type="text" class="form-control typeInput" value="2">
 								    </div>
 								  </div>
 	    						<div class="col-lg-2">
@@ -453,7 +461,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">排序</button>
 								      </span>
-								      <input name="watchPicture[2].pictureSort" type="text" class="form-control" value="1">
+								      <input name="watchPicture[2].pictureSort" type="text" class="form-control typeInput" value="1">
 								    </div>
 								  </div>
 	    						<br><br><br>
