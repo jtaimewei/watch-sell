@@ -20,6 +20,9 @@
 .notice-label{
 	color: #990000;
 }
+.fileInput{
+    margin-top: 8px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -91,19 +94,45 @@ $(function(){
 		$("#movement-label").next().val($(this).attr("name"));
 	});
 	/* 增加文件 */
-	var num = 2; 
 	$("#addFile").click(function(){
-		var number = $("#fileDiv").find("input[type='file']").size();
-		//alert(number);
-		if (number <= 5){
-			num = num+1;
-			$("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input type="file" name="uploadFiles['+num+']"></div>');
+		var num = $("#fileDiv").find("input[type='file']").size();
+		alert(num);
+		if (num <= 5){
+			/* $("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input type="file" name="uploadFiles['+num+']"></div>'); */
+			$("#fileDiv").append('<div class="row">'+
+					'<div class="col-lg-1">'+
+						'<label class="fileInput">图信息</label>'+
+				 	 '</div>'+
+					'<div class="col-lg-3">'+
+					     ' <input class="fileInput" name="watchPicture['+num+'].uploadFile" type="file" >'+
+				 	 '</div>'+
+					'<div class="col-lg-2">'+
+					    '<div class="input-group">'+
+					      '<span class="input-group-btn">'+
+					       ' <button class="btn btn-default" type="button">类型</button>'+
+					      '</span>'+
+					     '<input name="watchPicture['+num+'].pictureType" type="text" class="form-control" value="2">'+
+					   ' </div>'+
+					  '</div>'+
+					'<div class="col-lg-2">'+
+					   ' <div class="input-group">'+
+					     ' <span class="input-group-btn">'+
+					      '  <button class="btn btn-default" type="button">排序</button>'+
+					      '</span>'+
+					     ' <input name="watchPicture['+num+'].pictureSort" type="text" class="form-control" value="1">'+
+					   ' </div>'+
+					   ' </div>'+
+					   '<div class="col-lg-2">'+
+						'<button type="button" class="btn btn-warning btn-sm deleteButton">删除</button>'+
+					  '</div>'+
+				'<br><br><br></div>');
 		}
 		$(".kuangDiv").height($("#watch-div").height());
 	});
 	/* 删除文件 */
 	$("#fileDiv").on('click','.deleteButton',function(){
-		$(this).parent().remove();
+		$(this).parent().parent().remove();
+		$(this).parent().parent().next().remove();
 		$(".kuangDiv").height($("#watch-div").height());
 	});
 	/* 提交-添加名表 */
@@ -351,9 +380,84 @@ $(function(){
 						<br>
 						<div id ="fileDiv" class="form-group">
     						<label for="exampleInputFile">上传产品图片</label><button id="addFile" type="button" class="btn btn-warning">增加文件</button>
-    						<div><br><label>主图(页头1)</label><input name="uploadFiles[0]" type="file" ></div>
-    						<div><br><label>附图(页头2)</label><input name="uploadFiles[1]" type="file" ></div>
-    						<div><br><label>附图(页头3)</label><input name="uploadFiles[2]" type="file" ></div>
+    						<br><br>
+    						<div class="row">
+    							<div class="col-lg-1">
+    								<label class="fileInput">图信息</label>
+							 	 </div>
+    							<div class="col-lg-3">
+								      <input class="fileInput" name="watchPicture[0].uploadFile" type="file" >
+							 	 </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">类型</button>
+								      </span>
+								      <input name="watchPicture[0].pictureType" type="text" class="form-control">
+								    </div>
+								  </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">排序</button>
+								      </span>
+								      <input name="watchPicture[0].pictureSort" type="text" class="form-control">
+								    </div>
+								  </div>
+								  <br><br><br>
+    						</div>
+    						
+    						<div class="row">
+    							<div class="col-lg-1">
+    								<label class="fileInput">图信息</label>
+							 	 </div>
+    							<div class="col-lg-3">
+								      <input class="fileInput" name="watchPicture[0].uploadFile" type="file" >
+							 	 </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">类型</button>
+								      </span>
+								      <input name="watchPicture[1].pictureType" type="text" class="form-control">
+								    </div>
+								  </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">排序</button>
+								      </span>
+								      <input name="watchPicture[1].pictureSort" type="text" class="form-control">
+								    </div>
+								  </div>
+								  <br><br><br>
+    						</div>
+    						
+    						<div class="row">
+    							<div class="col-lg-1">
+    								<label class="fileInput">图信息</label>
+							 	 </div>
+    							<div class="col-lg-3">
+								      <input class="fileInput" name="watchPicture[0].uploadFile" type="file" >
+							 	 </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">类型</button>
+								      </span>
+								      <input name="watchPicture[2].pictureType" type="text" class="form-control" value="2">
+								    </div>
+								  </div>
+	    						<div class="col-lg-2">
+								    <div class="input-group">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="button">排序</button>
+								      </span>
+								      <input name="watchPicture[2].pictureSort" type="text" class="form-control" value="1">
+								    </div>
+								  </div>
+	    						<br><br><br>
+    						</div>
   						</div>
 						<br>
 						<br>
