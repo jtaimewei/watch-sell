@@ -12,4 +12,6 @@ public interface WatchCartDao {
 
 	void cleanCart(String id);
 
+	int getCount(String id);
+
 }

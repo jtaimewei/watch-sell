@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 
 
 
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +41,8 @@ import com.wlh.watch.modules.order.service.OrderDetailService;
 import com.wlh.watch.modules.order.service.OrderService;
 import com.wlh.watch.modules.sys.cart.entity.WatchCart;
 import com.wlh.watch.modules.sys.cart.service.WatchCartService;
+import com.wlh.watch.modules.sys.comment.entity.WatchComment;
+import com.wlh.watch.modules.sys.comment.service.WatchCommentService;
 import com.wlh.watch.modules.sys.menu.service.SysMenuService;
 import com.wlh.watch.modules.sys.reception.entity.UserReception;
 import com.wlh.watch.modules.sys.reception.service.UserReceptionService;
@@ -70,6 +74,8 @@ public class ForeUserController {
 	private OrderDetailService orderDetailService;
 	@Resource
 	private OrderService orderService;
+	@Resource
+	private WatchCommentService watchCommentService;
 	
 	/**
 	 * 进入登录界面
@@ -122,6 +128,10 @@ public class ForeUserController {
 		String pwd2=Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);*/
 		
 		session.setAttribute("gUser", user1);
+		int cartNumber = watchCartService.getCount(user1.getId());
+		if (cartNumber != 0) {
+			session.setAttribute("cartNumber", cartNumber);
+		}
 		return "modules/fore/index";
 	}
 	
@@ -395,6 +405,7 @@ public class ForeUserController {
 			orderService.saveOrder(order);
 			//订单创建成功后，清空购物车
 			watchCartService.cleanCart(id);
+			session.removeAttribute("cartNumber");
 			model.addAttribute("orderPay", order);
 			model.addAttribute("allPrice", total);
 			return "modules/fore/user/forePay";
@@ -417,6 +428,13 @@ public class ForeUserController {
 		@RequestMapping("/user/order/myOrder")
 		public String ToMyOrder(HttpServletRequest request,
 				HttpServletResponse response,Order order,Model model,HttpSession session) {
+			if (order.getUserId() == null) {
+				User user = (User) session.getAttribute("gUser");
+				if(user == null) {
+					return "modules/fore/user/login2";
+				}
+				order.setUserId( user.getId());
+			}
 			Page<Order> page = orderService.findMyOrderPage(
 					new Page<Order>(request, response), order);
 			model.addAttribute("page", page);
@@ -429,15 +447,76 @@ public class ForeUserController {
 			model.addAttribute("orderPay", order);
 			return "modules/fore/user/forePay";
 		}
-		//退货 -整个订单的
+		//退货 -
 		@RequestMapping("/user/order/back")
 		public String backOrder(OrderDetail orderDetail,HttpServletRequest request,HttpSession session,Model model) {
-			//orderService.backOrder(order);
+			Order order = new Order();
+			order.setId(orderDetail.getOrderId());
+			order.setOrderState("4");//退货状态
+			orderService.backOrder(order);
 			//model.addAttribute("orderPay", order);
 			String[] ids = request.getParameterValues("id");
-			System.out.println(ids);
-			return "modules/fore/user/forePay";
+			for (String id : ids) {
+				OrderDetail orderDetail1 = new OrderDetail();
+				orderDetail1.setId(id);
+				orderDetail1.setOrderDetailState("1");//退货状态
+				orderDetailService.backOrderDetail(orderDetail1);
+			}
+			
+			return "redirect:/b/user/order/myOrder/?repage";
 		}
+		//确认收货
+		@RequestMapping("/user/order/okOrder")
+		public String okOrder(Order order,HttpSession session,Model model) {
+			order.setOrderState("6");//订单完成状态
+			orderService.backOrder(order);
+			return "redirect:/b/user/order/myOrder/?repage";
+		}
+		//删除订单
+		@RequestMapping("/user/order/deleteOrder")
+		public String deleteOrder(Order order,HttpSession session,Model model) {
+			orderService.deleteOrder(order);
+			return "redirect:/b/user/order/myOrder/?repage";
+		}
+		//进入 评价界面
+		@RequestMapping("/user/order/toComment")
+		public String toComment(Order order,HttpSession session,Model model) {
+			Order order1 = orderService.getById(order.getId());
+			model.addAttribute("order", order1);
+			return "modules/fore/user/foreComment";
+		}
+		//进入 详情页面
+		@RequestMapping("/user/order/detail")
+		public String detail(Order order,HttpSession session,Model model) {
+			Order order1 = orderService.getById(order.getId());
+			model.addAttribute("order", order1);
+			return "modules/fore/user/foreOrderDetail";
+		}
+		//添加评论
+		@RequestMapping("/user/order/comment")
+		public String comment(Order order,HttpSession session,Model model) {
+			User user = (User) session.getAttribute("gUser");
+			if(user == null) {
+				return "modules/fore/user/login2";
+			}
+			
+			List<OrderDetail> ods = order.getOrderDetail();
+			for (OrderDetail orderDetail : ods) {
+				WatchComment comment = new WatchComment();
+				comment.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+				comment.setUserId(user.getId());
+				comment.setUserName(user.getUserName());
+				comment.setWatchId(orderDetail.getWatchId());
+				comment.setCommentContent(orderDetail.getRemarks());
+				comment.setCommentContentTime(DateUtils.getDateTime());
+				orderDetailService.saveRemarks(orderDetail);
+				watchCommentService.saveComment(comment);
+			}
+			order.setOrderState("7");//订单完成状态
+			orderService.backOrder(order);
+			return "redirect:/b/user/order/myOrder/?repage";
+		}
+		
 		
 }
 /**

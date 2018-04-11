@@ -25,6 +25,23 @@
 		a.watch_id = #{watchId}
 		LIMIT #{page.number},#{page.pageSize}
 	</select>
+	<insert id="saveComment">
+		INSERT INTO watch_comment(
+		id,
+		user_id,
+		watch_id,
+		user_name,
+		comment_content,
+		comment_content_time
+		) VALUES (
+		#{id},
+		#{userId},
+		#{watchId},
+		#{userName},
+		#{commentContent},
+		#{commentContentTime}
+		)
+	</insert>
 	<!-- <select id="findById" resultType="WatchComment">
 		SELECT 
 			<include refid="comment"/>

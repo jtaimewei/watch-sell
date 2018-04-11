@@ -21,7 +21,7 @@ public class Order {
 	private String orderGetName;//收货人---
 	private String orderGetAddress;//收货地址--
 	private String orderGetPhone;//收货人电话--
-	private String orderState;//订单状态；0-创建订单成功 1-支付成功 ，待发货 2-已发货 3-已收货 4-退货中5-退货成功6-交易完成
+	private String orderState;//订单状态；0-创建订单成功 1-支付成功 ，待发货 2-已发货 3-已收货 4-退货中5-退货成功6-交易成功，待评价7-交易完成
 	
 	List<OrderDetail> orderDetail;
 	

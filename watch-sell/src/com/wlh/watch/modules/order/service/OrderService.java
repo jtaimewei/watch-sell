@@ -43,4 +43,12 @@ public class OrderService {
 		page.setList(orderDao.findMyOrderList(order));
 		return page;
 	}
+
+	public void backOrder(Order order) {
+		orderDao.backOrder(order);
+	}
+
+	public void deleteOrder(Order order) {
+		orderDao.deleteOrder(order);
+	}
 }

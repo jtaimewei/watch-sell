@@ -294,7 +294,14 @@
 				</form>
 			</div>
 			<div id="headmiddle4">
-				<a href="${pageContext.request.contextPath }/b/user/cart"><button>购物车</button></a>
+				<a href="${pageContext.request.contextPath }/b/user/cart">
+				<button>
+				购物车
+				<c:if test="${cartNumber != null}">
+				(${cartNumber})
+				</c:if>
+				</button>
+				</a>
 			</div>
 		</div>
 		<div id="navigationbar">

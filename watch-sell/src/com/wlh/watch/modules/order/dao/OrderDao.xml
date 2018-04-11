@@ -50,6 +50,7 @@
     <result property="orderGetPhone" column="orderGetPhone"/>   
     <collection property="orderDetail" ofType="OrderDetail">  
         <result property="id" column="orderDetail.id"/>  
+        <result property="watchId" column="orderDetail.watchId"/>  
         <result property="orderWatchSerialNumber" column="orderDetail.orderWatchSerialNumber"/>  
         <result property="orderWatchTitle" column="orderDetail.orderWatchTitle"/>  
         <result property="orderDetailOldPrice" column="orderDetail.orderDetailOldPrice"/>  
@@ -58,11 +59,13 @@
         <result property="orderDetailPicture" column="orderDetail.orderDetailPicture"/>  
         <result property="orderDetailState" column="orderDetail.orderDetailState"/>  
         <result property="orderDetailTime" column="orderDetail.orderDetailTime"/>  
+        <result property="remarks" column="orderDetail.remarks"/>  
     </collection>  
   </resultMap> 
 	<select id="findMyOrderList" resultMap="order1">
 		SELECT
 		b.id AS "orderDetail.id",
+		b.watch_id AS "orderDetail.watchId",
 		b.order_watch_serial_number AS "orderDetail.orderWatchSerialNumber",
 		b.order_watch_title AS "orderDetail.orderWatchTitle",
 		b.order_detail_old_price AS "orderDetail.orderDetailOldPrice",
@@ -72,7 +75,10 @@
 		b.order_detail_state AS "orderDetail.orderDetailState",
 		b.order_detail_time AS "orderDetail.orderDetailTime",
 		<include refid="order" />
-		FROM (SELECT * from watch_order wo WHERE wo.del_flag = '0' AND wo.user_id = #{userId} LIMIT #{page.number},#{page.pageSize}) a
+		FROM (SELECT * from watch_order wo WHERE wo.del_flag = '0'
+		 AND wo.user_id = #{userId}
+		 ORDER BY wo.order_create_time DESC
+		 LIMIT #{page.number},#{page.pageSize}) a
 		LEFT JOIN watch_order_detail b 
 		ON a.id = b.order_id 
 	</select>
@@ -80,13 +86,16 @@
 	<select id="getById" resultMap="order1">
 		SELECT
 		b.id AS "orderDetail.id",
+		b.watch_id AS "orderDetail.watchId",
 		b.order_watch_serial_number AS "orderDetail.orderWatchSerialNumber",
+		b.order_watch_title AS "orderDetail.orderWatchTitle",
 		b.order_detail_old_price AS "orderDetail.orderDetailOldPrice",
 		b.order_detail_discount_price AS "orderDetail.orderDetailDiscountPrice",
 		b.order_watch_number AS "orderDetail.orderWatchNumber",
 		b.order_detail_picture AS "orderDetail.orderDetailPicture",
 		b.order_detail_state AS "orderDetail.orderDetailState",
 		b.order_detail_time AS "orderDetail.orderDetailTime",
+		b.remarks AS "orderDetail.remarks",
 		<include refid="order" />
 		FROM watch_order a LEFT JOIN watch_order_detail b 
 		ON a.id = b.order_id WHERE a.id=#{id};
@@ -125,6 +134,18 @@
 		order_trade_number = #{orderTradeNumber},
 		order_pay_time = #{orderPayTime},
 		order_send_time = #{orderSendTime}
+		WHERE id = #{id}
+	</update>
+	<update id="backOrder">
+		UPDATE watch_order
+		SET
+		order_state = #{orderState}
+		WHERE id = #{id}
+	</update>
+	<update id="deleteOrder">
+		UPDATE watch_order
+		SET
+		del_flag = '1'
 		WHERE id = #{id}
 	</update>
 	

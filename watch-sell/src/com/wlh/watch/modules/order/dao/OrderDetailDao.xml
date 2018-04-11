@@ -38,5 +38,17 @@
 		#{orderDetailTime}
 		)
 	</insert>
+	<update id="backOrderDetail">
+		UPDATE watch_order_detail
+		SET
+		order_detail_state = #{orderDetailState}
+		WHERE id = #{id}
+	</update>
+	<update id="saveRemarks">
+		UPDATE watch_order_detail
+		SET
+		remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
 
 </mapper>

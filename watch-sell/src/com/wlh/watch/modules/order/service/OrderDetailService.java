@@ -76,4 +76,12 @@ public class OrderDetailService {
 		orderDetailDao.saveOrderDetail(orderDetail);
 	}
 
+	public void backOrderDetail(OrderDetail orderDetail1) {
+		orderDetailDao.backOrderDetail(orderDetail1);
+	}
+
+	public void saveRemarks(OrderDetail orderDetail) {
+		orderDetailDao.saveRemarks(orderDetail);
+	}
+
 }

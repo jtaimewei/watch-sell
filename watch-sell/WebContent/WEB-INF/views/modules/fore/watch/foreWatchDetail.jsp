@@ -57,6 +57,7 @@ function page(n,s){
 		
 		/* 加入购物车 */
 		$("#addCartButton").click(function(){
+			$("#messageAjaxSpan").html("");
 			var watchId = $("#watchId").val();
 			var buyNum = $("#numberInput").val();
 			$.ajax({  
@@ -77,6 +78,31 @@ function page(n,s){
 			  });
 			
 		});
+		
+		/* 立即购买 */
+		$("#buyNowButton").click(function(){
+			$("#messageAjaxSpan").html("");
+			var number = $("#numberInput").val();
+			var watchId = $("#watchId").val();
+			var list=watchId+"@"+number; 
+			 $.ajax({  
+				    type: "POST",  
+				    url: "${pageContext.request.contextPath}/b/user/order",  
+				    data:{"list":list},  
+				    async: false,
+				    error: function() {  
+				        alert("购买失败");  
+				    },  
+				    success: function(data) {
+				    	if (data == "0") {
+					    	$("#messageAjaxSpan").html("您还没有登录,请先登录！");
+				    	} else if (data == "1") {
+				    		window.location.href="${pageContext.request.contextPath}/b/user/toOrder";
+				    	}
+				    }  
+				  });
+		});
+		
 		
 	});
 </script>
@@ -158,7 +184,7 @@ function page(n,s){
 		    <span style="font-size: 16px;color: #666666;margin-top: 10px;margin-left: 32px;">库存:</span>
 		    <span id="kcSpan" style="font-size: 16px;color: #666666;padding-left: 10px;">${watch.watchNumber}</span>
 		    <br><br>
-		    <button type="button" class="btn btn-danger buyButton">立即购买</button>
+		    <button id="buyNowButton" type="button" class="btn btn-danger buyButton">立即购买</button>
 	  		<button id="addCartButton" type="button" class="btn btn-default carButton">加入购物车</button>
 	      	<span id="messageAjaxSpan" style="color: red; margin-left: 20px;font-size: 19px;font-family: 宋体;"></span>
 	      </div>

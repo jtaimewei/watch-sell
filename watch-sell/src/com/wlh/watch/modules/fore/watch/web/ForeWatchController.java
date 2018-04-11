@@ -132,7 +132,10 @@ public class ForeWatchController {
 		watchCart.setCartCreateTime(DateUtils.getDate("yyyy-MM-dd HH:mm:ss"));
 		watchCart.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		watchCartService.addCart(watchCart);
-		
+		int cartNumber = watchCartService.getCount(user.getId());
+		if (cartNumber != 0) {
+			session.setAttribute("cartNumber", cartNumber);
+		}
 		return "成功加入购物车！";
 	}
 	

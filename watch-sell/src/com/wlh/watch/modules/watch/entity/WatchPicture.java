@@ -1,5 +1,7 @@
 package com.wlh.watch.modules.watch.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class WatchPicture {
 	
 	private String id;//id-64UUID
@@ -7,6 +9,8 @@ public class WatchPicture {
 	private String pictureSrc;//图片地址
 	private String pictureType;//图片类型，主图：0，附图：1
 	private String pictureSort;//图片显示的 排序
+	
+	private MultipartFile uploadFile;//图片
 	public String getId() {
 		return id;
 	}
@@ -37,4 +41,11 @@ public class WatchPicture {
 	public void setPictureSort(String pictureSort) {
 		this.pictureSort = pictureSort;
 	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+	
 }

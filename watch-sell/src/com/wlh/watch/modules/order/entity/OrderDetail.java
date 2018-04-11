@@ -11,10 +11,12 @@ public class OrderDetail {
 	private String orderDetailDiscountPrice;//优惠价格
 	private int orderWatchNumber;//产品数量
 	private String orderDetailPicture;//产品主图
-	private String orderDetailState;//订单产品详情状态：交易成功，退货
+	private String orderDetailState;//订单产品详情状态：0-交易成功，1-退货
 	private String orderDetailTime;//时间
 	
 	private String orderWatchTitle;//商品信息title 
+	
+	private String remarks;//评价
 	
 	private String watchSerialNumber;
 	private int total;
@@ -116,6 +118,12 @@ public class OrderDetail {
 	}
 	public void setOrderWatchTitle(String orderWatchTitle) {
 		this.orderWatchTitle = orderWatchTitle;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 	
 }

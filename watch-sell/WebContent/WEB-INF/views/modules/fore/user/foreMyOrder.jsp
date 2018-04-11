@@ -25,8 +25,12 @@ function page(n,s){
 	
 }
 $(function(){
+	var ts;
+	//点击退货
 	$(".backButton").click(function(){
-		var key = false;
+		$("#messageSpan").html("");
+		ts = $(this);
+		/* var key = false;
 		$(this).parent().find("input[name='id']").each(function(){
 			//alert($(this).val());
 			if ($(this).is(':checked')) {
@@ -34,11 +38,30 @@ $(function(){
 			}
 		});
 		if (key == true) {
-			
-			$(this).parent().submit();
+			alert(1);
+			//$(this).parent().submit();
+		} else {
+			return;
+		} */
+		
+		
+	});
+	//提示退货信息，然后提交退货form
+	$("#backModelButton").click(function(){
+		$("#messageSpan").html("");
+		var key = false;
+		ts.parent().find("input[name='id']").each(function(){
+			//alert($(this).val());
+			if ($(this).is(':checked')) {
+				key = true;
+			}
+		});
+		if (key == true) {
+			//alert(1);
+			ts.parent().submit();
+		} else {
+			$("#messageSpan").html("[请选择要退货的商品]");
 		}
-		
-		
 	});
 	
 });
@@ -53,6 +76,7 @@ $(function(){
 			<div class="col-md-12">
 				<div class="thumbnail myDiv">
 			      	<div class="caption">
+			      	<h4><label>我的订单:</label></h4>	
 			      		<c:forEach items="${page.list}" var="order">
 			      		<div class="thumbnail" style="overflow-x: auto;">
 			      	<div class="caption">
@@ -94,6 +118,9 @@ $(function(){
 									<span style="color: red;">退货成功</span>
 									</c:if>
 									<c:if test="${order.orderState == '6'}">
+									<span style="color: red;">待评价</span>
+									</c:if>
+									<c:if test="${order.orderState == '7'}">
 									<span style="color: red;">交易完成</span>
 									</c:if>
 								</td>
@@ -142,7 +169,14 @@ $(function(){
 					<td >￥${orderDetail.orderDetailOldPrice}</td>
 					<td >${orderDetail.orderDetailDiscountPrice}</td>
 					<td >${orderDetail.orderWatchNumber}</td>
-					<td >${orderDetail.orderDetailState}</td>
+					<td >
+						<c:if test="${orderDetail.orderDetailState == '0'}">
+							交易成功
+						</c:if>
+						<c:if test="${orderDetail.orderDetailState == '1'}">
+							退货
+						</c:if>
+					</td>
 					<td >${orderDetail.orderDetailTime}</td>
 					<c:if test="${order.orderState == '2'}">
 						<td >
@@ -154,7 +188,7 @@ $(function(){
 			</table>
 			<c:if test="${order.orderState == '2'}">
 			<input type="hidden" name="orderId" value="${order.id}">
-			 <button type="button" class="btn btn-default btn-sm backButton">退货</button>
+			 <button type="button" class="btn btn-default btn-sm backButton" data-toggle="modal" data-target="#myModal">退货</button>
 			 </c:if>
 			</form>
 			<br>
@@ -169,20 +203,28 @@ $(function(){
       			</form>			
 			</c:if>
 			<c:if test="${order.orderState == '2'}">
-				<form action="${pageContext.request.contextPath }/b/user/order/toPay" method="post">
+				<form action="${pageContext.request.contextPath }/b/user/order/okOrder" method="post">
 	      			<input type="hidden" name="id" value="${order.id}">
-	      			<input type="hidden" name="orderNumber" value="${order.orderNumber}">
-	      			<input type="hidden" name="orderAllPrice" value="${order.orderAllPrice}">
 	      			<button  type="submit" class="btn btn-success" style="margin-left: 26px;">确认收货</button>
+      			</form>			
+			</c:if>
+			<c:if test="${order.orderState == '6'}">
+				<form action="${pageContext.request.contextPath }/b/user/order/toComment" method="post">
+	      			<input type="hidden" name="id" value="${order.id}">
+	      			<button  type="submit" class="btn btn-success" style="margin-left: 26px;">评论</button>
+      			</form>			
+			</c:if>
+			<c:if test="${order.orderState == '7'}">
+				<form action="${pageContext.request.contextPath }/b/user/order/detail" method="post">
+	      			<input type="hidden" name="id" value="${order.id}">
+	      			<button  type="submit" class="btn btn-success" style="margin-left: 26px;">详情</button>
       			</form>			
 			</c:if>
 			</div>
 			<div class="col-md-1">
-			<form action="${pageContext.request.contextPath }/b/user/order/toPay" method="post">
+			<form action="${pageContext.request.contextPath }/b/user/order/deleteOrder" method="post">
 	      			<input type="hidden" name="id" value="${order.id}">
-	      			<input type="hidden" name="orderNumber" value="${order.orderNumber}">
-	      			<input type="hidden" name="orderAllPrice" value="${order.orderAllPrice}">
-					<button type="button" class="btn btn-success" style="margin-left: 26px;">删除订单</button>
+					<button type="submit" class="btn btn-success" style="margin-left: 26px;">删除订单</button>
       			</form>	
       			</div>
       			</div>
@@ -193,7 +235,7 @@ $(function(){
 						<input type="hidden" id="pageNo" name="pageNo" value="${page.pageNo}">
 						<input type="hidden" id="pageSize" name="pageSize" value="${page.pageSize}">
 						<input type="hidden" name="userId" value="${gUser.id}">
-				  	<div>${page}</div>
+				  	<div style="margin-left: 10px;">${page}</div>
 				  	</form>
 				</div>
 			</div>
@@ -207,9 +249,8 @@ $(function(){
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">确认退货</h4>
+						        <h4 class="modal-title" id="myModalLabel">确认退货<span id="messageSpan" style="color: red;margin-left: 120px;"></span></h4>
 						      </div>
-						  <form class="form-horizontal" action="${pageContext.request.contextPath }/b/user/order/back" method="post">
 						      <div class="modal-body">
 							<input type="hidden" id="backId" name="id">
 							<input type="hidden" id="backOrderId" name="orderId">
@@ -221,9 +262,8 @@ $(function(){
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" id="addRecButton" class="btn btn-primary">确认退货</button>
+						        <button type="button" id="backModelButton" class="btn btn-primary">确认退货</button>
 						      </div>
-						      </form>
 						    </div>
 						  </div>
 						</div>

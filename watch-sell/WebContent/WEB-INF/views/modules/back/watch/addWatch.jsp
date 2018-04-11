@@ -23,6 +23,8 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$(".kuangDiv").height($("#watch-div").height());
+
 	$(".notice-label").hide();
 	$("#notice-info").hide(); 
 	$("#crowd-div").hide();
@@ -97,10 +99,12 @@ $(function(){
 			num = num+1;
 			$("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input type="file" name="uploadFiles['+num+']"></div>');
 		}
+		$(".kuangDiv").height($("#watch-div").height());
 	});
 	/* 删除文件 */
 	$("#fileDiv").on('click','.deleteButton',function(){
 		$(this).parent().remove();
+		$(".kuangDiv").height($("#watch-div").height());
 	});
 	/* 提交-添加名表 */
 	 $("#addWatchButton").click(function(){
@@ -164,6 +168,8 @@ $(function(){
   modelAttribute="multiFileUploadForm" method="post"
   enctype="multipart/form-data">
 				<div class="col-md-2">
+				<div class="thumbnail kuangDiv">
+			      <div class="caption">
 					<h4><span class="label label-danger">选择的品牌</span></h4>
 					<label id="brand-label"></label>
 					<input type="hidden" name="brandId">
@@ -182,11 +188,14 @@ $(function(){
 					<br>
 					<label id="notice-movement" class="notice-label">*请选择机芯</label>
 					<br>
-					<h4><span class="label label-danger">选择的名表</span></h4>
 					<br>
 					<input type="button" id="addWatchButton" class="btn btn-danger btn-block" value="提 交">
 				</div>
+				</div>
+				</div>
 				<div class="col-md-10">
+				<div class="thumbnail kuangDiv">
+			      <div class="caption">
 				<div class="btn-group btn-group-justified" role="group" aria-label="123">
 				  <div class="btn-group" role="group">
 				    <button type="button" id="step-brand" class="btn btn-default">1.选择品牌:</button>
@@ -346,9 +355,14 @@ $(function(){
     						<div><br><label>附图(页头2)</label><input name="uploadFiles[1]" type="file" ></div>
     						<div><br><label>附图(页头3)</label><input name="uploadFiles[2]" type="file" ></div>
   						</div>
-						
+						<br>
+						<br>
+						<br>
+						<br>
 					</div>
 					
+				</div>
+				</div>
 				</div>
 				</form:form>
 			</div>

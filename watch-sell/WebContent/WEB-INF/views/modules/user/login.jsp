@@ -70,7 +70,7 @@ $(function(){
 	<img src="${ctxStatic}/resources/img/20180408140857.png" height="45px" />
 	</div>
 	<div id="lg-zong">
-		<img src="${ctxStatic}/resources/img/39149a8c7a2c40d3bd7a5c66093a6bed.jpg" height="580px"
+		<img src="${ctxStatic}/resources/img/img_login.jpg" height="580px"
 			width="1341px" />
 		
 		<div id="lg-zong-login">

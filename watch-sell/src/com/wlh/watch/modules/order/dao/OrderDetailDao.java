@@ -10,4 +10,8 @@ public interface OrderDetailDao {
 
 	void saveOrderDetail(OrderDetail orderDetail);
 
+	void backOrderDetail(OrderDetail orderDetail1);
+
+	void saveRemarks(OrderDetail orderDetail);
+
 }

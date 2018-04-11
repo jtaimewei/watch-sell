@@ -27,19 +27,19 @@
 			      		</div>
 			      		<span>选择支付方式</span>
 			      		<br><br>
-			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/v20180410112058.png">
+			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/icon_sk.png">
 			      		<label style="font-size: 16px;margin-left: 10px;">银行卡快捷支付</label>
 			      		<br>
 			      		<hr>
-			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/v20180410112058.png">
+			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/icon_wx.png">
 			      		<label style="font-size: 16px;margin-left: 10px;">微信快捷支付</label>
 			      		<br>
 			      		<hr>
-			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/v20180410112058.png">
+			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/icon_zfb.png">
 			      		<label style="font-size: 16px;margin-left: 10px;">支付宝快捷支付</label>
 			      		<br>
 			      		<hr>
-			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/v20180410112058.png">
+			      		<img alt="" width="43px;" src="${ctxStatic}/resources/img/351704398550487180.png">
 			      		<label style="font-size: 16px;margin-left: 10px;">货到付款</label>
 			      		<br>
 			      		<hr>

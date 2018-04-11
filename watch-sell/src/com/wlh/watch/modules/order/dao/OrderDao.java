@@ -20,4 +20,8 @@ public interface OrderDao {
 
 	List<Order> findMyOrderList(Order order);
 
+	void backOrder(Order order);
+
+	void deleteOrder(Order order);
+
 }

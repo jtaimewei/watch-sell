@@ -21,6 +21,10 @@ public class WatchCommentService {
 		page.setList(watchCommentDao.findForeList(watchComment));
 		return page;
 	}
+
+	public void saveComment(WatchComment comment) {
+		watchCommentDao.saveComment(comment);
+	}
 	
 	
 

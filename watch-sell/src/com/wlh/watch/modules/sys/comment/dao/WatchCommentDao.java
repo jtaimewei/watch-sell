@@ -10,4 +10,6 @@ public interface WatchCommentDao {
 
 	List<WatchComment> findForeList(WatchComment watchComment);
 
+	void saveComment(WatchComment comment);
+
 }
