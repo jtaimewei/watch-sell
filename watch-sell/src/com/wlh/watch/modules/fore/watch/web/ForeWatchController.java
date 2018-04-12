@@ -114,6 +114,7 @@ public class ForeWatchController {
 		model.addAttribute("page", page);
 		
 		return "modules/fore/watch/foreWatchDetail";
+		//return "modules/fore/watch/for";
 	}
 	
 	/**
