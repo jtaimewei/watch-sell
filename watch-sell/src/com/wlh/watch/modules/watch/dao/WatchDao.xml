@@ -117,6 +117,7 @@
 		b.id AS "watchPicture.id",
 		b.picture_src AS "watchPicture.pictureSrc",
 		b.picture_sort AS "watchPicture.pictureSort",
+		b.picture_type AS "watchPicture.pictureType",
 		c.id AS "brand.id",
 		c.brand_name AS "brand.brandName",
 		d.id AS "crowd.id",
@@ -124,24 +125,28 @@
 		e.id AS "movement.id",
 		e.movement_name AS "movement.movementName",
 		<include refid="watch" />
-		FROM watch a LEFT JOIN watch_picture b on a.id=b.watch_id 
-		LEFT JOIN watch_brand c ON c.id = a.brand_id
-		LEFT JOIN watch_crowd d on d.id = a.crowd_id
-		LEFT JOIN watch_movement e on e.id = a.movement_id
-		WHERE a.del_flag = '0'
+		FROM (SELECT w.* FROM watch w 
+		LEFT JOIN watch_brand m ON m.id = w.brand_id
+		LEFT JOIN watch_crowd n on n.id = w.crowd_id
+		LEFT JOIN watch_movement v on v.id = w.movement_id
+		WHERE w.del_flag = '0'
 		<if test="brandName != null and brandName != ''">
-			AND c.brand_name = #{brandName}
+			AND m.brand_name = #{brandName}
 		</if>
 		<if test="crowdName != null and crowdName != ''">
-			AND d.crowd_name = #{crowdName}
+			AND n.crowd_name = #{crowdName}
 		</if>
 		<if test="movementName != null and movementName != ''">
-			AND e.movement_name = #{movementName}
+			AND v.movement_name = #{movementName}
 		</if>
 		<if test="gPrice != 0 and lPrice != 0">
-			AND a.watch_pre_price BETWEEN #{gPrice} and #{lPrice}
+			AND w.watch_pre_price BETWEEN #{gPrice} and #{lPrice}
 		</if>
-		LIMIT #{page.number},#{page.pageSize}
+		LIMIT #{page.number},#{page.pageSize}) a 
+		LEFT JOIN watch_picture b on a.id=b.watch_id 
+		LEFT JOIN watch_brand c ON c.id = a.brand_id
+		LEFT JOIN watch_crowd d on d.id = a.crowd_id
+		LEFT JOIN watch_movement e on e.id = a.movement_id ORDER BY b.picture_sort
 	</select>
 	<select id="getCount" resultType="Long">
 		SELECT
@@ -197,6 +202,15 @@
 			watch_year = #{watchYear},
 			watch_weight = #{watchWeight},
 			watch_waterproof = #{watchWaterproof}
+			WHERE id = #{id}
+	</update>
+	<update id="editWatchPicture">
+		UPDATE watch_picture SET
+			<if test="pictureSrc != null and pictureSrc != ''">
+			picture_src = #{pictureSrc},
+			</if>
+			picture_type = #{pictureType},
+			picture_sort = #{pictureSort}
 			WHERE id = #{id}
 	</update>
 	<update id="editWatchNumber">

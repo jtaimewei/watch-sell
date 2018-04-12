@@ -113,7 +113,7 @@ $(function(){
 					      '<span class="input-group-btn">'+
 					       ' <button class="btn btn-default" type="button">类型</button>'+
 					      '</span>'+
-					     '<input name="watchPicture['+num+'].pictureType" type="text" class="form-control typeInput" value="2">'+
+					     '<input name="watchPicture['+num+'].pictureType" type="text" class="form-control typeInput" value="3">'+
 					   ' </div>'+
 					  '</div>'+
 					'<div class="col-lg-2">'+
@@ -121,7 +121,7 @@ $(function(){
 					     ' <span class="input-group-btn">'+
 					      '  <button class="btn btn-default" type="button">排序</button>'+
 					      '</span>'+
-					     ' <input name="watchPicture['+num+'].pictureSort" type="text" class="form-control typeInput" value="1">'+
+					     ' <input name="watchPicture['+num+'].pictureSort" type="text" class="form-control typeInput" value="10">'+
 					   ' </div>'+
 					   ' </div>'+
 					   '<div class="col-lg-2">'+
@@ -401,7 +401,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">类型</button>
 								      </span>
-								      <input name="watchPicture[0].pictureType" type="text" class="form-control typeInput">
+								      <input name="watchPicture[0].pictureType" type="text" value="1" class="form-control typeInput">
 								    </div>
 								  </div>
 	    						<div class="col-lg-2">
@@ -409,7 +409,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">排序</button>
 								      </span>
-								      <input name="watchPicture[0].pictureSort" type="text" class="form-control typeInput">
+								      <input name="watchPicture[0].pictureSort" type="text" value="1" class="form-control typeInput">
 								    </div>
 								  </div>
 								  <br><br><br>
@@ -427,7 +427,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">类型</button>
 								      </span>
-								      <input name="watchPicture[1].pictureType" type="text" class="form-control typeInput">
+								      <input name="watchPicture[1].pictureType" type="text" value="2" class="form-control typeInput">
 								    </div>
 								  </div>
 	    						<div class="col-lg-2">
@@ -435,7 +435,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">排序</button>
 								      </span>
-								      <input name="watchPicture[1].pictureSort" type="text" class="form-control typeInput">
+								      <input name="watchPicture[1].pictureSort" type="text" value="2" class="form-control typeInput">
 								    </div>
 								  </div>
 								  <br><br><br>
@@ -461,7 +461,7 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">排序</button>
 								      </span>
-								      <input name="watchPicture[2].pictureSort" type="text" class="form-control typeInput" value="1">
+								      <input name="watchPicture[2].pictureSort" type="text" class="form-control typeInput" value="3">
 								    </div>
 								  </div>
 	    						<br><br><br>

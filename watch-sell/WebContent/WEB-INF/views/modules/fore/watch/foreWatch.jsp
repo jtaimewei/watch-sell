@@ -202,7 +202,11 @@ $(function(){
 	    <div class="thumbnail">
 	    	<a href="${pageContext.request.contextPath}/b/watch/detail?watchId=${watch.id}">
 	      <%-- <img src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" alt="..."> --%>
-	      <img src="${ctxStatic}/resources/watch/${watch.watchPicture[0].pictureSrc}" alt="...">
+	     <c:forEach items="${watch.watchPicture}" var="picture">
+	      <c:if test="${picture.pictureType == '1'}">
+	      <img src="/image/${picture.pictureSrc}" alt="...">
+	      </c:if>
+	      </c:forEach>
 	     </a>
 	      <div class="caption">
 	      	<h4 style="font-weight: bold;color:#990000;">￥${watch.watchPrePrice}</h4>

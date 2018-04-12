@@ -11,6 +11,11 @@ public class WatchPicture {
 	private String pictureSort;//图片显示的 排序
 	
 	private MultipartFile uploadFile;//图片
+	
+	private MultipartFile uploadEditFile;//修改的图片
+	
+	private String editType;//修改图片时候的标识:删除标识
+	
 	public String getId() {
 		return id;
 	}
@@ -46,6 +51,18 @@ public class WatchPicture {
 	}
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+	public String getEditType() {
+		return editType;
+	}
+	public void setEditType(String editType) {
+		this.editType = editType;
+	}
+	public MultipartFile getUploadEditFile() {
+		return uploadEditFile;
+	}
+	public void setUploadEditFile(MultipartFile uploadEditFile) {
+		this.uploadEditFile = uploadEditFile;
 	}
 	
 }

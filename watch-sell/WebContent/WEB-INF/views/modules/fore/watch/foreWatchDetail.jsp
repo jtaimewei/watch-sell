@@ -115,37 +115,19 @@ function page(n,s){
 	    <div class="thumbnail">
 	      <img src="${ctxStatic}/resources/watch/${watch.watchPicture[0].pictureSrc}" alt="...">
 	      <div class="caption">
-	      <c:forEach items="${watch.watchPicture}" var="picture">
-	      	<div class="col-sm-6 col-md-2">
-	      	<br>
-	    		<div class="thumbnail">
-	      			<img src="${ctxStatic}/resources/watch/${picture.pictureSrc}" alt="...">
-		      		<div class="caption">
-		      
-			     	</div>
-		    	</div>
-	  		</div>
-	  	</c:forEach>
-	  		<div class="col-sm-6 col-md-2">
-	      	<br>
-	    		<div class="thumbnail">
-	      			<img src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" alt="...">
-		      		<div class="caption">
-		      
-			     	</div>
-		    	</div>
-	  		</div>
-	  		
-	  		<div class="col-sm-6 col-md-2">
-	      	<br>
-	    		<div class="thumbnail">
-	      			<img src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" alt="...">
-		      		<div class="caption">
-		      
-			     	</div>
-		    	</div>
-	  		</div>
-	  		
+			<c:forEach items="${watch.watchPicture}" var="picture">
+				<c:if test="${picture.pictureType == '1' || picture.pictureType == '2'}">      				
+			      	<div class="col-sm-6 col-md-2">
+			      	<br>
+			    		<div class="thumbnail">
+			      			<img src="/image/${picture.pictureSrc}" alt="...">
+				      		<div class="caption">
+				      
+					     	</div>
+				    	</div>
+			  		</div>
+			  	</c:if>	
+	  		</c:forEach>
 	      </div>
 	    </div>
 	  </div>
@@ -177,7 +159,11 @@ function page(n,s){
 		    <br>
 		    <p style="font-size: 16px;color: #666666;margin-top: 10px;">款式</p>
     		<div class="thumbnail" style="margin-left: 70px;width: 95px;margin-top: -20px;">
-      			<img src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" width="50px" height="50px" alt="...">
+    			<c:forEach items="${watch.watchPicture}" var="picture">
+	      		<c:if test="${picture.pictureType == '1'}">
+      				<img src="/image/${picture.pictureSrc}" width="50px" height="50px" alt="...">
+	    		</c:if>
+	    		</c:forEach>
 	    	</div>
 		    <span style="font-size: 16px;color: #666666;margin-top: 10px;margin-right: 32px;">数量</span>
 		    <input id="jButton" style="width: 35px;" type="button" value="-"><input id="numberInput" style="width: 50px;text-align: center;" type="text" value="1"><input id="aButton" style="width: 35px;" type="button" value="+">
@@ -243,23 +229,19 @@ function page(n,s){
 <div class="alert alert-info" role="alert">
 	<strong>商品详情</strong>
 </div>
-	<div class="col-sm-6 col-md-12">
-	    <div class="thumbnail">
-	      <img src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" alt="...">
-	     
-	    </div>
-	  </div>
-	  <c:forEach items="${watch.watchPicture}" var="picture">
-	      	<div class="col-sm-6 col-md-12">
-	      	<br>
-	    		<div class="thumbnail">
-	      			<img src="${ctxStatic}/resources/watch/${picture.pictureSrc}" alt="...">
-		      		<div class="caption">
-		      
-			     	</div>
-		    	</div>
-	  		</div>
-	  	</c:forEach>
+<div class="thumbnail">
+	<div class="caption">
+	  	<c:forEach items="${watch.watchPicture}" var="picture">
+	  		<c:if test="${picture.pictureType == '3'}">
+	  		<div class="row" align="center">
+		      	<div class="col-sm-6 col-md-12">
+		      		<img src="/image/${picture.pictureSrc}" alt="...">
+		  		</div>
+		  	</div>
+	  		</c:if>
+  		</c:forEach>
+</div>
+</div>
 </div>
 
 <div class="row" style="margin-left: 20px;width: 95%;">

@@ -77,10 +77,9 @@
 		<include refid="order" />
 		FROM (SELECT * from watch_order wo WHERE wo.del_flag = '0'
 		 AND wo.user_id = #{userId}
-		 ORDER BY wo.order_create_time DESC
 		 LIMIT #{page.number},#{page.pageSize}) a
 		LEFT JOIN watch_order_detail b 
-		ON a.id = b.order_id 
+		ON a.id = b.order_id ORDER BY a.order_create_time DESC
 	</select>
 	
 	<select id="getById" resultMap="order1">

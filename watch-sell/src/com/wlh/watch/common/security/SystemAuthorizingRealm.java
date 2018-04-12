@@ -68,8 +68,12 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		User user1 = new User();
 		user1.setEmail(token.getUsername());
 		User user =userService.getByEmail(user1);
+		
 		if (user != null) {
-			
+			// 0-顾客;1-客服;2-管理员
+			if (user.getUserType() == 0) {
+				throw new AuthenticationException("msg:用户或密码错误, 请重试.");
+			}
 			byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
 			return new SimpleAuthenticationInfo(new Principal(user, token.isMobileLogin()), 
 					user.getPassword().substring(16), ByteSource.Util.bytes(salt), getName());

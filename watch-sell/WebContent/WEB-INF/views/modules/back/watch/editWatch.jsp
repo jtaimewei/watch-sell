@@ -23,6 +23,8 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$(".kuangDiv").height($("#watch-div").height());
+	
 	$(".notice-label").hide();
 	$("#notice-info").hide(); 
 	$("#crowd-div").hide();
@@ -89,21 +91,53 @@ $(function(){
 		$("#movement-label").next().val($(this).attr("name"));
 	});
 	/* 增加文件 */
-	var num = 2; 
+	var num = Number($("#exitPicture").val()); 
 	$("#addFile").click(function(){
-		var number = $("#fileDiv").find("input[type='file']").size();
-		//alert(number);
-		if (number <= 5){
-			num = num+1;
-			$("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input class="add-file" type="file" name="uploadFiles['+num+']"></div>');
+		var number = $("#fileDiv").find(".pictrueDiv").size();
+		//alert("num"+num);
+		//alert("number"+number);
+		if (number <= 10){
+			
+			/* $("#fileDiv").append('<div><br><label>附图(详情图)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-xs deleteButton">删除</button><input class="add-file" type="file" name="uploadFiles['+num+']"></div>'); */
+			$("#fileDiv").append('<div class="row pictrueDiv">'+
+					'<div class="col-lg-1">'+
+						'<label class="fileInput">图信息</label>'+
+				 	 '</div>'+
+					'<div class="col-lg-3">'+
+					     ' <input class="fileAddInput" name="watchPicture['+num+'].uploadFile" type="file" >'+
+				 	 '</div>'+
+					'<div class="col-lg-2">'+
+					    '<div class="input-group">'+
+					      '<span class="input-group-btn">'+
+					       ' <button class="btn btn-default" type="button">类型</button>'+
+					      '</span>'+
+					     '<input name="watchPicture['+num+'].pictureType" type="text" class="form-control typeInput" value="3">'+
+					   ' </div>'+
+					  '</div>'+
+					'<div class="col-lg-2">'+
+					   ' <div class="input-group">'+
+					     ' <span class="input-group-btn">'+
+					      '  <button class="btn btn-default" type="button">排序</button>'+
+					      '</span>'+
+					     ' <input name="watchPicture['+num+'].pictureSort" type="text" class="form-control typeInput" value="10">'+
+					   ' </div>'+
+					   ' </div>'+
+					   '<div class="col-lg-2">'+
+						'<button type="button" class="btn btn-warning btn-sm deleteButton">删除</button>'+
+					  '</div>'+
+				'<br><br><br></div>');
+			
+		num = num+1;
 		}
+		$(".kuangDiv").height($("#watch-div").height());
 	});
 	/* 删除要新加的文件 */
 	$("#fileDiv").on('click','.deleteButton',function(){
-		$(this).parent().remove();
+		$(this).parent().parent().remove();
+		$(".kuangDiv").height($("#watch-div").height());
 	});
 	/* 删除已有的文件 */
-	$(".deleteImgButton").click(function(){
+	/* $(".deleteImgButton").click(function(){
 		var th = $(this);
 		var id = $(this).prev().val();
 		alert(id)
@@ -121,7 +155,13 @@ $(function(){
 		    	}
 		    	
 		    });
-		});
+		}); */
+	/* 删除现有的图片信息 */
+	$(".deleteExistButton").click(function(){
+		$(this).prev().val("1");
+		$(this).parent().parent().attr("class","row");
+		$(this).parent().parent().hide();
+	});
 	
 	/* 提交-修改名表 */
 	 $("#editWatchButton").click(function(){
@@ -147,7 +187,13 @@ $(function(){
 				key = false;
 			}
 		});
-		$(".add-file").each(function(){
+		$(".typeInput").each(function(){
+			if ($(this).val() == ''){
+				$("#notice-info").show();
+				key = false;
+			} 
+		});
+		$(".fileAddInput").each(function(){
 			if ($(this).val() == ''){
 				$("#notice-info").show();
 				key = false;
@@ -187,6 +233,8 @@ $(function(){
   enctype="multipart/form-data">
   <input type="hidden" name="id" value="${watch.id }">
 				<div class="col-md-2">
+				<div class="thumbnail kuangDiv">
+			      <div class="caption">
 					<h4><span class="label label-danger">选择的品牌</span></h4>
 					<label id="brand-label">${watch.brand.brandName}</label>
 					<input type="hidden" name="brandId" value="${watch.brand.id}">
@@ -208,7 +256,11 @@ $(function(){
 					<br>
 					<input type="button" id="editWatchButton" class="btn btn-danger btn-block" value="提 交">
 				</div>
+				</div>
+				</div>
 				<div class="col-md-10">
+				<div class="thumbnail kuangDiv">
+			      <div class="caption">
 				<div class="btn-group btn-group-justified" role="group" aria-label="123">
 				  <div class="btn-group" role="group">
 				    <button type="button" id="step-brand" class="btn btn-default">1.修改品牌:</button>
@@ -362,26 +414,30 @@ $(function(){
 							<label class="notice-label">*必填*</label>
 						</div>
 						<br>
+						<input type="hidden" id="exitPicture" value="${fn:length(watch.watchPicture)}">
 						<div id ="fileDiv" class="form-group">
     						<label for="exampleInputFile">上传产品图片</label><button id="addFile" type="button" class="btn btn-warning">增加文件</button>
     						<br><br>
     						<c:forEach items="${watch.watchPicture}" var="picture" varStatus="str">
-    							<div class="row">
+    							<div class="row pictrueDiv">
     							<div class="col-lg-1">
+    								<input type="hidden" name="watchPicture[${str.index}].id" value="${picture.id }">
     								<label class="fileInput">图信息</label>
 							 	 </div>
     							<div class="col-lg-3">
-								     <img src="D:/file/${picture.pictureSrc }" class="img-rounded">
+								    <%--  <img width="150px" src="${ctxStatic}/resources/watch/${picture.pictureSrc }" class="img-rounded"> --%>
+								     <img width="150px" src="/image/${picture.pictureSrc }" class="img-rounded">
+							 		<br><br>
 							 	 </div>
     							<div class="col-lg-3">
-								      <input class="fileInput" name="watchPicture[0].uploadFile" type="file" >
+								      <input class="fileInput" name="watchPicture[${str.index}].uploadEditFile" type="file" >
 							 	 </div>
 	    						<div class="col-lg-2">
 								    <div class="input-group">
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">类型</button>
 								      </span>
-								      <input name="watchPicture[0].pictureType" type="text" value="${picture.pictureType }" class="form-control typeInput">
+								      <input name="watchPicture[${str.index}].pictureType" type="text" value="${picture.pictureType }" class="form-control typeInput">
 								    </div>
 								  </div>
 	    						<div class="col-lg-2">
@@ -389,8 +445,12 @@ $(function(){
 								      <span class="input-group-btn">
 								        <button class="btn btn-default" type="button">排序</button>
 								      </span>
-								      <input name="watchPicture[0].pictureSort" type="text" value="${picture.pictureSort }" class="form-control typeInput">
+								      <input name="watchPicture[${str.index}].pictureSort" type="text" value="${picture.pictureSort }" class="form-control typeInput">
 								    </div>
+								  </div>
+	    						<div class="col-lg-1">
+	    							<input type="hidden" name="watchPicture[${str.index}].editType" value="0">
+	    							<button type="button" class="btn btn-warning btn-sm deleteExistButton">删除</button>
 								  </div>
 								  <br><br><br>
     						</div>
@@ -458,9 +518,17 @@ $(function(){
   							</c:forEach>
   							
   						</div>
-						
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
 					</div>
 					
+				</div>
+				</div>
 				</div>
 				</form:form>
 			</div>

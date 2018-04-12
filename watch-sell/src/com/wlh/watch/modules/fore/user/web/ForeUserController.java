@@ -114,7 +114,11 @@ public class ForeUserController {
 			model.addAttribute("message", "用户名或者密码错误");
 			return "modules/fore/user/login2";
 		}
-
+		//0-顾客;1-客服;2-管理员
+		if (user1.getUserType() == 1 || user1.getUserType() == 2) {
+			model.addAttribute("message", "用户名或者密码错误");
+			return "modules/fore/user/login2";
+		}
 		String plain = Encodes.unescapeHtml(user.getPassword());//明文密码
 		byte[] salt = Encodes.decodeHex(user1.getPassword().substring(0,16));//密文密码
 		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, 1024);

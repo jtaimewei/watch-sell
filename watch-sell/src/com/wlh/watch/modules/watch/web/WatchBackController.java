@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,13 +14,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wlh.watch.common.persistence.Page;
-import com.wlh.watch.modules.order.entity.OrderDetail;
 import com.wlh.watch.modules.sys.type.entity.Brand;
 import com.wlh.watch.modules.sys.type.entity.Crowd;
 import com.wlh.watch.modules.sys.type.entity.Movement;
@@ -36,7 +32,8 @@ import com.wlh.watch.modules.watch.service.WatchService;
 @Controller
 @RequestMapping("/a/watch")
 public class WatchBackController {
-	
+	//private static final String PATHTO = "D:/software_file/eclipse_workspase/watch-sell/watch-sell/WebContent/static/resources/watch/";
+	private static final String PATHTO = "D:/file/";
 	@Resource
 	private WatchService watchService;
 	@Resource
@@ -99,7 +96,7 @@ public class WatchBackController {
 				wp.setPictureType(watchPicture.getPictureType());
 				wps.add(wp);
 				try {
-					mf.transferTo(new File("D:/file/" + pathName));
+					mf.transferTo(new File(PATHTO + pathName));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -146,53 +143,74 @@ public class WatchBackController {
 	 */
 	@RequestMapping("edit")
 	public String edit(@ModelAttribute("watch")Watch watch,Model model) {
+		String id = watch.getId();
 		
-		watchService.editWatch(watch);
 		//2.再存图片信息
-		List<MultipartFile> files = new ArrayList<MultipartFile>();
+		//2.再存图片信息
 		List<WatchPicture> wps = new ArrayList<WatchPicture>();
-		files = watch.getUploadFiles();
-		if (files.get(0) != null){
-			
-		}
-		for (int i = 0; i<files.size();i++ ){
-		/*for (MultipartFile mf : files) {*/
-			MultipartFile mf = files.get(i);
-			if (mf!=null) {
+		List<WatchPicture> pics = watch.getWatchPicture();
+		for (WatchPicture watchPicture : pics) {
+				MultipartFile mf = watchPicture.getUploadFile();//新增加的
+				MultipartFile mfed = watchPicture.getUploadEditFile();//修改原来的
+			//新加的	
+			if (mf != null) {
+				WatchPicture wp = new WatchPicture();
+				String src =  mf.getOriginalFilename();
+				String srch = src.substring(src.lastIndexOf(".") + 1);
+				String pathName = UUID.randomUUID().toString().replaceAll("-", "") + "."+ srch;
+				wp.setPictureSrc(pathName);
+				wp.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+				wp.setWatchId(id);
+				wp.setPictureSort(watchPicture.getPictureSort());
+				wp.setPictureType(watchPicture.getPictureType());
+				wps.add(wp);
 				try {
-					if (i < 3 && !mf.getOriginalFilename().equals("")) {
-						WatchPicture wap = new WatchPicture();
-						wap.setPictureSort(String.valueOf(i));
-						wap.setWatchId(watch.getId());
-						watchService.deletePictureByPicture(wap);
-					} else if (i < 3 && mf.getOriginalFilename().equals("")) {
-						continue;
-					}
-					WatchPicture wp = new WatchPicture();
-					String src =  mf.getOriginalFilename();
-					String srch = src.substring(src.lastIndexOf(".") + 1);
-					String pathName = UUID.randomUUID().toString().replaceAll("-", "") + "."+ srch;
-					wp.setPictureSrc(pathName);
-					wp.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-					wp.setWatchId(watch.getId());
-					wp.setPictureSort(String.valueOf(i));
-					wps.add(wp);
-					mf.transferTo(new File("D:/software_file/eclipse_workspase/watch-sell/watch-sell/WebContent/static/resources/watch/" + pathName));
+					mf.transferTo(new File(PATHTO + pathName));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			
+			//修改原来的
+			if (mfed != null) {
+				if (watchPicture.getEditType().equals("1")) {
+					System.err.println("删除这个图片信息" + watchPicture.getId());
+					//删除图片信息
+					watchService.deletePictureById(watchPicture.getId());
+				} else if (watchPicture.getEditType().equals("0")) {
+					WatchPicture wp1 = new WatchPicture();
+					wp1.setId(watchPicture.getId());
+					wp1.setPictureSort(watchPicture.getPictureSort());
+					wp1.setPictureType(watchPicture.getPictureType());
+					String src1 =  mfed.getOriginalFilename();
+					if (src1 != null && !src1.equals("")) {
+						String srch1 = src1.substring(src1.lastIndexOf(".") + 1);
+						String pathName1 = UUID.randomUUID().toString().replaceAll("-", "") + "."+ srch1;
+						wp1.setPictureSrc(pathName1);
+						try {
+							/*mfed.transferTo(new File("D:/software_file/eclipse_workspase/watch-sell/watch-sell/WebContent/static/resources/watch/" + pathName1));*/
+							mfed.transferTo(new File(PATHTO + pathName1));
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					//修改图片信息
+					watchService.editWatchPicture(wp1);
+				}
+			}
 		}
+		//新加的图片信息
 		watchService.addWatchPicture(wps);
-		List<Brand> brands = brandService.findAllList();
+		watchService.editWatch(watch);
+		/*List<Brand> brands = brandService.findAllList();
 		List<Crowd> crowds = crowdService.findList();
 		List<Movement> movements = movementService.findAllList();
 		model.addAttribute("brands", brands);
 		model.addAttribute("crowds", crowds);
-		model.addAttribute("movements", movements);
-		return "redirect:/a/watch/list";
+		model.addAttribute("movements", movements);*/
+		return "redirect:/a/watch/list?repage";
 	}
 }

@@ -34,4 +34,6 @@ public interface WatchDao {
 
 	void editWatchNumber(OrderDetail orderDetail);
 
+	void editWatchPicture(WatchPicture wp1);
+
 }

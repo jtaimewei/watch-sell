@@ -66,4 +66,8 @@ public class WatchService {
 		watchDao.editWatchNumber(orderDetail);
 	}
 
+	public void editWatchPicture(WatchPicture wp1) {
+		watchDao.editWatchPicture(wp1);
+	}
+
 }
