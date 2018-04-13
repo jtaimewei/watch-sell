@@ -49,12 +49,15 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/urm/headerURM.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation"><a href="${pageContext.request.contextPath }/a/menu/list">菜单列表</a></li>
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/menu/toadd">添加菜单</a></li>
 					<li role="presentation"  class="active"><a href="#">修改菜单</a></li>
 				</ul>
 				<br><br>
+				<div class="row">
 				<div class="col-md-6 col-md-offset-1">
 				<form id="editMenuForm" action="${pageContext.request.contextPath }/a/menu/edit" method="post">
 						<input type="hidden" name="id" value="${editMenu.id}">
@@ -86,7 +89,14 @@
 							<button type="button" id="editMenuButton" class="btn btn-primary btn-lg btn-block">修改</button>
 						
 					</form>
+					<br>
+					<br>
+					<br>
+					<br>
 				</div>
+				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>

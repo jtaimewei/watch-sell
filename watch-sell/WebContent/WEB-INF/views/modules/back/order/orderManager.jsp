@@ -10,6 +10,9 @@
 .caozhuo-class {
 	margin-left: 10px;
 }
+td{
+	white-space:nowrap;
+}
 </style>
 <script type="text/javascript">
 function page(n,s){
@@ -25,6 +28,8 @@ function page(n,s){
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/order/list">订单管理</a></li>
 				</ul>
@@ -38,6 +43,7 @@ function page(n,s){
 							<td class="active">订单编号</td>
 							<td class="success">用户</td>
 							<td class="success">交易号</td>
+							<td class="success">订单状态</td>
 							<td class="warning">订单创建时间</td>
 							<td class="warning">订单支付时间</td>
 							<td class="warning">发货时间</td>
@@ -55,6 +61,29 @@ function page(n,s){
 								<td class="active">${order.orderNumber}</td>
 								<td class="success">${order.userName}</td>
 								<td class="success">${order.orderTradeNumber}</td>
+								<td class="success">
+									<c:if test="${order.orderState == '0'}">
+									<span style="color: red;">待支付</span>
+									</c:if>
+									<c:if test="${order.orderState == '2'}">
+									<span style="color: red;">待收货</span>
+									</c:if>
+									<c:if test="${order.orderState == '3'}">
+									<span style="color: red;">已收货</span>
+									</c:if>
+									<c:if test="${order.orderState == '4'}">
+									<span style="color: red;">退货中</span>
+									</c:if>
+									<c:if test="${order.orderState == '5'}">
+									<span style="color: red;">退货成功</span>
+									</c:if>
+									<c:if test="${order.orderState == '6'}">
+									<span style="color: red;">待评价</span>
+									</c:if>
+									<c:if test="${order.orderState == '7'}">
+									<span style="color: red;">交易完成</span>
+									</c:if>
+								</td>
 								<td class="warning">${order.orderCreateTime}</td>
 								<td class="warning">${order.orderPayTime}</td>
 								<td class="warning">${order.orderSendTime}</td>
@@ -71,6 +100,8 @@ function page(n,s){
 					<div>${page}</div>
 				</div>
 				</form>
+			</div>
+			</div>
 			</div>
 
 		</div>

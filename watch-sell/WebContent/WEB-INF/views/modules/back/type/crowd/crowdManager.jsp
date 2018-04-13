@@ -16,6 +16,8 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/type/headerType.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 			<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/type/crowd/list">人群列表</a></li>
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/type/crowd/save">添加人群</a></li>
@@ -39,6 +41,8 @@
 						</c:forEach>
 					</table>
 				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>

@@ -67,7 +67,7 @@ $(function(){
 							<tr>
 								<th>
 									<%-- <img alt="" src="${ctxStatic}/resources/watch/${orderDetail.orderDetailPicture}"> --%>
-									<img alt="" src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" width="100px;" height="100px;">
+									<img alt="" src="/image/${orderDetail.orderDetailPicture}" width="100px;" height="100px;">
 								</th>
 								<th>${orderDetail.orderWatchTitle}</th>
 								<th>￥${orderDetail.orderDetailOldPrice}</th>

@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>名表网</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
+<link rel="stylesheet"
+	href="${ctxStatic}/bootstrap-3.3.5/css/bootstrap-select.min.css" />
+	<script type="text/javascript"
+	src="${ctxStatic}/bootstrap-3.3.5/js/bootstrap-select.min.js"></script>
 <style type="text/css">
 .header-user-notice {
 	white-space: nowrap;
@@ -38,20 +42,21 @@
 	<div class="container-fluid">
 		<div class="row">
 		<%@ include file="/WEB-INF/views/modules/fore/user/leftUser.jsp"%>
-			<div class="col-md-10">
-				<div class="col-md-5 col-md-offset-1">
+			<div class="col-md-10 ">
+				<div class="thumbnail myDiv">
+			      <div class="caption">
 					<form id="headUserForm" class="form-horizontal" action="${pageContext.request.contextPath}/b/user/edit" method="post">
 						<input type="hidden" name="id" value="${gUser.id}">
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
-							<div class="col-sm-10">
+							<div class="col-sm-4">
 								<input type="email" class="form-control"
 									value="${gUser.email}" disabled="disabled">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">用户名</label>
-							<div class="col-sm-10">
+							<div class="col-sm-4">
 								<input type="text" class="form-control" id="userName"
 									name="userName" value="${gUser.userName}" placeholder="用户名">
 							</div>
@@ -59,18 +64,18 @@
 						</div>
 						
 						<div class="form-group">
-							<label for="inputPassword4" class="col-sm-2 control-label">性别</label>
-							<div class="col-sm-10">
+							<label class="col-sm-2 control-label">性别</label>
+							<div class="col-sm-4">
 								<select name="sex" form="headUserForm" class="selectpicker">
 									<option value="" >请选择</option>
 									<option value="0" ${gUser.sex == '0'?'selected="selected"':''}>女</option>
-									<option value="1" ${gUser.sex == '1'?'selected="selected"':''}>男</option>
+									<option value="1" ${gUser.sex == '1'?'selected="selected"':''}>男</option> 
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">生日</label>
-							<div class="col-sm-10">
+							<div class="col-sm-4">
 								<input type="text" class="form-control" id="birthday"
 									name="birthday" readonly="readonly" value="${gUser.birthday}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
 							</div>
@@ -78,7 +83,7 @@
 			
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">手机号</label>
-							<div class="col-sm-10">
+							<div class="col-sm-4">
 								<input type="text" class="form-control" id="phoneNum"
 									name="phoneNum" value="${gUser.phoneNum}" placeholder="电话号码">
 							</div>
@@ -90,6 +95,9 @@
 						</div>
 					</form>
 				</div>
+				
+			</div>
+			
 			</div>
 		</div>
 

@@ -31,4 +31,8 @@ public class WatchCartService {
 		return watchCartDao.getCount(id);
 	}
 
+	public void clearCarts(String[] ids) {
+		watchCartDao.clearCarts(ids);
+	}
+
 }

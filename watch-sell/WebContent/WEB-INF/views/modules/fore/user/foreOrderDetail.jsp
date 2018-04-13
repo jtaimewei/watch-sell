@@ -82,7 +82,7 @@ $(function(){
 				
 				<tr>
 					<%-- <td >${orderDetail.orderDetailPicture}</td> --%>
-					<td ><img alt="" src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" width="100px;" height="100px;"></td>
+					<td ><img alt="" src="/image/${orderDetail.orderDetailPicture}" width="100px;" height="100px;"></td>
 					<td >${orderDetail.orderWatchSerialNumber}</td>
 					<td ><span >${orderDetail.orderWatchTitle}</span></td>
 					<td >￥${orderDetail.orderDetailOldPrice}</td>

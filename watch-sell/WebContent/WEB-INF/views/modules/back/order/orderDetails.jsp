@@ -10,12 +10,17 @@
 .caozhuo-class {
 	margin-left: 10px;
 }
+td{
+	white-space:nowrap;
+}
 </style>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/order/list">订单管理</a></li>
 					<li role="presentation" class="active"><a href="#">订单详情</a></li>
@@ -27,6 +32,7 @@
 						<tr>
 							<td class="active">订单编号</td>
 							<td class="success">交易号</td>
+							<td class="success">订单状态</td>
 							<td class="warning">订单创建时间</td>
 							<td class="warning">订单支付时间</td>
 							<td class="warning">发货时间</td>
@@ -42,6 +48,29 @@
 							<tr>
 								<td class="active">${order.orderNumber}</td>
 								<td class="success">${order.orderTradeNumber}</td>
+								<td class="success">
+									<c:if test="${order.orderState == '0'}">
+									<span style="color: red;">待支付</span>
+									</c:if>
+									<c:if test="${order.orderState == '2'}">
+									<span style="color: red;">待收货</span>
+									</c:if>
+									<c:if test="${order.orderState == '3'}">
+									<span style="color: red;">已收货</span>
+									</c:if>
+									<c:if test="${order.orderState == '4'}">
+									<span style="color: red;">退货中</span>
+									</c:if>
+									<c:if test="${order.orderState == '5'}">
+									<span style="color: red;">退货成功</span>
+									</c:if>
+									<c:if test="${order.orderState == '6'}">
+									<span style="color: red;">待评价</span>
+									</c:if>
+									<c:if test="${order.orderState == '7'}">
+									<span style="color: red;">交易完成</span>
+									</c:if>
+								</td>
 								<td class="warning">${order.orderCreateTime}</td>
 								<td class="warning">${order.orderPayTime}</td>
 								<td class="warning">${order.orderSendTime}</td>
@@ -74,7 +103,9 @@
 					<td >${orderDetail.orderDetailOldPrice}</td>
 					<td >${orderDetail.orderDetailDiscountPrice}</td>
 					<td >${orderDetail.orderWatchNumber}</td>
-					<td >${orderDetail.orderDetailPicture}</td>
+					<td >
+						<img alt="" src="/image/${orderDetail.orderDetailPicture}" width="100px;" height="100px;">
+					</td>
 					<td >${orderDetail.orderDetailState}</td>
 					<td >${orderDetail.orderDetailTime}</td>
 				</tr>
@@ -82,6 +113,8 @@
 			</table>
 			
 			
+			</div>
+			</div>
 			</div>
 
 		</div>

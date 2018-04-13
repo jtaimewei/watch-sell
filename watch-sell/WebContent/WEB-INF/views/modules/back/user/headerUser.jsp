@@ -5,6 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>后台个人信息</title>
+<link rel="stylesheet"
+	href="${ctxStatic}/bootstrap-3.3.5/css/bootstrap-select.min.css" />
+	<script type="text/javascript"
+	src="${ctxStatic}/bootstrap-3.3.5/js/bootstrap-select.min.js"></script>
 <style type="text/css">
 .header-user-notice {
 	white-space: nowrap;

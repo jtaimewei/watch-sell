@@ -218,6 +218,9 @@ $(function(){
 	
 		<div class="row">
 			<div class="col-md-12">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
+			  <div class="row">
 				<ul class="nav nav-tabs">
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/watch/list">名表列表</a></li>
 					<li role="presentation"><a href="${pageContext.request.contextPath }/a/watch/save">添加名表</a></li>
@@ -531,6 +534,9 @@ $(function(){
 				</div>
 				</div>
 				</form:form>
+			</div>
+			</div>
+			</div>
 			</div>
 		</div>
 	</div>

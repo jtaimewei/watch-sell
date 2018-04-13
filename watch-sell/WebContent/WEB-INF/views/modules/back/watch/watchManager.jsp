@@ -25,6 +25,8 @@ function page(n,s){
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/watch/list">名表列表</a></li>
 					<li role="presentation"><a href="${pageContext.request.contextPath }/a/watch/save">添加名表</a></li>
@@ -62,6 +64,8 @@ function page(n,s){
 					<div>${page}</div>
 				</div>
 				</form>
+			</div>
+			</div>
 			</div>
 
 		</div>

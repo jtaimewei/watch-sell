@@ -16,6 +16,7 @@
 </style>
 <script type="text/javascript">
 	$(function(){
+		$(".rigthDiv").height($(window).height());
 		$(".role-edit-notice").hide();
 		$("#editBrandButton").click(function(){
 			$(".role-edit-notice").hide();
@@ -38,12 +39,15 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/type/headerType.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			      <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/type/brand/list">品牌列表</a></li>
 					<li role="presentation"><a href="${pageContext.request.contextPath }/a/type/brand/save">添加品牌</a></li>
 					<li role="presentation" class="active"><a href="#">修改</a></li>
 				</ul>
 				<br><br>
+				<div class="row">
 				<div class="col-md-6 col-md-offset-1">
 				<form id="editBrandForm" action="${pageContext.request.contextPath }/a/type/brand/edit" method="post">
 				 		<div class="input-group input-group-lg">
@@ -61,6 +65,9 @@
 							<button type="button" id="editBrandButton" class="btn btn-primary btn-lg btn-block">修改</button>
 					</form>
 				</div>
+				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>

@@ -16,6 +16,8 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/urm/headerURM.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/menu/list">菜单列表</a></li>
 					<li role="presentation"><a href="${pageContext.request.contextPath }/a/menu/toadd">添加菜单</a></li>
@@ -41,6 +43,8 @@
 						</c:forEach>
 					</table>
 				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>

@@ -24,13 +24,13 @@
 			      	<div class="caption">
 	<br><br>
 		<ul class="nav nav-pills nav-stacked">
-			<li role="presentation" ${type == 'brand'?'class="active"':''}><a
+			<li role="presentation" ${left == 'own'?'class="active"':''}><a
 				href="${pageContext.request.contextPath}/b/user/own">个人信息</a></li>
-			<li role="presentation" ${type == 'crowd'?'class="active"':''}><a
+			<li role="presentation" ${left == 'password'?'class="active"':''}><a
 				href="${pageContext.request.contextPath }/b/user/editPassword">修改密码</a></li>
-			<li role="presentation"  ${type == 'movement'?'class="active"':''}><a
+			<li role="presentation"  ${left == 'reception'?'class="active"':''}><a
 				href="${pageContext.request.contextPath }/b/user/reception">收货地址</a></li>
-			<li role="presentation"  ${type == 'movement'?'class="active"':''}><a
+			<li role="presentation"  ${left == 'vip'?'class="active"':''}><a
 				href="${pageContext.request.contextPath }/b/user/vip">会员中心</a></li>
 			<li role="presentation" ><a
 				href="${pageContext.request.contextPath }/b/user/cart">购物车</a></li>

@@ -16,6 +16,8 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/urm/headerURM.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 			<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/role/list">角色列表</a></li>
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/role/toadd">添加角色</a></li>
@@ -39,8 +41,9 @@
 							</tr>
 						</c:forEach>
 					</table>
-					<div>${page}</div>
 				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>

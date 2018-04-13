@@ -10,25 +10,44 @@
 <style type="text/css">
 
 </style>
-
 </head>
 <body>
-	<div class="form-inline">
+<div class="container-fluid">
+		<div class="row">
+		<div class="col-md-12">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
+	<div class="form-inline" style="margin-left: 8px;">
 		<div class="form-group">
     		<label for="exampleInputName2">查询时间：</label>
-   			 <input type="text" id="startTime" readonly="readonly" class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
+
+<% 
+java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+ 
+java.util.Date currentTime = new java.util.Date();//得到当前系统时间
+java.util.Date date = df.parse(df.format(new java.util.Date()));
+java.util.Calendar calendar = java.util.Calendar.getInstance();
+calendar.setTime(date);
+calendar.add(java.util.Calendar.MONTH,-1);
+java.util.Date mdate = calendar.getTime();
+%>
+
+   			 <input type="text" id="startTime" value="<fmt:formatDate value="<%=mdate %>" pattern="yyyy-MM-dd"/>" readonly="readonly" class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
   		</div>
   		<div class="form-group">
     		<label for="exampleInputEmail2">-</label>
-   			<input type="text" id="endTime" class="form-control" readonly="readonly"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
+   			<input type="text" id="endTime" value="<fmt:formatDate value="<%=date %>" pattern="yyyy-MM-dd"/>" class="form-control" readonly="readonly"  onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
   		</div>
   		<button id="chartButton" type="button" class="btn btn-primary">查询</button>
   	</div>
-  	
-	<div id="main" style="width: 800px;height:400px;">
+  	<br>
+	<div id="main" style="width: 1200px;height:400px;">
 	</div>
 		
-
+</div>
+</div>
+</div>
+</div></div>
 <script type="text/javascript">
 
  /* var option = {
@@ -99,7 +118,7 @@
 //指定图表的配置项和数据
  var option = {
 	    title: {
-	        text: '折线图堆叠'
+	        text: '名表销售分析图'
 	    },
 	    tooltip: {
 	        trigger: 'axis'
@@ -124,8 +143,8 @@
 	                   type: 'slider',
 	                   xAxisIndex: [0],
 	                   filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-	                   start: 30,
-	                   end: 70
+	                   start: 0,
+	                   end: 100
 	               }
 	           ],
 	    xAxis: {
@@ -138,6 +157,56 @@
 	    },
 	    series: []
 	};
+	var startTime1 = $("#startTime").val();
+	var endTime1 = $("#endTime").val();
+	$.ajax({  
+	    type: "POST",  
+	    url: "${pageContext.request.contextPath}/a/get",  
+	    data:JSON.stringify({
+	    	"startTime":startTime1,
+	    	"endTime":endTime1
+	    }),  
+	    async: false,
+	    contentType:"application/json;charset=utf-8",
+	    error: function() {  
+	        alert("加载失败");  
+	    },  
+	    success: function(data) {
+	    	//alert(typeof data)
+	    	console.log('data',data);
+	    	option.legend.data = null;
+	    	option.xAxis.data = null;
+	    	option.series = [];
+	    	option.legend.data = data.title;
+	    	option.xAxis.data = data.timeList;
+	    	var title = data.title;
+	    	for (var i= 0 ;i < title.length; i++){
+	    		var d = {
+    		            name:title[i],
+    		            type:'line',
+    		            //stack: '总量',
+    		            data:data[title[i]]
+    		        };
+	    		option.series.push(d);
+	    	}
+	    	console.log('option',option);
+	    	/* $.each(title, function(){
+	    		var key = this;
+	    		  var d = {
+	    		            name:key,
+	    		            type:'line',
+	    		            stack: '总量',
+	    		            data:data.key
+	    		        }; 
+	    		  option.series.push(d);
+	    	 }); */
+	    	// 基于准备好的dom，初始化echarts实例
+	    	 var myChart = echarts.init(document.getElementById('main'));
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+	    } 
+	  });
+	
 $("#chartButton").click(function(){
 	var startTime = $("#startTime").val();
 	var endTime = $("#endTime").val();

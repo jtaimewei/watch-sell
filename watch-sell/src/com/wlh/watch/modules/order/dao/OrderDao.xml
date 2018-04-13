@@ -138,6 +138,9 @@
 	<update id="backOrder">
 		UPDATE watch_order
 		SET
+		<if test="orderCloseTime != null and orderCloseTime != ''">
+		order_close_time = #{orderCloseTime},
+		</if>
 		order_state = #{orderState}
 		WHERE id = #{id}
 	</update>

@@ -54,12 +54,15 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/urm/headerURM.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation"><a
 						href="${pageContext.request.contextPath }/a/user/list">用户列表</a></li>
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/user/toadd">添加用户</a></li>
 				</ul>
 				<br>
+				<div class="row">
 				<div class="col-md-6 col-md-offset-1">
 					<form id="addUserForm" class="form-horizontal" action="${pageContext.request.contextPath }/a/user/add"
 						method="post">
@@ -140,7 +143,13 @@
 							</div>
 						</div>
 					</form>
+					<br>
+					<br>
+					<br>
 				</div>
+				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>

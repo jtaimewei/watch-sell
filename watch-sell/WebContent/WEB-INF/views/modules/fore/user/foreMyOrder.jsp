@@ -64,6 +64,12 @@ $(function(){
 		}
 	});
 	
+	/* 全选 */
+	$(".allCheck").click(function(){
+		var xz = $(this).prop("checked");//判断全选按钮的选中状态
+        var ck =$(this).parent().parent().parent().find(".chCheck").prop("checked",xz);  //让class名为qx的选项的选中状态和全选按钮的选中状态一致。 
+	});
+	
 });
 </script>
 </head>
@@ -156,14 +162,14 @@ $(function(){
 					<td >时间</td>
 					<c:if test="${order.orderState == '2'}">
 					<td >
-					 退货<input type="checkbox">
+					 退货<input type="checkbox" class="allCheck">
 					</td>
 					</c:if>
 				</tr>
 				<c:forEach items="${order.orderDetail}" var="orderDetail">
 				<tr>
 					<%-- <td >${orderDetail.orderDetailPicture}</td> --%>
-					<td ><img alt="" src="${ctxStatic}/resources/img/b510774f43a844d98fb51111cf2e2ff7.jpg" width="100px;" height="100px;"></td>
+					<td ><img alt="" src="/image/${orderDetail.orderDetailPicture}" width="100px;" height="100px;"></td>
 					<td >${orderDetail.orderWatchSerialNumber}</td>
 					<td ><span >${orderDetail.orderWatchTitle}</span></td>
 					<td >￥${orderDetail.orderDetailOldPrice}</td>
@@ -180,7 +186,7 @@ $(function(){
 					<td >${orderDetail.orderDetailTime}</td>
 					<c:if test="${order.orderState == '2'}">
 						<td >
-						<input type="checkbox" name="id" value="${orderDetail.id}">
+						<input class="chCheck" type="checkbox" name="id" value="${orderDetail.id}">
 					</td>
 					</c:if>
 				</tr>

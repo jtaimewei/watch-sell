@@ -20,6 +20,7 @@
 <script type="text/javascript"
 	src="${ctxStatic}/bootstrap-3.3.5/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="${ctxStatic}/resources/js/jquery.1.4.2-min.js"></script>
+<link href="${ctxStatic}/fore/index.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 .buyButton{
 	width: 130px;
@@ -46,24 +47,21 @@
 </style>
 <style type="text/css">
 /* reset */
-body{font:12px/18px "宋体",arial,sans-serif;color:#585858;}
-body,div,p,span,form,iframe,table,td,th,input,textarea,button,label,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
-h1,h2,h3,h4,h5,h6{font-size:100%; }
-ul,ol,li,dl{list-style-type:none;}
-em,i,dfn,cite,strong,small{font-style:normal;} 
-img{border:0;}
-fieldset,button,input,select,option{vertical-align:middle;font:12px/18px "宋体",arial,sans-serif;}
-table{border-collapse:collapse;border-spacing:0}
-textarea{resize:none}
+.preview div,p,span,form,iframe,table,td,th,input,textarea,button,label,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+.preview h1,h2,h3,h4,h5,h6{font-size:100%; }
+.preview ul,ol,li,dl{list-style-type:none;}
+.preview em,i,dfn,cite,strong,small{font-style:normal;} 
+.preview img{border:0;}
+.preview fieldset,button,input,select,option{vertical-align:middle;font:12px/18px "宋体",arial,sans-serif;}
 /* color */
-a:link,a:visited{color:#575757;text-decoration:none;}
-a:hover{color:#ef4165;text-decoration:none;}
-a:active{color:#1d7400;}
+.preview a:link,a:visited{color:#575757;text-decoration:none;}
+.preview a:hover{color:#ef4165;text-decoration:none;}
+.preview a:active{color:#1d7400;}
 /* clearfix */
 .clearfix:after{ visibility:hidden; display:block; font-size:0; content:" "; clear:both; height:0;}
 *html .clearfix{ zoom:1;}
 
-.preview{width:400px; height:465px; margin:50px 0px 0px 150px;}
+.preview{width:400px; height:465px;}
 /* smallImg */
 .smallImg{position:relative; height:52px; margin-top:1px; background-color:#F1F0F0; padding:6px 5px; width:390px; overflow:hidden;float:left;}
 .scrollbutton{width:14px; height:50px; overflow:hidden; position:relative; float:left; cursor:pointer; }
@@ -83,6 +81,90 @@ a:active{color:#1d7400;}
 #bigView{position:absolute;border: 1px solid #959595; overflow: hidden; z-index:999;}
 #bigView img{position:absolute;}
 </style>
+<script type="text/javascript">
+			//alert(window.screen.width);
+			$(function() {
+				//导航栏顶部广告部分X点击隐藏广告部分
+				$("#headad span").click(function() {
+					$("#headad").hide();
+				});
+				//导航栏顶部字体鼠标经过颜色变白色
+				//导航栏顶部字体鼠标离开颜色变回
+				$("#headtop_ul_li_a1").mouseover(function() {
+					$("#headtop_ul_li_a1").css("color", "white");
+				});
+				$("#headtop_ul_li_a1").mouseout(function() {
+					$("#headtop_ul_li_a1").css("color", "lightgrey");
+				});
+				//
+				$("#headtop_ul_li_a2").mouseover(function() {
+					$("#headtop_ul_li_a2").css("color", "white");
+				});
+				$("#headtop_ul_li_a2").mouseout(function() {
+					$("#headtop_ul_li_a2").css("color", "lightgrey");
+				});
+				//
+				$("#headtop_ul_li_a3").mouseover(function() {
+					$("#headtop_ul_li_a3").css("color", "white");
+				});
+				$("#headtop_ul_li_a3").mouseout(function() {
+					$("#headtop_ul_li_a3").css("color", "lightgrey");
+				});
+				$('#headtop li:eq(4)').hover(function() {
+					$("#headtop_ul_li_a4").css({
+						"color": "#333333",
+						"background-color": "white"
+					});
+					//$(this).find('#headtop_ul_li_a4_ul').css('display', 'block');
+					$(this).find('#headtop_ul_li_a4_ul').slideDown();
+				}, function() {
+					//$(this).find('#headtop_ul_li_a4_ul').css('display', 'none');
+					$(this).find('#headtop_ul_li_a4_ul').slideUp();
+					$("#headtop_ul_li_a4").css({
+						"color": "lightgrey",
+						"background-color": "#333333"
+					});
+				});
+				//
+				$("#headtop_ul_li_a5").mouseover(function() {
+					$("#headtop_ul_li_a5").css("color", "white");
+				});
+				$("#headtop_ul_li_a5").mouseout(function() {
+					$("#headtop_ul_li_a5").css("color", "lightgrey");
+				});
+				//
+				$("#headtop_ul_li_a6").mouseover(function() {
+					$("#headtop_ul_li_a6").css("color", "white");
+				});
+				$("#headtop_ul_li_a6").mouseout(function() {
+					$("#headtop_ul_li_a6").css("color", "lightgrey");
+				});
+				//搜索栏聚焦失焦事件
+				$('#headmiddle3_text').bind('input propertychange', function() {
+					headmiddle3textcheck();
+				});
+
+				function headmiddle3textcheck() {
+					var subvalue = $("#headmiddle3_text").val();
+					if (subvalue == "") {
+						$("#headmiddle3_submit").hide();
+					} else {
+						$("#headmiddle3_submit").show();
+					}
+				};
+				$("#headmiddle3_text").blur(function() {
+					var subvalue = $(this).val();
+					if (subvalue == "") {
+						$("#headmiddle3_submit").hide();
+					} else {
+						$("#headmiddle3_submit").show();
+					}
+				});
+				
+				
+				
+			});
+		</script>
 <script type="text/javascript">
 function page(n,s){
 	if (n) $("#pageNo").val(n);
@@ -302,14 +384,51 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<%-- <%@ include file="/WEB-INF/views/modules/fore/head/foreHead1.jsp"%>	 --%>
+<div id="headad">
+			<span>&times;</span>
+		</div>
+		<div id="headtop">
+			<ul>
+				<li><a id="headtop_ul_li_a4" href="">服务专线</a>
+					<ul id="headtop_ul_li_a4_ul">
+						<li><a href="#">订单0111</a></li>
+						<li><a href="#">订单0222</a></li>
+						<li><a href="#">订单0333</a></li>
+						<li><a href="#">订单0333</a></li>
+						<hr width="80%" style="margin-left: -2px;" />
+						<a href="">查看更多订单</a>
+					</ul>
+				</li>
+				<li><a id="headtop_ul_li_a2" href="">办理业务</a></li>
+				<li><a id="headtop_ul_li_a3" href="">手机表行</a></li>
+				
+				
+				<c:if test="${empty gUser}">
+				<li>|</li>
+				<li><a id="headtop_ul_li_a5" href="${pageContext.request.contextPath }/b/register">注册</a></li>
+				<li><a id="headtop_ul_li_a6" href="${pageContext.request.contextPath }/b/login">登录</a></li>
+				</c:if>
+				<c:if test="${!empty gUser}">
+				<li>|</li>
+				<li><a href="${pageContext.request.contextPath}/b/user/order/myOrder?userId=${gUser.id}" id="headtop_ul_li_a1">我的订单</a></li>
+				<li>|</li>
+				<li><a href="${pageContext.request.contextPath}/b/logout">注销</a></li>
+				<li><a id="headtop_ul_li_a5" href="${pageContext.request.contextPath}/b/user/own">${gUser.userName }&nbsp;[${gUser.vip}]</a></li>
+				</c:if>
+				<li><a href="${pageContext.request.contextPath}/b/index">首页</a></li>
+			</ul>
+		</div>
 <br>
 
 <div class="row" style="margin-left: 20px;width: 95%;">
 	<div class="col-sm-6 col-md-5">
 	<div class="preview">
 	<div id="vertical" class="bigImg">
-		<img src="mid/05.jpg" width="400" height="400" alt="" id="midimg" />
+		<c:forEach items="${watch.watchPicture}" var="picture">
+	      		<c:if test="${picture.pictureType == '1'}">
+		<img src="/image/${picture.pictureSrc}" width="400" height="400" alt="" id="midimg" />
+		</c:if>
+		</c:forEach>
 		<div style="display:none;" id="winSelector"></div>
 	</div><!--bigImg end-->	
 	<div class="smallImg">

@@ -64,6 +64,8 @@
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/urm/headerURM.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
 				<ul class="nav nav-tabs">
 					<li role="presentation"><a
 						href="${pageContext.request.contextPath }/a/user/list">用户列表</a></li>
@@ -71,6 +73,7 @@
 					<li role="presentation" class="active"><a href="#">修改用户</a></li>
 				</ul>
 				<br>
+				<div class="row">
 				<div class="col-md-6 col-md-offset-1">
 					<form id="editUserForm" class="form-horizontal" action="${pageContext.request.contextPath }/a/user/edit"
 						method="post">
@@ -160,6 +163,9 @@
 						</div>
 					</form>
 				</div>
+				</div>
+			</div>
+			</div>
 			</div>
 
 		</div>

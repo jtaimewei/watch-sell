@@ -25,6 +25,7 @@
 		        <result property="id" column="watchPicture.id"/>  
 		        <result property="pictureSrc" column="watchPicture.pictureSrc"/>  
 		        <result property="pictureSort" column="watchPicture.pictureSort"/>  
+		        <result property="pictureType" column="watchPicture.pictureType"/>  
 	    	</collection>   
 	    </association>  
   	</resultMap> 
@@ -33,6 +34,7 @@
 		b.id AS "watchPicture.id",
 		b.picture_src AS "watchPicture.pictureSrc",
 		b.picture_sort AS "watchPicture.pictureSort",
+		b.picture_type AS "watchPicture.pictureType",
 		c.id AS "watch.id",
 		c.watch_title AS "watch.watchTitle",
 		c.watch_pre_price AS "watch.watchPrePrice",
@@ -68,6 +70,15 @@
 		UPDATE watch_cart SET
 			del_flag = '1'
 			WHERE user_id = #{id}
+	</update>
+	<update id="clearCarts">
+		UPDATE watch_cart SET
+			del_flag = '1'
+		<where>
+		<foreach collection="ids" item="id" separator="," open="id in (" close=")">  
+            #{id}
+        </foreach>
+        </where>
 	</update>
 
 </mapper>

@@ -9,11 +9,8 @@
 <script type="text/javascript" src="${ctxStatic}/resources/js/jquery.1.4.2-min.js"></script>
 <style type="text/css">
 /* reset */
-body{font:12px/18px "宋体",arial,sans-serif;color:#585858;}
-body,div,p,span,form,iframe,table,td,th,input,textarea,button,label,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
-h1,h2,h3,h4,h5,h6{font-size:100%; }
-ul,ol,li,dl{list-style-type:none;}
-em,i,dfn,cite,strong,small{font-style:normal;} 
+div,iframe,ul,li{margin:0;padding:0;}
+ul,li{list-style-type:none;}
 img{border:0;}
 fieldset,button,input,select,option{vertical-align:middle;font:12px/18px "宋体",arial,sans-serif;}
 table{border-collapse:collapse;border-spacing:0}
@@ -26,7 +23,7 @@ a:active{color:#1d7400;}
 .clearfix:after{ visibility:hidden; display:block; font-size:0; content:" "; clear:both; height:0;}
 *html .clearfix{ zoom:1;}
 
-.preview{width:400px; height:465px; margin:50px 0px 0px 150px;}
+.preview{width:400px; height:465px;}
 /* smallImg */
 .smallImg{position:relative; height:52px; margin-top:1px; background-color:#F1F0F0; padding:6px 5px; width:390px; overflow:hidden;float:left;}
 .scrollbutton{width:14px; height:50px; overflow:hidden; position:relative; float:left; cursor:pointer; }
@@ -192,7 +189,11 @@ $(document).ready(function(){
 <body>
 	<div class="preview">
 	<div id="vertical" class="bigImg">
-		<img src="mid/05.jpg" width="400" height="400" alt="" id="midimg" />
+		<c:forEach items="${watch.watchPicture}" var="picture">
+	      		<c:if test="${picture.pictureType == '1'}">
+		<img src="/image/${picture.pictureSrc}" width="400" height="400" alt="" id="midimg" />
+		</c:if>
+		</c:forEach>
 		<div style="display:none;" id="winSelector"></div>
 	</div><!--bigImg end-->	
 	<div class="smallImg">

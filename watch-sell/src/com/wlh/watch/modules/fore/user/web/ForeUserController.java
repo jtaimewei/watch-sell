@@ -205,8 +205,8 @@ public class ForeUserController {
 	}
 	//查看个人信息
 	@RequestMapping("/user/own")
-	public String toMy() {
-		
+	public String toMy(HttpSession session) {
+		session.setAttribute("left", "own");
 		return "modules/fore/user/foreUser";
 	}
 	//修改个人信息
@@ -219,14 +219,14 @@ public class ForeUserController {
 	}
 	//进入修改密码
 	@RequestMapping("/user/editPassword")
-	public String editPassword(User user) {
-		
+	public String editPassword(User user,HttpSession session) {
+		session.setAttribute("left", "password");
 		return "modules/fore/user/forePassword";
 	}
 	// 进入vip 页面
 	@RequestMapping("/user/vip")
-	public String vip(User user) {
-		
+	public String vip(User user,HttpSession session) {
+		session.setAttribute("left", "vip");
 		return "modules/fore/user/foreVip";
 	}
 	/**
@@ -277,7 +277,7 @@ public class ForeUserController {
 		String id = user.getId();
 		
 		List<UserReception> recs = userReceptionService.findReception(id);
-		
+		session.setAttribute("left", "reception");
 		model.addAttribute("recs", recs);
 		return "modules/fore/user/foreReception";
 	}
@@ -316,6 +316,23 @@ public class ForeUserController {
 		model.addAttribute("carts", carts);
 		
 		return "modules/fore/user/foreCart";
+	}
+	//清除购物车 -
+	@RequestMapping("/watch/cart/clear")
+	public String clearCart(HttpServletRequest request,HttpSession session,Model model) {
+		User user = (User) session.getAttribute("gUser");
+		if (user == null) {
+			return "modules/fore/user/login2";
+		}
+		String[] ids = request.getParameterValues("id");
+		watchCartService.clearCarts(ids);
+		int cartNumber = watchCartService.getCount(user.getId());
+		if (cartNumber != 0) {
+			session.setAttribute("cartNumber", cartNumber);
+		} else if (cartNumber == 0) {
+			session.removeAttribute("cartNumber");
+		}
+		return "redirect:/b/user/cart";
 	}
 	//ajax-添加订单
 	@RequestMapping(value="/user/order",produces="text/html;charset=UTF-8;")
@@ -473,6 +490,7 @@ public class ForeUserController {
 		@RequestMapping("/user/order/okOrder")
 		public String okOrder(Order order,HttpSession session,Model model) {
 			order.setOrderState("6");//订单完成状态
+			order.setOrderCloseTime(DateUtils.getDateTime());
 			orderService.backOrder(order);
 			return "redirect:/b/user/order/myOrder/?repage";
 		}

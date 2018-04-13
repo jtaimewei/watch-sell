@@ -25,6 +25,8 @@ function page(n,s){
 		<div class="row">
 			<%@ include file="/WEB-INF/views/modules/back/type/headerType.jsp"%>
 			<div class="col-md-10">
+			<div class="thumbnail rigthDiv">
+			      <div class="caption">
 			<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="${pageContext.request.contextPath }/a/type/brand/list">品牌列表</a></li>
 					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/type/brand/save">添加品牌</a></li>
@@ -52,6 +54,8 @@ function page(n,s){
 					<div>${page}</div>
 				</div>
 				</form>
+			</div>
+			</div>
 			</div>
 
 		</div>

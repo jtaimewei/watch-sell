@@ -17,11 +17,14 @@
 		<div class="row">
 		<%@ include file="/WEB-INF/views/modules/fore/user/leftUser.jsp"%>
 			<div class="col-md-10">
-				<div id="password-div" class="col-md-5 col-md-offset-1">
+				<div class="thumbnail myDiv">
+			      <div class="caption">
 				<br><br>
 				<h3><span class="label label-default">vip级别:</span>&nbsp;&nbsp;&nbsp;&nbsp;${gUser.vip}</h3>
 				<h3><span class="label label-default">会员积分:</span>&nbsp;&nbsp;&nbsp;&nbsp;${gUser.credits}</h3>
-				</div>
+				<br><br><br><br><br><br>
+			</div>
+			</div>
 			</div>
 		</div>
 
