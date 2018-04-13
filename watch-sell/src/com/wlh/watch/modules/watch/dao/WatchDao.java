@@ -36,4 +36,8 @@ public interface WatchDao {
 
 	void editWatchPicture(WatchPicture wp1);
 
+	long getForeSearchCount(Watch watch);
+
+	List<Watch> findForeSearchList(Watch watch);
+
 }

@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<%@ include file="/WEB-INF/views/modules/back/header/backHeader.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>后台个人信息</title>
 <link rel="stylesheet"
 	href="${ctxStatic}/bootstrap-3.3.5/css/bootstrap-select.min.css" />
@@ -19,14 +22,26 @@
 .form-group {
 	margin-top: 20px;
 }
+.selectpicker{
+   
+}
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/modules/back/header/backHeader.jsp"%>
+	
 	<div class="container-fluid">
 		<div class="row">
+			<div class="col-md-12">
+			<div class="thumbnail rigthDiv">
+			  <div class="caption">
+			<ul class="nav nav-tabs">
+					<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/a/headerUser">个人信息</a></li>
+					<li role="presentation" ><a href="${pageContext.request.contextPath }/a/user/editPassword">修改密码</a></li>
+				</ul>
+				<div class="row">
 			<div class="col-md-5 col-md-offset-2">
-				<form id="headerUserForm" class="form-horizontal" action="" method="post">
+			
+				<form id="headerUserForm" class="form-horizontal" action="${pageContext.request.contextPath }/a/user/editUser" method="post">
 					<input type="hidden" name="id" value="${userOwn.id}">
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">登录名</label>
@@ -98,7 +113,22 @@
 							<button type="submit" class="btn btn-default">修改</button>
 						</div>
 					</div> -->
+					<button type="submit" id="addMenuButton" class="btn btn-default" style="margin-left: 87px;">修&nbsp;&nbsp;改</button>
 				</form>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+			</div>
+			</div>
+			</div>
 			</div>
 		</div>
 

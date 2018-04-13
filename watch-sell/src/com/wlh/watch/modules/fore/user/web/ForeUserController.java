@@ -237,24 +237,26 @@ public class ForeUserController {
 	public String password(User user,HttpSession session,Model model){
 		User user1 = (User) session.getAttribute("gUser");
 		String id = user1.getId();
-		//原来密码解密
-		String password = user1.getPassword();
-		password = "123";
-		if (!user.getPassword().equals(password)) {
+		String plain = Encodes.unescapeHtml(user.getPassword());//明文密码
+		byte[] salt = Encodes.decodeHex(user1.getPassword().substring(0,16));//密文密码
+		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, 1024);
+		if(!user1.getPassword().equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword))){
 			model.addAttribute("message", "密码错误");
 			return "modules/fore/user/forePassword";
 		}
+		
 		//新密码-加盐加密
-		String plain = Encodes.unescapeHtml(user.getNewPassword());
-		byte[] salt = Digests.generateSalt(8);
-		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, 1024);
-		String password1 = Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
+		String plain1 = Encodes.unescapeHtml(user.getNewPassword());
+		byte[] salt1 = Digests.generateSalt(8);
+		byte[] hashPassword1 = Digests.sha1(plain1.getBytes(), salt1, 1024);
+		String password1 = Encodes.encodeHex(salt1)+Encodes.encodeHex(hashPassword1);
 		
 		user.setPassword(password1);
 		user.setId(id);
 		
 		userService.editPassword(user);
-		
+		user1.setPassword(password1);
+		session.setAttribute("gUser", user1);
 		model.addAttribute("message", "修改密码成功！");
 		return "modules/fore/user/forePassword";
 	}

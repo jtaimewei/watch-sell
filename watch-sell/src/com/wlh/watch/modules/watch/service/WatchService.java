@@ -70,4 +70,12 @@ public class WatchService {
 		watchDao.editWatchPicture(wp1);
 	}
 
+	public Page<Watch> findForeSearchPage(Page<Watch> page, Watch watch) {
+		page.setNumber((page.getPageNo()-1)*page.getPageSize());
+		watch.setPage(page);
+		page.setCount(watchDao.getForeSearchCount(watch));
+		page.setList(watchDao.findForeSearchList(watch));
+		return page;
+	}
+
 }

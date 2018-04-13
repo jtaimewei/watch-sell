@@ -45,14 +45,59 @@ public class UserController {
 	private SysMenuService sysMenuService;
 	@Resource
 	private SysRoleService sysRoleService;
-
+	//查看个人信息
 	@RequestMapping("headerUser")
 	public String toHeaderLogin(HttpServletRequest request,
 			HttpServletResponse response,HttpSession session) throws IOException {
 		session.setAttribute("head", "headerUser");
 		return "modules/back/user/headerUser";
 	}
-
+	//修改个人信息
+	@RequestMapping("/user/editUser")
+	public String edit(User user,HttpSession session) {
+		user.setUserName("后台用户");
+		userService.editBack(user);
+		User user2 = userService.getById(user.getId());
+		session.setAttribute("userOwn", user2);
+		return "modules/back/user/headerUser";
+	}
+	//进入修改密码
+	@RequestMapping("/user/editPassword")
+	public String editPassword(User user,HttpSession session) {
+		return "modules/back/user/headerUserPassword";
+	}
+	/**
+	 * 修改密码
+	 * @return
+	 */
+	@RequestMapping("/user/password/edit")
+	public String password(User user,HttpSession session,Model model){
+		User user1 = (User) session.getAttribute("userOwn");
+		String id = user1.getId();
+		String plain = Encodes.unescapeHtml(user.getPassword());//明文密码
+		byte[] salt = Encodes.decodeHex(user1.getPassword().substring(0,16));//密文密码
+		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, 1024);
+		if(!user1.getPassword().equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword))){
+			model.addAttribute("message", "密码错误");
+			return "modules/back/user/headerUserPassword";
+		}
+		
+		//新密码-加盐加密
+		String plain1 = Encodes.unescapeHtml(user.getNewPassword());
+		byte[] salt1 = Digests.generateSalt(8);
+		byte[] hashPassword1 = Digests.sha1(plain1.getBytes(), salt1, 1024);
+		String password1 = Encodes.encodeHex(salt1)+Encodes.encodeHex(hashPassword1);
+		
+		user.setPassword(password1);
+		user.setId(id);
+		
+		userService.editPassword(user);
+		
+		user1.setPassword(password1);
+		session.setAttribute("userOwn", user1);
+		model.addAttribute("message", "修改密码成功！");
+		return "modules/back/user/headerUserPassword";
+	}
 	@RequestMapping(value = { "loin" }, produces = "text/html;charset=UTF-8;", method = RequestMethod.POST)
 	public String sigin(User user, HttpSession session,
 			HttpServletRequest request, Model model) {

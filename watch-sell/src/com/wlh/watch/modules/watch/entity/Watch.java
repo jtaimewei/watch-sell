@@ -40,6 +40,7 @@ public class Watch {
 	private int gPrice;//小价格
 	private int lPrice;//大价格
 	
+	private String name;//模糊匹配名
 	
 	private Page<Watch> page;
 	
@@ -236,6 +237,12 @@ public class Watch {
 	}
 	public void setlPrice(int lPrice) {
 		this.lPrice = lPrice;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

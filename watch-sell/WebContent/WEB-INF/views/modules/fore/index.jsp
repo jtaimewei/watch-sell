@@ -8,10 +8,9 @@
 <title>名表首页</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <link href="${ctxStatic}/fore/index.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script>
 <script type="text/javascript">
 			//alert(window.screen.width);
-		<script type="text/javascript">
+		
 			//alert(window.screen.width);
 			$(function() {
 				//导航栏顶部广告部分X点击隐藏广告部分
@@ -288,8 +287,8 @@
 				<img src="${ctxStatic}/resources/img/adelodimsdkeidjsmqq.gif" />
 			</div>
 			<div id="headmiddle3">
-				<form action="" method="">
-					<input id="headmiddle3_text" type="text" />
+				<form action="${pageContext.request.contextPath }/b/watch/searchAll" method="post">
+					<input id="headmiddle3_text" name="name" type="text" />
 					<input id="headmiddle3_submit" type="submit" value="搜索" />
 				</form>
 			</div>

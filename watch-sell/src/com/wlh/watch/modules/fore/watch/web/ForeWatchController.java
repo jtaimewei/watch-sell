@@ -100,6 +100,29 @@ public class ForeWatchController {
 		return "modules/fore/watch/foreWatch";
 	}
 	/**
+	 * 前台搜索框-整体模糊匹配搜索
+	 * @return
+	 */
+	@RequestMapping("/watch/searchAll")
+	public String toGetWatch(Watch watch,Model model,HttpServletRequest request,
+			HttpServletResponse response,HttpSession session){
+		List<Brand> brands = brandService.findAllList();
+		List<Crowd> crowds = crowdService.findList();
+		List<Movement> movements = movementService.findAllList();
+		model.addAttribute("brands", brands);
+		model.addAttribute("crowds", crowds);
+		model.addAttribute("movements", movements);
+		String name = watch.getName();
+		String name1 = "%" + name + "%";
+		watch.setName(name1);
+		Page<Watch> page = watchService.findForeSearchPage(
+				new Page<Watch>(request, response), watch);
+		model.addAttribute("page", page);
+		model.addAttribute("name", name);
+		return "modules/fore/watch/foreWatch";
+	}
+	
+	/**
 	 * 查询单个手表信息(购买页面信息)
 	 * @return
 	 */

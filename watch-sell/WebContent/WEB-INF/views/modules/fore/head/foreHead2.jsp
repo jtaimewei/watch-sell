@@ -90,13 +90,20 @@
 				<img src="${ctxStatic}/resources/img/adelodimsdkeidjsmqq.gif" />
 			</div>
 			<div id="headmiddle3">
-				<form action="" method="">
-					<input id="headmiddle3_text" type="text" />
+				<form action="${pageContext.request.contextPath }/b/watch/searchAll" method="post">
+					<input id="headmiddle3_text" name="name" value="${name }" type="text" />
 					<input id="headmiddle3_submit" type="submit" value="搜索" />
 				</form>
 			</div>
 			<div id="headmiddle4">
-				<a href=""><button>购物车</button></a>
+				<a href="${pageContext.request.contextPath }/b/user/cart">
+				<button>
+				购物车
+				<c:if test="${cartNumber != null}">
+				(${cartNumber})
+				</c:if>
+				</button>
+				</a>
 			</div>
 		</div>
 		<div id="navigationbar">

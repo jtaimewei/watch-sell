@@ -148,6 +148,35 @@
 		LEFT JOIN watch_crowd d on d.id = a.crowd_id
 		LEFT JOIN watch_movement e on e.id = a.movement_id ORDER BY b.picture_sort
 	</select>
+	<select id="findForeSearchList" resultMap="watch1">
+		SELECT
+		b.id AS "watchPicture.id",
+		b.picture_src AS "watchPicture.pictureSrc",
+		b.picture_sort AS "watchPicture.pictureSort",
+		b.picture_type AS "watchPicture.pictureType",
+		c.id AS "brand.id",
+		c.brand_name AS "brand.brandName",
+		d.id AS "crowd.id",
+		d.crowd_name AS "crowd.crowdName",
+		e.id AS "movement.id",
+		e.movement_name AS "movement.movementName",
+		<include refid="watch" />
+		FROM (SELECT w.* FROM watch w 
+		LEFT JOIN watch_brand m ON m.id = w.brand_id
+		LEFT JOIN watch_crowd n on n.id = w.crowd_id
+		LEFT JOIN watch_movement v on v.id = w.movement_id
+		WHERE w.del_flag = '0'
+		and
+		(w.watch_title LIKE #{name} 
+		OR m.brand_name LIKE #{name}
+		OR n.crowd_name LIKE #{name} 
+		OR v.movement_name LIKE #{name})
+		LIMIT #{page.number},#{page.pageSize}) a 
+		LEFT JOIN watch_picture b on a.id=b.watch_id 
+		LEFT JOIN watch_brand c ON c.id = a.brand_id
+		LEFT JOIN watch_crowd d on d.id = a.crowd_id
+		LEFT JOIN watch_movement e on e.id = a.movement_id ORDER BY b.picture_sort
+	</select>
 	<select id="getCount" resultType="Long">
 		SELECT
 		COUNT(1)
@@ -174,6 +203,18 @@
 			AND a.watch_pre_price BETWEEN #{gPrice} and #{lPrice}
 		</if>
 		 
+	</select>
+	<select id="getForeSearchCount" resultType="Long">
+		SELECT
+		COUNT(1)
+		FROM watch a,watch_brand b,watch_crowd c,watch_movement m
+		WHERE a.brand_id = b.id and a.crowd_id = c.id and a.movement_id = m.id
+		AND a.del_flag = '0' 
+		and
+		(a.watch_title LIKE #{name} 
+		OR b.brand_name LIKE #{name}
+		OR c.crowd_name LIKE #{name} 
+		OR m.movement_name LIKE #{name})
 	</select>
 	<delete id="deletePictureById">
 		DELETE FROM watch_picture WHERE id = #{id}
