@@ -47,14 +47,13 @@
 </style>
 <style type="text/css">
 /* reset */
-.preview div,p,span,form,iframe,table,td,th,input,textarea,button,label,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
-.preview h1,h2,h3,h4,h5,h6{font-size:100%; }
-.preview ul,ol,li,dl{list-style-type:none;}
+.preview div,.preview iframe,.preview table,.preview td,.preview th,.preview textarea,.preview ul,.preview ol,.preview li,.preview dl,.preview dt,.preview dd{margin:0;padding:0;}
+.preview ul,.preview ol,.preview li,.preview dl{list-style-type:none;}
 .preview em,i,dfn,cite,strong,small{font-style:normal;} 
 .preview img{border:0;}
-.preview fieldset,button,input,select,option{vertical-align:middle;font:12px/18px "宋体",arial,sans-serif;}
+.preview fieldset,.preview button,.preview input,.preview select,.preview option{vertical-align:middle;font:12px/18px "宋体",arial,sans-serif;}
 /* color */
-.preview a:link,a:visited{color:#575757;text-decoration:none;}
+.preview a:link,.preview a:visited{color:#575757;text-decoration:none;}
 .preview a:hover{color:#ef4165;text-decoration:none;}
 .preview a:active{color:#1d7400;}
 /* clearfix */

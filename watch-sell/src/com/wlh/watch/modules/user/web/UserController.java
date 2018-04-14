@@ -16,8 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.wlh.watch.common.data.DateUtils;
 import com.wlh.watch.common.persistence.Page;
+import com.wlh.watch.common.utils.DateUtils;
 import com.wlh.watch.common.utils.Digests;
 import com.wlh.watch.common.utils.Encodes;
 import com.wlh.watch.modules.back.online.entity.OnlineSession;
@@ -127,8 +127,7 @@ public class UserController {
 		}
 		user2.setPassword("");
 		session.setAttribute("user", user2);
-		OnlineSession onlineSession = new OnlineSession(
-				request.getRemoteAddr(), user2.getEmail(), DateUtils.getDATE());
+		OnlineSession onlineSession = new OnlineSession(request.getRemoteAddr(), user2.getEmail(), DateUtils.getDateTime());
 		// 监听session名字为_login 的session，并将value值(对象)存储到SessionListener对象的集合中。
 		session.setAttribute(SessionListener.LISTENER_NAME, onlineSession);
 		log.info(menus);

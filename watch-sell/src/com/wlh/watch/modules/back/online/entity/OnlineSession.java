@@ -14,10 +14,10 @@ public class OnlineSession {
     /**  
      * 客户登录系统时间.  
      */    
-    private Date onlineTime = null;    
+    private String onlineTime = null;    
         
     
-    public OnlineSession(String ip, String loginId, Date onlineTime) {
+    public OnlineSession(String ip, String loginId, String onlineTime) {
   		super();
   		this.ip = ip;
   		this.loginId = loginId;
@@ -43,12 +43,12 @@ public class OnlineSession {
     }
 
 
-	public Date getOnlineTime() {
+	public String getOnlineTime() {
 		return onlineTime;
 	}
 
 
-	public void setOnlineTime(Date onlineTime) {
+	public void setOnlineTime(String onlineTime) {
 		this.onlineTime = onlineTime;
 	}
 

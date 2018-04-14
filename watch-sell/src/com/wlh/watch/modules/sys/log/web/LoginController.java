@@ -15,8 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.wlh.watch.common.data.DateUtils;
+
+
 import com.wlh.watch.common.security.SystemAuthorizingRealm.Principal;
+import com.wlh.watch.common.utils.DateUtils;
 import com.wlh.watch.common.utils.UserUtils;
 import com.wlh.watch.modules.back.online.entity.OnlineSession;
 import com.wlh.watch.modules.back.online.session.SessionListener;
@@ -77,7 +79,7 @@ public class LoginController {
 		session.setAttribute("menus", menus);
 		List<SysRole> roleList = sysRoleService.findList();
 		session.setAttribute("roles", roleList);
-		OnlineSession onlineSession=new OnlineSession(request.getRemoteAddr(), user2.getEmail(), DateUtils.getDATE());
+		OnlineSession onlineSession=new OnlineSession(request.getRemoteAddr(), user2.getEmail(), DateUtils.getDateTime());
 		//监听session名字为_login 的session，并将value值(对象)存储到SessionListener对象的集合中。
 		UserUtils.getSession().setAttribute(SessionListener.LISTENER_NAME,onlineSession);
 		//session.setAttribute(SessionListener.LISTENER_NAME,onlineSession);

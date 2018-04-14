@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 
 
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,9 @@ import com.wlh.watch.common.persistence.Page;
 import com.wlh.watch.common.utils.DateUtils;
 import com.wlh.watch.common.utils.Digests;
 import com.wlh.watch.common.utils.Encodes;
+import com.wlh.watch.common.utils.UserUtils;
+import com.wlh.watch.modules.back.online.entity.OnlineSession;
+import com.wlh.watch.modules.back.online.session.SessionListener;
 import com.wlh.watch.modules.order.entity.Order;
 import com.wlh.watch.modules.order.entity.OrderDetail;
 import com.wlh.watch.modules.order.service.OrderDetailService;
@@ -103,7 +107,7 @@ public class ForeUserController {
 	 * @return
 	 */
 	@RequestMapping("signin")
-	public String login(User user,HttpSession session,Model model){
+	public String login(User user,HttpSession session,Model model,HttpServletRequest request){
 		String checkCode = (String) session.getAttribute("checkCode");
 		if (!checkCode.equals(user.getCheckCode().toUpperCase())) {
 			model.addAttribute("message", "图形验证码错误");
@@ -132,6 +136,10 @@ public class ForeUserController {
 		String pwd2=Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);*/
 		
 		session.setAttribute("gUser", user1);
+		OnlineSession onlineSession=new OnlineSession(request.getRemoteAddr(), user1.getEmail(), DateUtils.getDateTime());
+		//监听session名字为_login 的session，并将value值(对象)存储到SessionListener对象的集合中。
+		session.setAttribute(SessionListener.LISTENER_NAME,onlineSession);
+		//session.setAttribute(SessionListener.LISTENER_NAME,onlineSession);
 		int cartNumber = watchCartService.getCount(user1.getId());
 		if (cartNumber != 0) {
 			session.setAttribute("cartNumber", cartNumber);
