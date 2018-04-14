@@ -54,6 +54,10 @@ public class ForeWatchController {
 	public String toIndex(){
 		return "modules/fore/index";
 	}
+	@RequestMapping("test")
+	public String test1(){
+		return "modules/fore/head/foreHead1";
+	}
 	
 	/**
 	 * 根据价格-品牌-人群-机芯 分类联合查询

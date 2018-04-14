@@ -75,6 +75,7 @@ public class LoginController {
 		List<SysMenu> menus = null;
 		User user2 = userService.getByEmail(user);
 		session.setAttribute("userOwn", user2);
+		session.setAttribute("suser", user2);
 		menus = sysMenuService.getByUserId(user2.getId());
 		session.setAttribute("menus", menus);
 		List<SysRole> roleList = sysRoleService.findList();

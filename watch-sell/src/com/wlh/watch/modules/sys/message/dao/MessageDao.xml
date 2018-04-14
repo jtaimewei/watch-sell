@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wlh.watch.modules.sys.message.dao.MessageDao">
+	<sql id="message">
+		a.id AS "id",
+		a.from_who AS "fromWho",
+		a.to_who AS "toWho",
+		a.message_text AS "messageText",
+		a.message_date AS "messageDate"
+	</sql>
+	<insert id="addMessage">
+		INSERT INTO sys_message(
+		id,
+		from_who,
+		to_who,
+		message_text,
+		message_date
+		) VALUES (
+		#{id},
+		#{fromWho},
+		#{toWho},
+		#{messageText},
+		#{messageDate}
+		)
+	</insert>
+	
+	
+	
+</mapper>

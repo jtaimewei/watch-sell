@@ -6,9 +6,122 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>名表首页</title>
+<%
+	String path = request.getContextPath();
+	String http = request.getScheme()+"://";
+	String base = request.getServerName()+":"+request.getServerPort()+path+"/";
+	String basePath =http+base;
+	%>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <link href="${ctxStatic}/fore/index.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script>
+<style type="text/css">
+.thName1{
+	width: 60px;
+}
+.thName2{
+	width: 60px;
+}
+.thMessage1{
+    width: 170px;
+    word-break: break-all;   
+}
+.thMessage2{
+	width: 170px;
+    word-break: break-all;	
+}
+.thNotice{
+    width: 100px;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	 
+	var mydate = new Date();
+	if((mydate.getMonth()+1)<10){
+		var myMonth="0"+(mydate.getMonth()+1);
+	}else{
+		var myMonth=""+(mydate.getMonth()+1);
+	}
+	// mydate.getMonth(); //获取当前月份(0-11,0代表1月)
+	 //mydate.getDate(); //获取当前日(1-31)
+	 if(mydate.getDate()<10){
+			var myDate="0"+mydate.getDate();
+		}else{
+			var myDate=""+mydate.getDate();
+		}
+	 if(mydate.getHours()<10){
+			var myHours="0"+mydate.getHours();
+		}else{
+			var myHours=""+mydate.getHours();
+		}
+	// mydate.getHours(); //获取当前小时数(0-23)
+	 if(mydate.getMinutes()<10){
+			var myMinutes="0"+mydate.getMinutes();
+		}else{
+			var myMinutes=""+mydate.getMinutes();
+		}
+	//mydate.getMinutes(); //获取当前分钟数(0-59)
+	
+	/* for(i=0;i<user.length;i++){
+		alert(user[i].username);
+	} */
+	$("#divDetail").scrollTop($("#tableDetail").height());
+	var base="<%=base%>";
+	var kefu;
+	var webSocket = null;
+	$("#socketButton").click(function(){
+		//alert($("#divDetail").height());
+		//$("#divDetail").scrollTop($("body").find("#tableDetail").height());
+		 $.ajax({  
+			    type: "POST",  
+			    url: "${pageContext.request.contextPath }/b/message/getKefu",  
+			    async: false,
+			    contentType:"application/json;charset=utf-8",
+			    error: function() {  
+			        alert("获取在线客服失败");  
+			    },  
+			    success: function(data) {
+			    	kefu = data;
+			    	console.log("在线客服",kefu);
+			    	
+			    }  
+			  });
+		webSocket = new WebSocket("ws://"+base+"chat//ws");
+		webSocket.onopen = function(event){
+		    console.log("连接成功");
+		    console.log(event);
+		};
+		webSocket.onerror = function(event){
+		    console.log("连接失败");
+		    console.log(event);
+		};
+		webSocket.onclose = function(event){
+		    console.log("Socket连接断开");
+		    console.log(event);
+		};
+		//接收消息
+		webSocket.onmessage = function(event){
+			
+				var message = JSON.parse(event.data);
+				
+				
+		} 
+	});
+	//点击发送按钮给用户发送消息
+	$("#sendMessageButton").click(function(){
+		console.log($("#messageText").val());
+		console.log("在线客服1",kefu);
+		var data = {};//新建data对象，并规定属性名与相应的值
+	    data['fromWho'] = "ooo";
+	    data['toWho'] = "wowowo";
+	    data['messageText'] = $("#messageText").val();
+	   	webSocket.send(JSON.stringify(data));
+	});	
+		
+	  
+});
+
+</script>
 <script type="text/javascript">
 			//alert(window.screen.width);
 			$(function() {
@@ -101,15 +214,8 @@
 		</div>
 		<div id="headtop">
 			<ul>
-				<li><a id="headtop_ul_li_a4" href="">服务专线</a>
-					<ul id="headtop_ul_li_a4_ul">
-						<li><a href="#">订单0111</a></li>
-						<li><a href="#">订单0222</a></li>
-						<li><a href="#">订单0333</a></li>
-						<li><a href="#">订单0333</a></li>
-						<hr width="80%" style="margin-left: -2px;" />
-						<a href="">查看更多订单</a>
-					</ul>
+				<li> 
+				<button id="socketButton" type="button" style="background-color: #333333;color: white;border: none;" data-toggle="modal" data-target="#myModal">联系客服</button>
 				</li>
 				<li><a id="headtop_ul_li_a2" href="">办理业务</a></li>
 				<li><a id="headtop_ul_li_a3" href="">手机表行</a></li>
@@ -132,6 +238,75 @@
 		</div>
 
 		
+<!-- 模态框 联系客服 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel">在线客服服务</h4>
+						      </div>
+						      <div id="divDetail" class="modal-body" style="height: 400px;overflow: auto;">
+						 			<table id="tableDetail">
+						 				<tr>
+								 			<td class="thName1"></td>
+								 			<td class="thMessage1"></th>
+								 			<td class="thNotice">122112</td>
+								 			<td class="thMessage2"></td>
+								 			<td class="thName2"></td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1" valign="top">张三</td>
+								 			<td class="thMessage1">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thNotice"></td>
+								 			<td class="thMessage2"></td>
+								 			<td class="thName2"></td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1"></td>
+								 			<td class="thMessage1"></td>
+								 			<td class="thNotice"></td>
+								 			<td class="thMessage2">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thName2" align="right">张三</td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1">张三</td>
+								 			<td class="thMessage1">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thNotice"></td>
+								 			<td class="thMessage2"></td>
+								 			<td class="thName2"></td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1"></td>
+								 			<td class="thMessage1"></td>
+								 			<td class="thNotice"></td>
+								 			<td class="thMessage2">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thName2">张三</td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1">张三</td>
+								 			<td class="thMessage1">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thNotice"></td>
+								 			<td class="thMessage2"></td>
+								 			<td class="thName2"></td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1"></td>
+								 			<td class="thMessage1"></td>
+								 			<td class="thNotice"></td>
+								 			<td class="thMessage2">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thName2">张三</td>
+							 			</tr>
+
+						 			</table>
+						      </div>
+						      <div class="modal-footer">
+						       <input id="messageText" type="text" value="21313123" />
+						        <button type="button" id="sendMessageButton" class="btn btn-primary">发送</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 
 </body>
 </html>

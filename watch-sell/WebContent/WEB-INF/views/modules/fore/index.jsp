@@ -248,17 +248,10 @@
 		</div>
 		<div id="headtop">
 			<ul>
-				<li><a id="headtop_ul_li_a4" href="">服务专线</a>
-					<ul id="headtop_ul_li_a4_ul">
-						<li><a href="#">订单0111</a></li>
-						<li><a href="#">订单0222</a></li>
-						<li><a href="#">订单0333</a></li>
-						<li><a href="#">订单0333</a></li>
-						<hr width="80%" style="margin-left: -2px;" />
-						<a href="">查看更多订单</a>
-					</ul>
+				<li> 
+				<button type="button" style="background-color: #333333;color: white;border: none;" data-toggle="modal" data-target="#myModal">联系客服</button>
 				</li>
-				<li><a id="headtop_ul_li_a2" href="">办理业务</a></li>
+				<li><a id="headtop_ul_li_a2" href="${pageContext.request.contextPath }/b/test">办理业务</a></li>
 				<li><a id="headtop_ul_li_a3" href="">手机表行</a></li>
 				
 				
@@ -540,5 +533,27 @@
     </div>
   </div>
 </div>
+
+
+<!-- 模态框 联系客服 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel">在线客服服务</h4>
+						      </div>
+						      <div class="modal-body">
+						 			
+						      </div>
+						      <div class="modal-footer">
+						       <input type="text" value="21313123" />
+						        <button type="button" id="addRecButton" class="btn btn-primary">发送</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
+
 </body>
 </html>

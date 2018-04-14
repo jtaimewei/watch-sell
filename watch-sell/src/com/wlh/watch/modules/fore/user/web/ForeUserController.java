@@ -136,6 +136,7 @@ public class ForeUserController {
 		String pwd2=Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);*/
 		
 		session.setAttribute("gUser", user1);
+		session.setAttribute("suser", user1);
 		OnlineSession onlineSession=new OnlineSession(request.getRemoteAddr(), user1.getEmail(), DateUtils.getDateTime());
 		//监听session名字为_login 的session，并将value值(对象)存储到SessionListener对象的集合中。
 		session.setAttribute(SessionListener.LISTENER_NAME,onlineSession);
@@ -548,6 +549,15 @@ public class ForeUserController {
 			orderService.backOrder(order);
 			return "redirect:/b/user/order/myOrder/?repage";
 		}
+	/**
+	 * 获取一个在线客服	
+	 */
+	@RequestMapping("/message/getKefu")
+	public @ResponseBody String getKefu(){
+		
+		String kf = "12231";
+		return kf;
+	}
 		
 		
 }

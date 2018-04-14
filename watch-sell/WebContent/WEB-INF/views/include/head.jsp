@@ -10,8 +10,10 @@
 	src="${ctxStatic}/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 
 
-<script type="text/javascript"
-	src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script>
+<%-- <script type="text/javascript"
+	src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script> --%>
+	<script type="text/javascript"
+	src="${ctxStatic}/resources/js/jquery-3.2.1.min.js"></script>
 <script src="${ctxStatic}/My97DatePicker/WdatePicker.js"
 	type="text/javascript"></script>
 <script src="${ctxStatic}/jquery-jbox/2.3/jquery.jBox-2.3.min.js" type="text/javascript"></script>

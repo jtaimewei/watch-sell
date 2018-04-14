@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>名表首页</title>
 <link href="${ctxStatic}/fore/index.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="${ctxStatic}/resources/js/jquery-1.11.3.js"></script>
+<script type="text/javascript"
+	src="${ctxStatic}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 			//alert(window.screen.width);
 			$(function() {
