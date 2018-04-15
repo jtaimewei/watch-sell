@@ -17,17 +17,27 @@
 <style type="text/css">
 .thName1{
 	width: 60px;
+	white-space: nowrap;
+　　	overflow: hidden; 
+ 	text-overflow: ellipsis;        
+ 　　-moz-text-overflow: ellipsis;  
 }
 .thName2{
 	width: 60px;
 }
 .thMessage1{
     width: 170px;
-    word-break: break-all;   
+    word-break: break-all;
+    background-color: white;
+    box-shadow: 1px 1px 6px 2px #b4adad;border-radius:5px 5px 5px 5px;border: 1px solid #b4adad;
+    padding: 10px;    
 }
 .thMessage2{
 	width: 170px;
     word-break: break-all;	
+    background-color: white;
+    box-shadow: 1px 1px 6px 2px #b4adad;border-radius:5px 5px 5px 5px;border: 1px solid #b4adad;
+    padding: 10px; 
 }
 .thNotice{
     width: 100px;
@@ -69,10 +79,13 @@ $(function(){
 	var base="<%=base%>";
 	var kefu;
 	var webSocket = null;
+	var kk = 0;
 	$("#socketButton").click(function(){
 		//alert($("#divDetail").height());
 		//$("#divDetail").scrollTop($("body").find("#tableDetail").height());
-		 $.ajax({  
+		$("#divDetail").scrollTop(document.getElementById("tableDetail").offsetHeight);
+		if (kk == 0) {
+			$.ajax({  
 			    type: "POST",  
 			    url: "${pageContext.request.contextPath }/b/message/getKefu",  
 			    async: false,
@@ -86,36 +99,74 @@ $(function(){
 			    	
 			    }  
 			  });
-		webSocket = new WebSocket("ws://"+base+"chat//ws");
-		webSocket.onopen = function(event){
-		    console.log("连接成功");
-		    console.log(event);
-		};
-		webSocket.onerror = function(event){
-		    console.log("连接失败");
-		    console.log(event);
-		};
-		webSocket.onclose = function(event){
-		    console.log("Socket连接断开");
-		    console.log(event);
-		};
-		//接收消息
-		webSocket.onmessage = function(event){
-			
+		 	$("#kefuSpan").html(kefu);
+			webSocket = new WebSocket("ws://"+base+"chat//ws");
+			webSocket.onopen = function(event){
+				kk = 1;
+			    console.log("连接成功");
+			    console.log(event);
+			};
+			webSocket.onerror = function(event){
+				kk = 0;
+			    console.log("连接失败");
+			    console.log(event);
+			};
+			webSocket.onclose = function(event){
+				kk = 0;
+			    console.log("Socket连接断开");
+			    console.log(event);
+			};
+			//接收消息
+			webSocket.onmessage = function(event){
 				var message = JSON.parse(event.data);
-				
-				
-		} 
+				//alert(message.messageText);
+				$("#tableDetail").append(
+						'<tr>'+
+			 			'<td class="thName1" valign="top">'+message.fromWho+'</td>'+
+			 			'<td class="thMessage1">'+message.messageText+'</td>'+
+			 			'<td class="thNotice"></td>'+
+			 			'<td ></td>'+
+			 			'<td class="thName2"></td>'+
+		 				'</tr>'
+					);
+				$("#divDetail").scrollTop($("#tableDetail").height());
+			} 
+		}
+		 
+		
+		
 	});
+	/* 回车发送消息 */
+	$("body").keydown(function () {
+		if (event.keyCode == "13") {//keyCode=13是回车键
+			$('#sendMessageButton').trigger("click");
+		}
+		});
 	//点击发送按钮给用户发送消息
 	$("#sendMessageButton").click(function(){
-		console.log($("#messageText").val());
-		console.log("在线客服1",kefu);
-		var data = {};//新建data对象，并规定属性名与相应的值
-	    data['fromWho'] = "ooo";
-	    data['toWho'] = "wowowo";
-	    data['messageText'] = $("#messageText").val();
-	   	webSocket.send(JSON.stringify(data));
+		var messageText=$("#messageText").val();
+		if (messageText != '') {
+			$("#tableDetail").append(
+					'<tr>'+
+		 			'<td class="thName1"></td>'+
+		 			'<td></td>'+
+		 			'<td class="thNotice"></td>'+
+		 			'<td class="thMessage2">'+messageText+'</td>'+
+		 			'<td class="thName2" align="right" valign="top">ME</td>'+
+					'</tr>'
+				);
+			console.log($("#tableDetail").height());
+			$("#divDetail").scrollTop(document.getElementById("tableDetail").offsetHeight);
+	/* 		$("#divDetail").scrollTop($("#tableDetail").height()); */
+			//console.log($("#messageText").val());
+			//console.log("在线客服1",kefu);
+			var data = {};//新建data对象，并规定属性名与相应的值
+		    data['fromWho'] = "${gUser.email }";
+		    data['toWho'] = kefu;
+		    data['messageText'] = $("#messageText").val();
+		   	webSocket.send(JSON.stringify(data));
+		   	$("#messageText").val("");
+		}
 	});	
 		
 	  
@@ -244,65 +295,66 @@ $(function(){
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">在线客服服务</h4>
+						        <h4 class="modal-title" id="myModalLabel">客服:<span id="kefuSpan"></span></h4>
 						      </div>
 						      <div id="divDetail" class="modal-body" style="height: 400px;overflow: auto;">
-						 			<table id="tableDetail">
+						 			<table id="tableDetail" style="border-collapse:separate; border-spacing:10px; table-layout:fixed;display:inline-block;word-wrap:break-word;">
 						 				<tr>
 								 			<td class="thName1"></td>
-								 			<td class="thMessage1"></th>
-								 			<td class="thNotice">122112</td>
-								 			<td class="thMessage2"></td>
+								 			<td></th>
+								 			<td class="thNotice" align="center">122112</td>
+								 			<td></td>
 								 			<td class="thName2"></td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1" valign="top">张三123312321312133213</td>
+								 			<td class="thMessage1">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thNotice"></td>
+								 			<td></td>
+								 			<td class="thName2"></td>
+							 			</tr>
+							 			<tr>
+								 			<td class="thName1"></td>
+								 			<td></td>
+								 			<td class="thNotice"></td>
+								 			<td class="thMessage2">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
+								 			<td class="thName2" align="right" valign="top">张三</td>
 							 			</tr>
 							 			<tr>
 								 			<td class="thName1" valign="top">张三</td>
 								 			<td class="thMessage1">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
 								 			<td class="thNotice"></td>
-								 			<td class="thMessage2"></td>
+								 			<td></td>
 								 			<td class="thName2"></td>
 							 			</tr>
 							 			<tr>
 								 			<td class="thName1"></td>
-								 			<td class="thMessage1"></td>
+								 			<td ></td>
 								 			<td class="thNotice"></td>
 								 			<td class="thMessage2">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
-								 			<td class="thName2" align="right">张三</td>
+								 			<td class="thName2" align="right" valign="top">张三</td>
 							 			</tr>
 							 			<tr>
-								 			<td class="thName1">张三</td>
+								 			<td class="thName1" valign="top">张三</td>
 								 			<td class="thMessage1">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
 								 			<td class="thNotice"></td>
-								 			<td class="thMessage2"></td>
+								 			<td></td>
 								 			<td class="thName2"></td>
 							 			</tr>
 							 			<tr>
 								 			<td class="thName1"></td>
-								 			<td class="thMessage1"></td>
+								 			<td ></td>
 								 			<td class="thNotice"></td>
 								 			<td class="thMessage2">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
-								 			<td class="thName2">张三</td>
-							 			</tr>
-							 			<tr>
-								 			<td class="thName1">张三</td>
-								 			<td class="thMessage1">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
-								 			<td class="thNotice"></td>
-								 			<td class="thMessage2"></td>
-								 			<td class="thName2"></td>
-							 			</tr>
-							 			<tr>
-								 			<td class="thName1"></td>
-								 			<td class="thMessage1"></td>
-								 			<td class="thNotice"></td>
-								 			<td class="thMessage2">消息1qweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedasdasdadsadadasdasdadasdasdasdasdasdasdasdas</td>
-								 			<td class="thName2">张三</td>
+								 			<td class="thName2" align="right" valign="top">张三</td>
 							 			</tr>
 
 						 			</table>
 						      </div>
 						      <div class="modal-footer">
-						       <input id="messageText" type="text" value="21313123" />
+						       <input id="messageText" type="text" value="21313123" style="width:480px;border: none;height: 35px;font-size: 17px;"/>
 						        <button type="button" id="sendMessageButton" class="btn btn-primary">发送</button>
+						        <hr style="margin-left: -14px;margin-right: -14px;">
 						      </div>
 						    </div>
 						  </div>

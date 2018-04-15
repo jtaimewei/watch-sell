@@ -1,7 +1,5 @@
 package com.wlh.watch.modules.sys.message.entity;
 
-import java.util.Date;
-
 /**
  * 聊天记录信息类
  * @author admin
@@ -12,7 +10,7 @@ public class Message {
     private String fromWho;
     private String toWho;
     private String messageText;
-    private Date messageDate;
+    private String messageDate;
     
     private int friendMessage;//0：表示普通消息 1：表示好友请求消息
 
@@ -48,11 +46,11 @@ public class Message {
 		this.messageText = messageText;
 	}
 
-	public Date getMessageDate() {
+	public String getMessageDate() {
 		return messageDate;
 	}
 
-	public void setMessageDate(Date messageDate) {
+	public void setMessageDate(String messageDate) {
 		this.messageDate = messageDate;
 	}
 

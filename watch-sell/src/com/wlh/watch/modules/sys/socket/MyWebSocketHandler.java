@@ -1,8 +1,10 @@
 package com.wlh.watch.modules.sys.socket;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,7 +19,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wlh.watch.common.data.DateUtils;
+import com.wlh.watch.common.utils.DateUtils;
+import com.wlh.watch.modules.back.online.entity.OnlineSession;
 import com.wlh.watch.modules.sys.message.entity.Message;
 import com.wlh.watch.modules.sys.message.service.MessageService;
 
@@ -29,6 +32,8 @@ public class MyWebSocketHandler implements WebSocketHandler{
 	
 	//当MyWebSocketHandler类被加载时就会创建该Map，随类而生
 	 public static final Map<String, WebSocketSession> userSocketSessionMap;
+	 
+	 private static Map<String,OnlineSession> sessions = new HashMap<String, OnlineSession>(); 
 	
 	 static {
 		 System.out.println("当MyWebSocketHandler类被加载时就会创建该Map，随类而生");
@@ -46,6 +51,7 @@ public class MyWebSocketHandler implements WebSocketHandler{
             if(entry.getValue().getAttributes().get("uid")==webSocketSession.getAttributes().get("uid")){
                 userSocketSessionMap.remove(webSocketSession.getAttributes().get("uid"));
                 System.out.println("WebSocket in staticMap:" + webSocketSession.getAttributes().get("uid") + "removed掉线了掉线了");
+                sessions.remove(webSocketSession.getAttributes().get("uid"));
             }
         }
 	}
@@ -59,6 +65,8 @@ public class MyWebSocketHandler implements WebSocketHandler{
 		if (userSocketSessionMap.get(uid) == null) {
 			System.out.println("握手实现连接后,用户加入"+uid+"webSocketSession"+webSocketSession);
             userSocketSessionMap.put(uid, webSocketSession);
+            
+            sessions.put(uid, new OnlineSession(webSocketSession.getRemoteAddress().getHostString(),uid,DateUtils.getDateTime()));
         }
 	}
 	
@@ -69,7 +77,7 @@ public class MyWebSocketHandler implements WebSocketHandler{
 		// TODO Auto-generated method stub
 		if(webSocketMessage.getPayloadLength()==0) return;
 		Message message=new Gson().fromJson(webSocketMessage.getPayload().toString(), Message.class);
-		message.setMessageDate(DateUtils.getDATE());
+		message.setMessageDate(DateUtils.getDateTime());
 		System.out.println("+++++++++++++"+message);
 		//发送Socket信息
 		System.out.println("这是Gson=========="+new GsonBuilder().setDateFormat("MM-dd HH:mm").create().toJson(message));
@@ -105,5 +113,13 @@ public class MyWebSocketHandler implements WebSocketHandler{
         	messageService.addMessage(message1);
         }
     }
+
+	public static Map<String, OnlineSession> getSessions() {
+		return sessions;
+	}
+
+	public static void setSessions(Map<String, OnlineSession> sessions) {
+		MyWebSocketHandler.sessions = sessions;
+	}
 
 }

@@ -2,7 +2,9 @@ package com.wlh.watch.modules.fore.user.web;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -10,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 
 
@@ -50,6 +53,7 @@ import com.wlh.watch.modules.sys.comment.service.WatchCommentService;
 import com.wlh.watch.modules.sys.menu.service.SysMenuService;
 import com.wlh.watch.modules.sys.reception.entity.UserReception;
 import com.wlh.watch.modules.sys.reception.service.UserReceptionService;
+import com.wlh.watch.modules.sys.socket.MyWebSocketHandler;
 import com.wlh.watch.modules.sys.vip.service.UserVipService;
 import com.wlh.watch.modules.user.entity.User;
 import com.wlh.watch.modules.user.service.UserService;
@@ -554,8 +558,18 @@ public class ForeUserController {
 	 */
 	@RequestMapping("/message/getKefu")
 	public @ResponseBody String getKefu(){
+		List<String> kfList = new ArrayList<String>();
+		Map<String, OnlineSession> onlineList = MyWebSocketHandler.getSessions();
 		
-		String kf = "12231";
+		Iterator<Map.Entry<String, OnlineSession>> entries = onlineList.entrySet().iterator(); 
+		while (entries.hasNext()) { 
+			Map.Entry<String,OnlineSession> entry = entries.next();
+			kfList.add(entry.getKey());
+		}
+		int x=0+(int)(Math.random()*(kfList.size()-1));//0-10
+		
+		/*String kf = "1510491769@qq.com";*/
+		String kf = kfList.get(x);
 		return kf;
 	}
 		

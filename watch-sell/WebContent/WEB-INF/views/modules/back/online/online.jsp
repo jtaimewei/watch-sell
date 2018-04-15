@@ -25,8 +25,9 @@
 							<td>${ status.index + 1}</td>
 							<td>${list.ip }</td>
 							<td>${list.loginId }</td>
-							<td><fmt:formatDate value="${list.onlineTime }"
-									pattern="yyyy-MM-dd HH:mm:ss" /></td>
+							<%-- <td><fmt:formatDate value="${list.onlineTime }"
+									pattern="yyyy-MM-dd HH:mm:ss" /></td> --%>
+							<td>${list.onlineTime }</td>
 
 						</tr>
 					</c:forEach>

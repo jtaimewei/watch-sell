@@ -189,8 +189,8 @@
 							<div class="form-group">
 							<input type="hidden" class="id" value="${rec.id}">
 								<label for="inputPassword3" class="col-sm-2 control-label">收货人</label>
-								<div class="col-sm-10">
-									<input style="width: 300px;" type="text" class="form-control recName"
+								<div class="col-sm-4">
+									<input type="text" class="form-control recName"
 										 value="${rec.recName }"  placeholder="收货人">
 								</div>
 								<p class="header-user-notice rec-recName">*请输入收货人</p>
@@ -198,7 +198,7 @@
 							
 							<div class="form-group">
 								<label for="inputPassword3" class="col-sm-2 control-label">联系方式</label>
-								<div class="col-sm-10">
+								<div class="col-sm-4">
 									<input type="text" class="form-control recPhone" 
 										value="${rec.recPhone }" placeholder="联系方式">
 								</div>
@@ -207,7 +207,7 @@
 							
 							<div class="form-group">
 								<label for="inputPassword3" class="col-sm-2 control-label">收货地址</label>
-								<div class="col-sm-10">
+								<div class="col-sm-4">
 									<input type="text" class="form-control recAddress"
 									value="${rec.recAddress }" placeholder="收货地址">
 								</div>
