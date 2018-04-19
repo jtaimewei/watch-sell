@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>名表首页</title>
+<title>名表网</title>
 <%
 	String path = request.getContextPath();
 	String http = request.getScheme()+"://";

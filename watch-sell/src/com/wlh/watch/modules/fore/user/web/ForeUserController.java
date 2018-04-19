@@ -173,7 +173,7 @@ public class ForeUserController {
 		}
 		String cd = UUID.randomUUID().toString().replaceAll("-", "");
 		String code = cd.substring(0, 5);
-		//userMail.sendMail(email, code);
+		userMail.sendMail(email, code);
 		System.out.println("-------------------"+code);
 		Cookie cookie = new Cookie("emailCode",code);
 		cookie.setMaxAge(60);
@@ -560,16 +560,19 @@ public class ForeUserController {
 	public @ResponseBody String getKefu(){
 		List<String> kfList = new ArrayList<String>();
 		Map<String, OnlineSession> onlineList = MyWebSocketHandler.getSessions();
-		
-		Iterator<Map.Entry<String, OnlineSession>> entries = onlineList.entrySet().iterator(); 
-		while (entries.hasNext()) { 
-			Map.Entry<String,OnlineSession> entry = entries.next();
-			kfList.add(entry.getKey());
+		String kf = "k001";
+		if (onlineList.size() >= 1) {
+			Iterator<Map.Entry<String, OnlineSession>> entries = onlineList.entrySet().iterator(); 
+			while (entries.hasNext()) { 
+				Map.Entry<String,OnlineSession> entry = entries.next();
+				kfList.add(entry.getKey());
+			}
+			int x=0+(int)(Math.random()*(kfList.size()-1));//0-10
+			
+			/*String kf = "1510491769@qq.com";*/
+			kf = kfList.get(x);
 		}
-		int x=0+(int)(Math.random()*(kfList.size()-1));//0-10
 		
-		/*String kf = "1510491769@qq.com";*/
-		String kf = kfList.get(x);
 		return kf;
 	}
 		

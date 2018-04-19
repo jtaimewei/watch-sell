@@ -41,15 +41,23 @@ function page(n,s){
 							<td class="active">用户邮箱</td>
 							<td class="success">用户名</td>
 							<td class="warning">用户类型</td>
-							<td class="danger">用户角色</td>
 							<td class="info">操作</td>
 						</tr>
 						<c:forEach items="${page.list}" var="user">
 							<tr>
 								<td class="active">${user.email}</td>
 								<td class="success">${user.userName}</td>
-								<td class="warning">${user.userType}</td>
-								<td class="danger">用户角色</td>
+								<td class="warning">
+								<c:if test="${user.userType == '0'}">
+									顾客
+								</c:if>
+								<c:if test="${user.userType == '1'}">
+									客服
+								</c:if>
+								<c:if test="${user.userType == '2'}">
+									管理员
+								</c:if>
+								</td>
 								<td class="info"><a class="caozhuo-class" href="${pageContext.request.contextPath }/a/user/get?id=${user.id}">修改</a><a
 									class="caozhuo-class" href="${pageContext.request.contextPath }/a/user/delete?id=${user.id}">删除</a></td>
 							</tr>

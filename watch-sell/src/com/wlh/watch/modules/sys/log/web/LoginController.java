@@ -86,6 +86,9 @@ public class LoginController {
 		//session.setAttribute(SessionListener.LISTENER_NAME,onlineSession);
 		logger.info(menus);
 		logger.debug("登录成功");
+		if (menus.size() < 1) {
+			return "redirect:/a/headerUser";
+		}
 		return "redirect:"+menus.get(0).getHref();
 		
 	}

@@ -13,17 +13,17 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Component;
 
-import com.wlh.watch.modules.user.entity.User;
-
-
 @Component
 public class UserMail {
-	private static String HOST="smtp.qq.com";
+	/*private static String HOST="smtp.qq.com";
 	private static String SMTP="smtp";
 	private static String PORT="587";
 	private static String MAILTITLE="autumn向您发送验证码";
 	private static String USER="494047680@qq.com";
-	private static String PASSWORD="wei19940307..";
+	private static String PASSWORD="wei19940307";
+	private static String USER="2939009859@qq.com";
+	private static String PASSWORD="dgemhajipesodcjd";
+	@SuppressWarnings("static-access")
 	public void sendMail(String toEmail,String code){
 
 		
@@ -54,13 +54,45 @@ public class UserMail {
 			"text/html;charset=utf-8");
 			message.setSentDate(new Date());
 			message.saveChanges();
-			//Transport transport=session.getTransport();
-			Transport.send(message);
-			//transport.close();
+			Transport transport=session.getTransport();
+			//Transport.send(message);
+			transport.send(message);
+			transport.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
-	}
+	}*/
+	
+	public void sendMail(String toEmail,String code){
+		 try {  
+	Properties props = new Properties();  
+    props.put("username", "18874490176@163.com");   
+    props.put("password", "wei18874490176");   
+    props.put("mail.transport.protocol", "smtp" );  
+    props.put("mail.smtp.host", "smtp.163.com");  
+    props.put("mail.smtp.port", "25" );  
+
+    Session mailSession = Session.getDefaultInstance(props);  
+
+    Message msg = new MimeMessage(mailSession);     
+    msg.setFrom(new InternetAddress("18874490176@163.com"));  
+    msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));   
+    msg.setSubject("激活邮件");   
+    msg.setContent("<h1>来自-名表网-用户注册激活邮件,正在进行邮箱激活,激活码为:</h1><h3>"+ code + " </a></3>","text/html;charset=UTF-8");
+
+    msg.saveChanges();  
+
+    Transport transport = mailSession.getTransport("smtp");  
+    transport.connect(props.getProperty("mail.smtp.host"), props  
+            .getProperty("username"), props.getProperty("password"));   
+    transport.sendMessage(msg, msg.getAllRecipients());  
+    transport.close();     
+	} catch (Exception e) {  
+	    e.printStackTrace();  
+	    System.out.println(e); 
+	}  
+}
+
 }

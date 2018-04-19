@@ -23,12 +23,16 @@ import com.wlh.watch.common.utils.DateUtils;
 import com.wlh.watch.modules.back.online.entity.OnlineSession;
 import com.wlh.watch.modules.sys.message.entity.Message;
 import com.wlh.watch.modules.sys.message.service.MessageService;
+import com.wlh.watch.modules.user.entity.User;
+import com.wlh.watch.modules.user.service.UserService;
 
 @Component
 public class MyWebSocketHandler implements WebSocketHandler{
 
 	@Resource
 	private MessageService messageService;
+	@Resource
+	private UserService userService;
 	
 	//当MyWebSocketHandler类被加载时就会创建该Map，随类而生
 	 public static final Map<String, WebSocketSession> userSocketSessionMap;
@@ -65,8 +69,12 @@ public class MyWebSocketHandler implements WebSocketHandler{
 		if (userSocketSessionMap.get(uid) == null) {
 			System.out.println("握手实现连接后,用户加入"+uid+"webSocketSession"+webSocketSession);
             userSocketSessionMap.put(uid, webSocketSession);
-            
-            sessions.put(uid, new OnlineSession(webSocketSession.getRemoteAddress().getHostString(),uid,DateUtils.getDateTime()));
+            User user1 = new User();
+            user1.setEmail(uid);
+            User user2 = userService.getByEmail(user1);
+            if (user2.getUserType() == 1) {
+            	sessions.put(uid, new OnlineSession(webSocketSession.getRemoteAddress().getHostString(),uid,DateUtils.getDateTime()));
+            }
         }
 	}
 	

@@ -96,7 +96,7 @@ $(function(){
 	/* 增加文件 */
 	var num = 2;
 	$("#addFile").click(function(){
-		var number = $("#fileDiv").find("input[type='file']").size();
+		var number = $("#fileDiv").find("input[type='file']").length;
 		//alert(num);
 		if (number <= 5){
 			num = num + 1;

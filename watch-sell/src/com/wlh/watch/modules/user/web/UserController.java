@@ -164,17 +164,7 @@ public class UserController {
 	@RequestMapping("/user/edit")
 	public String backUserEdit(User user, Model model,
 			HttpServletRequest request) {
-		User user1 = userService.getById(user.getId());
-		if (user1.getPassword().equals(user.getPassword())) {
-			user.setPassword("");
-		} else {
-			String plain = Encodes.unescapeHtml(user.getPassword());
-			byte[] salt = Digests.generateSalt(8);
-			byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, 1024);
-			String password = Encodes.encodeHex(salt)
-					+ Encodes.encodeHex(hashPassword);
-			user.setPassword(password);
-		}
+		
 		userService.editBack(user);
 		
 		List<SysRole> myRoles = sysRoleService.getByUserId(user.getId());// 数据库存的角色

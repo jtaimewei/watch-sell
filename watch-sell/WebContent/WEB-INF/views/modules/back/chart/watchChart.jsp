@@ -174,8 +174,8 @@ java.util.Date mdate = calendar.getTime();
 	    success: function(data) {
 	    	//alert(typeof data)
 	    	console.log('data',data);
-	    	option.legend.data = null;
-	    	option.xAxis.data = null;
+	    	option.legend.data = [];
+	    	option.xAxis.data = [];
 	    	option.series = [];
 	    	option.legend.data = data.title;
 	    	option.xAxis.data = data.timeList;

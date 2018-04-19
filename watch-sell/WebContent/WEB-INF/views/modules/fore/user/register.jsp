@@ -67,7 +67,7 @@
 				return;
 			}
 			var email = $("#email").val();
-			alert(email);
+			//alert(email);
 			$.ajax({  
 			    type: "POST",  
 			    url: "${pageContext.request.contextPath}/b/email",  
@@ -102,7 +102,7 @@
 			<form id="regForm" action="${pageContext.request.contextPath }/b/user/add" method="post">
 			<input class="user-reg-input" type="text" id="userName" name="userName" placeholder="用户名" /><label id="userName-label" class="notic-label">&nbsp;*不能为空</label> <br />
 			<input class="user-reg-input" type="text" id="email" name="email" placeholder="邮箱" /><label id="email-label" class="notic-label">&nbsp;*不能为空</label> <br />
-			<input class="user-reg-input" id="checkCode" name="checkCode" type="text" placeholder="图形验证码" /> <img class="user-reg-yanz-img" alt="验证码" src="${pageContext.request.contextPath}/b/check/code"><label id="checkCode-label" class="notic-label">&nbsp;*不能为空</label><br />
+			<input class="user-reg-input" id="checkCode" name="checkCode" type="text" placeholder="图形验证码" /> <img class="user-reg-yanz-img" alt="验证码" height="34px" src="${pageContext.request.contextPath}/b/check/code"><label id="checkCode-label" class="notic-label">&nbsp;*不能为空</label><br />
 			<input class="user-reg-input" id="email-input-code" name="emailCode" type="text" placeholder="邮箱验证码" /> <input id="email-button" type="button"
 				value="获取验证码" /><label id="email-input-code-label" class="notic-label">&nbsp;*不能为空</label> <br /> 
 			<input class="user-reg-input" type="password" id="f-password" name="password" placeholder="密码" /><label id="f-password-label" class="notic-label">&nbsp;*不能为空</label> <br /> 

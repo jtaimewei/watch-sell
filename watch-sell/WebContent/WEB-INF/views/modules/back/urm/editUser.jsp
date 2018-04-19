@@ -74,36 +74,29 @@
 				</ul>
 				<br>
 				<div class="row">
-				<div class="col-md-6 col-md-offset-1">
+				<div class="col-md-8 col-md-offset-1">
 					<form id="editUserForm" class="form-horizontal" action="${pageContext.request.contextPath }/a/user/edit"
 						method="post">
 						<input type="hidden" name="id" value="${user.id}">
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<input type="email" class="form-control" value="${user.email}"
 									disabled="disabled">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">用户名*</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<input type="text" class="form-control" id="userName"
 									name="userName" value="${user.userName}" placeholder="用户名">
 							</div>
 							<p id="user-name-notice" class="header-user-notice">*请输入用户名</p>
 						</div>
-						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">密码*</label>
-							<div class="col-sm-10">
-								<input type="password" class="form-control" id="password"
-									name="password" value="${user.password}" placeholder="密码">
-							</div>
-							<p id="password-notice" class="header-user-notice">*请输入密码</p>
-						</div>
+			
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">性别</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<select name="sex" form="editUserForm" class="selectpicker">
 									<option value="">请选择</option>
 									<option value="0" ${user.sex == '0'?'selected="selected"':''}>女</option>
@@ -113,7 +106,7 @@
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">生日</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<input type="text" class="form-control" id="birthday"
 									name="birthday" value="${user.birthday}"
 									onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});">
@@ -122,7 +115,7 @@
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">用户类型</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<c:if test="${user.userType == '0'}">
 									<input type="text" class="form-control" value="顾客"
 										disabled="disabled">
@@ -139,7 +132,7 @@
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">电话号码</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<input type="text" class="form-control" id="phoneNum"
 									name="phoneNum" value="${user.phoneNum}" placeholder="电话号码">
 							</div>
@@ -147,7 +140,7 @@
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">角色*</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<c:forEach items="${roles}" var="role" varStatus="status">
 									<label class="checkbox-inline"> <input type="checkbox"
 										class="roles-class" name="roles[${ status.index + 1}].id"  value="${role.id }"> ${role.roleName }

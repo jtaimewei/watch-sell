@@ -77,7 +77,7 @@
 		FROM watch a LEFT JOIN watch_picture b on a.id=b.watch_id 
 		LEFT JOIN watch_brand c ON c.id = a.brand_id
 		LEFT JOIN watch_crowd d on d.id = a.crowd_id
-		LEFT JOIN watch_movement e on e.id = a.movement_id WHERE a.id = #{id} ORDER BY b.picture_sort;
+		LEFT JOIN watch_movement e on e.id = a.movement_id WHERE a.id = #{id} ORDER BY cast(b.picture_sort as SIGNED INTEGER);
 	</select>
 	
 	<select id="getForeById" resultType="Watch">

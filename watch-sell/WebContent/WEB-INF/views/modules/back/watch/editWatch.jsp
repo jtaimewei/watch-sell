@@ -93,7 +93,7 @@ $(function(){
 	/* 增加文件 */
 	var num = Number($("#exitPicture").val()); 
 	$("#addFile").click(function(){
-		var number = $("#fileDiv").find(".pictrueDiv").size();
+		var number = $("#fileDiv").find(".pictrueDiv").length;
 		//alert("num"+num);
 		//alert("number"+number);
 		if (number <= 10){

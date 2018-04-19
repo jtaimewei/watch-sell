@@ -63,12 +63,12 @@
 				</ul>
 				<br>
 				<div class="row">
-				<div class="col-md-6 col-md-offset-1">
+				<div class="col-md-8 col-md-offset-1">
 					<form id="addUserForm" class="form-horizontal" action="${pageContext.request.contextPath }/a/user/add"
 						method="post">
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">登录名*</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<input type="text" id="email" name="email" class="form-control" value="">
 							</div>
 							<p id="email-notice" class="header-user-notice">*请输入登录名</p>
@@ -83,7 +83,7 @@
 						</div> -->
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">密码*</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<input type="password" class="form-control" id="password"
 									name="password" value="" placeholder="密码">
 							</div>
@@ -91,7 +91,7 @@
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">性别</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<select name="sex" form="addUserForm" class="selectpicker">
 									<option value="">请选择</option>
 									<option value="0">女</option>
@@ -110,7 +110,7 @@
 						</div> -->
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">用户类型</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 							<select name="userType" form="addUserForm" class="selectpicker">
 									<option value="1">客服</option>
 									<option value="2">管理员</option>
@@ -120,7 +120,7 @@
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">电话号码</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<input type="text" class="form-control" id="phoneNum"
 									name="phoneNum" value="" placeholder="电话号码">
 							</div>
@@ -128,7 +128,7 @@
 						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">角色*</label>
-							<div class="col-sm-10">
+							<div class="col-sm-6">
 								<c:forEach items="${roles}" var="role" varStatus="status">
 									<label class="checkbox-inline"> <input type="checkbox"
 										class="roles-class" name="roles[${ status.index + 1}].id"  value="${role.id }"> ${role.roleName }
